@@ -153,8 +153,6 @@ db-helpers/
 
 # GitHub configuration files
 
-.github
-
 # JS Config file
 
 jsconfig.json
