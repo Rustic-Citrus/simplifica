@@ -1,3 +1,8 @@
+import data from "../../data/user.json";
+
+import { Link, useParams } from "react-router-dom";
+
+import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Image from "react-bootstrap/Image";
@@ -5,10 +10,6 @@ import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
 import Tab from "react-bootstrap/Tab";
 import Card from "react-bootstrap/Card";
-// import PropTypes from "prop-types";
-import data from "../../data/user.json";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
 
 export const LessonPlanView = () => {
   const lessonPlan = data[0].lesson_plans[0];
@@ -16,37 +17,39 @@ export const LessonPlanView = () => {
 
   return (
     <>
-      <Row>
-        <Col xs={2}>
-          <Link to={`/simplifica-frontend/${userId}`}>
-            <Button
-              variant="outline-secondary"
-              className="mx-5 my-2"
-              title="Go back to profile."
-              aria-label="back-button"
-            >
-              <Image src="/arrow-left.svg"></Image>
-            </Button>
-          </Link>
-        </Col>
-      </Row>
+      <Container>
+        <Row>
+          <Col xs={2}>
+            <Link to={`/simplifica-frontend/${userId}`}>
+              <Button
+                variant="outline-secondary"
+                className="mx-3 mx-lg-5 my-2"
+                title="Go back to profile."
+                aria-label="back-button"
+              >
+                <Image src="/simplifica-frontend/arrow-left.svg"></Image>
+              </Button>
+            </Link>
+          </Col>
+        </Row>
+      </Container>
 
-      <Card className="mx-5">
+      <Card className="mx-3 mx-lg-5">
         <Card.Header>Lesson Plan</Card.Header>
         <Card.Body>
           <Card.Title>
             <Row>
-              <Col xs={6} sm={8} md={10}>
+              <Col xs={8} sm={8} md={10}>
                 <h1 className="display-6">{lessonPlan.topic}</h1>
               </Col>
-              <Col xs={3} sm={2} md={1}>
+              <Col xs={2} sm={2} md={1}>
                 <Button variant="outline-secondary">
-                  <Image src="/pencil.svg"></Image>
+                  <Image src="/simplifica-frontend/pencil.svg"></Image>
                 </Button>
               </Col>
-              <Col xs={3} sm={2} md={1}>
+              <Col xs={2} sm={2} md={1}>
                 <Button variant="outline-danger">
-                  <Image src="/trash.svg"></Image>
+                  <Image src="/simplifica-frontend/trash.svg"></Image>
                 </Button>
               </Col>
             </Row>
@@ -132,15 +135,29 @@ export const LessonPlanView = () => {
 
             <Nav variant="pills" className="flex-row mt-3">
               <Nav.Item>
-                <Nav.Link eventKey="presentation" title="See the presentation phase.">Presentation</Nav.Link>
+                <Nav.Link
+                  eventKey="presentation"
+                  title="See the presentation phase."
+                >
+                  Presentation
+                </Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="practice" title="See the practice phase."variant="outline-dark">
+                <Nav.Link
+                  eventKey="practice"
+                  title="See the practice phase."
+                  variant="outline-dark"
+                >
                   Practice
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="production" title="See the production phase.">Production</Nav.Link>
+                <Nav.Link
+                  eventKey="production"
+                  title="See the production phase."
+                >
+                  Production
+                </Nav.Link>
               </Nav.Item>
             </Nav>
           </Tab.Container>

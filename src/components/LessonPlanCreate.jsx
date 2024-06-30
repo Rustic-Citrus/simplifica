@@ -1,3 +1,4 @@
+import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Image from "react-bootstrap/Image";
@@ -42,14 +43,17 @@ export const LessonPlanCreate = () => {
 
   const [lessonPlan, setLessonPlan] = useState(lessonPlanTemplate);
   const [authorised, setAuthorised] = useState(false);
-  
+
   useEffect(() => {
     if (user._id === userId) {
       setAuthorised(true);
     }
 
     if (!lessonApiRef.current) {
-      lessonApiRef.current = new LessonPlanAPI(import.meta.env.VITE_API_ENDPOINT, userId);
+      lessonApiRef.current = new LessonPlanAPI(
+        import.meta.env.VITE_API_ENDPOINT,
+        userId
+      );
     }
   }, [user, userId, authorised]);
 
@@ -114,38 +118,38 @@ export const LessonPlanCreate = () => {
 
   return (
     <>
-      <Row>
-        <Col xs={2}>
-          <Link to={`/simplifica-frontend/${userId}`}>
-            <Button
-              variant="outline-secondary"
-              className="mx-5 my-2"
-              title="Go back to profile."
-              aria-label="back-button"
-            >
-              <Image src="/simplifica-frontend/arrow-left.svg"></Image>
-            </Button>
-          </Link>
-        </Col>
-      </Row>
+      <Container>
+        <Row>
+          <Col xs={2}>
+            <Link to={`/simplifica-frontend/${userId}`}>
+              <Button
+                variant="outline-secondary"
+                className="mx-3 mx-lg-5 my-2"
+                title="Go back to profile."
+                aria-label="back-button"
+              >
+                <Image src="/simplifica-frontend/arrow-left.svg"></Image>
+              </Button>
+            </Link>
+          </Col>
+        </Row>
+      </Container>
 
-      <Card className="mx-5">
+      <Card className="mx-3 mx-lg-5">
         <Card.Header>New Lesson Plan</Card.Header>
         <Card.Body>
           <Form>
-            <Card.Title>
+            <Card.Title className="mb-3">
               <Row className="align-items-center">
                 <Col xs={9} sm={10} md={10}>
                   <Form.Group>
-                    <FloatingLabel controlId="topic" label="Lesson Topic">
-                      <Form.Control
-                        type="text"
-                        placeholder="Lesson Topic"
-                        aria-label="topic-input"
-                        name="topic"
-                        onChange={handleChange}
-                      />
-                    </FloatingLabel>
+                    <Form.Control
+                      type="text"
+                      placeholder="Lesson Topic"
+                      aria-label="topic-input"
+                      name="topic"
+                      onChange={handleChange}
+                    />
                   </Form.Group>
                 </Col>
                 <Col xs={1} sm={2} md={{ span: 1, offset: 1 }}>

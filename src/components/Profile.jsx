@@ -49,8 +49,8 @@ export const Profile = () => {
   };
 
   return (
-    <Container className="pt-5 mt-5 mx-5 px-4 align-middle">
-      <Row className="mb-3 mt-5 mx-5 pt-5 align-items-center">
+    <Container className="pt-5 mt-3 mt-lg-5 mx-lg-5 px-4 align-middle">
+      <Row className="mb-3 mx-2 mt-3 mt-lg-5 mx-lg-5 pt-5 align-items-center">
         <Col xs={8} md={10}>
           <h1 className="display-3" aria-label="title">
             My Lesson Plans
@@ -64,7 +64,7 @@ export const Profile = () => {
           </Link>
         </Col>
       </Row>
-      <Table striped className="mx-5">
+      <Table striped className="mx-1 mx-lg-5">
         <thead>
           <tr>
             <th>#</th>
