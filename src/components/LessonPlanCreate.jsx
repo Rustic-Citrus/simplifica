@@ -51,21 +51,17 @@ export const LessonPlanCreate = () => {
     if (!lessonApiRef.current) {
       lessonApiRef.current = new LessonPlanAPI(import.meta.env.VITE_API_ENDPOINT, userId);
     }
-
-    console.log(lessonApiRef.current);
   }, [user, userId, authorised]);
 
   const handleSave = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await lessonApiRef.current.createLessonPlan(lessonPlan);
-
-      console.log(response);
+      await lessonApiRef.current.createLessonPlan(lessonPlan);
 
       setLessonPlan(lessonPlanTemplate);
 
-      navigate(`/${userId}`);
+      navigate(`/simplifica-frontend/${userId}`);
     } catch (error) {
       console.log(error.message);
     }
@@ -120,14 +116,14 @@ export const LessonPlanCreate = () => {
     <>
       <Row>
         <Col xs={2}>
-          <Link to={`/${userId}`}>
+          <Link to={`/simplifica-frontend/${userId}`}>
             <Button
               variant="outline-secondary"
               className="mx-5 my-2"
               title="Go back to profile."
               aria-label="back-button"
             >
-              <Image src="/arrow-left.svg"></Image>
+              <Image src="/simplifica-frontend/arrow-left.svg"></Image>
             </Button>
           </Link>
         </Col>
@@ -158,7 +154,7 @@ export const LessonPlanCreate = () => {
                     aria-label="save-button"
                     onClick={handleSave}
                   >
-                    <Image src="/floppy.svg"></Image>
+                    <Image src="/simplifica-frontend/floppy.svg"></Image>
                   </Button>
                 </Col>
               </Row>
@@ -214,7 +210,7 @@ export const LessonPlanCreate = () => {
                               )
                             }
                           >
-                            <Image src="/dash-lg.svg" />
+                            <Image src="/simplifica-frontend/dash-lg.svg" />
                           </Button>
                         </InputGroup>
                       );
@@ -239,7 +235,7 @@ export const LessonPlanCreate = () => {
                         )
                       }
                     >
-                      <Image src="/plus.svg" />
+                      <Image src="/simplifica-frontend/plus.svg" />
                     </Button>
                   </InputGroup>
                   <Form.Group className="mb-3" controlId="connection">
@@ -307,7 +303,7 @@ export const LessonPlanCreate = () => {
                               handleRemoveItem(e, "practice", "activities", i)
                             }
                           >
-                            <Image src="/dash-lg.svg" />
+                            <Image src="/simplifica-frontend/dash-lg.svg" />
                           </Button>
                         </InputGroup>
                       );
@@ -332,7 +328,7 @@ export const LessonPlanCreate = () => {
                         )
                       }
                     >
-                      <Image src="/plus.svg" />
+                      <Image src="/simplifica-frontend/plus.svg" />
                     </Button>
                   </InputGroup>
                 </Tab.Pane>
@@ -377,7 +373,7 @@ export const LessonPlanCreate = () => {
                                 )
                               }
                             >
-                              <Image src="/dash-lg.svg" />
+                              <Image src="/simplifica-frontend/dash-lg.svg" />
                             </Button>
                           </InputGroup>
                         );
@@ -403,7 +399,7 @@ export const LessonPlanCreate = () => {
                         )
                       }
                     >
-                      <Image src="/plus.svg" />
+                      <Image src="/simplifica-frontend/plus.svg" />
                     </Button>
                   </InputGroup>
                   <Form.Label className="h5">
@@ -429,7 +425,7 @@ export const LessonPlanCreate = () => {
                               handleRemoveItem(e, "production", "activities", i)
                             }
                           >
-                            <Image src="/dash-lg.svg" />
+                            <Image src="/simplifica-frontend/dash-lg.svg" />
                           </Button>
                         </InputGroup>
                       );
@@ -454,7 +450,7 @@ export const LessonPlanCreate = () => {
                         )
                       }
                     >
-                      <Image src="/plus.svg" />
+                      <Image src="/simplifica-frontend/plus.svg" />
                     </Button>
                   </InputGroup>
                 </Tab.Pane>

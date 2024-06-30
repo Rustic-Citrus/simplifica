@@ -10,9 +10,7 @@ export const Header = () => {
     e.preventDefault();
 
     try {
-      const response = await signOut();
-
-      console.log(response);
+      await signOut();
     } catch (error) {
       console.log(error.message);
     }
@@ -25,7 +23,7 @@ export const Header = () => {
       sticky="top"
     >
       <Navbar.Brand>
-        <Link className="text-decoration-none" to="/">
+        <Link className="text-decoration-none" to="/simplifica-frontend/">
           <h1
             className="display-6 text-body"
             aria-label="brand"

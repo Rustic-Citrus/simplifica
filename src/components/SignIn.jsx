@@ -88,7 +88,7 @@ export const SignIn = ({ triggerFeedback }) => {
               aria-label="hide-password-button"
             >
               <Image
-                src={hidePassword ? "/eye.svg" : "/eye-slash.svg"}
+                src={hidePassword ? "/simplifica-frontend/eye.svg" : "/simplifica-frontend/eye-slash.svg"}
                 alt="Icon of an eye."
               />
             </Button>

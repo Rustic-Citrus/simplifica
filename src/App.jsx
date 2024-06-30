@@ -16,7 +16,7 @@ export const App = () => {
     <AuthProvider>
       <Routes>
         <Route
-          path="/"
+          path="/simplifica-frontend/"
           element={
             <PublicRoute>
               <Page MainComponent={Splash} />
@@ -25,7 +25,7 @@ export const App = () => {
           errorElement={<Page MainComponent={Error} />}
         />
         <Route
-          path="/register"
+          path="/simplifica-frontend/register"
           element={
             <PublicRoute>
               <Page MainComponent={Register} />
@@ -33,7 +33,7 @@ export const App = () => {
           }
         />
         <Route
-          path="/login"
+          path="/simplifica-frontend/login"
           element={
             <PublicRoute>
               <Page MainComponent={SignIn} />
@@ -41,7 +41,7 @@ export const App = () => {
           }
         />
         <Route
-          path="/:userId"
+          path="/simplifica-frontend/:userId"
           element={
             <ProtectedRoute>
               <Page MainComponent={Profile} />
@@ -49,14 +49,14 @@ export const App = () => {
           }
         />
         <Route
-          path="/:userId/:lessonId"
+          path="/simplifica-frontend/:userId/:lessonId"
           element={
             <ProtectedRoute>
               <Page MainComponent={LessonPlanView} />
             </ProtectedRoute>
           }
         ></Route>
-        <Route path="/:userId/create" element={
+        <Route path="/simplifica-frontend/:userId/create" element={
           <ProtectedRoute><Page MainComponent={LessonPlanCreate}/></ProtectedRoute>
         }
         >

@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 export const ProtectedRoute = ({ children }) => {
   const { user } = useAuth();
   if (!user) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/simplifica-frontend/login" />;
   }
   return children;
 };

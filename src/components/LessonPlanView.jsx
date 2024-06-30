@@ -18,7 +18,7 @@ export const LessonPlanView = () => {
     <>
       <Row>
         <Col xs={2}>
-          <Link to={`/${userId}`}>
+          <Link to={`/simplifica-frontend/${userId}`}>
             <Button
               variant="outline-secondary"
               className="mx-5 my-2"

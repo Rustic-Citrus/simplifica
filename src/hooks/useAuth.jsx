@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
 
       if (response.status === 200 && response.data.user._id) {
         setUser(response.data.user);
-        navigate(`/${response.data.user._id}`);
+        navigate(`/simplifica-frontend/${response.data.user._id}`);
       }
 
       return response;
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
       const response = await api.logout();
 
       setUser(null);
-      navigate("/");
+      navigate("/simplifica-frontend/");
 
       return response;
     } catch (error) {
@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }) => {
 
       if (response.status === 201) {
         setTimeout(() => {
-          navigate("/login");
+          navigate("/simplifica-frontend/login");
         }, 3000);
       }
 
