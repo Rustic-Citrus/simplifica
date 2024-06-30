@@ -1,0 +1,81 @@
+[
+  {
+    "_id": "678123521" ,
+    "username": "josey-raine",
+    "password": "Asparagu$853",
+    "lesson_plans": [
+      {
+        "_id": "123145123",
+        "topic": "Present Perfect",
+        "date": "2024-02-05",
+        "presentation": {
+          "objective": "To introduce the present perfect tense to students.",
+          "materials": ["whiteboard", "markers", "handouts"],
+          "connection": "I will ask students to think about their own experiences and share them with the class."
+        },
+        "practice": {
+          "real_life_application": "Students will be able to use the present perfect tense to talk about their own experiences.",
+          "feedback_method": "I will provide feedback on students' use of the present perfect tense during the practice activities.",
+          "activities": ["pair work", "group work", "role play"]
+        },
+        "production": {
+          "learner_interaction": "Students will work in pairs to create dialogues using the present perfect tense.",
+          "success_criteria": [
+            "correct use of the present perfect tense",
+            "clear and natural-sounding dialogues",
+            "appropriate use of vocabulary and grammar"
+          ],
+          "activities": ["pair work", "group work", "role play"]
+        }
+      },
+      {
+        "_id": "578234781",
+        "topic": "Past Simple",
+        "date": "2024-02-07",
+        "presentation": {
+          "objective": "To introduce the past simple tense to students.",
+          "materials": ["whiteboard", "markers", "handouts"],
+          "connection": "I will ask students to think about their past experiences and share them with the class."
+        },
+        "practice": {
+          "real_life_application": "Students will be able to use the past simple tense to talk about past events.",
+          "feedback_method": "I will provide feedback on students' use of the past simple tense during the practice activities.",
+          "activities": ["pair work", "group work", "role play"]
+        },
+        "production": {
+          "learner_interaction": "Students will work in pairs to create dialogues using the past simple tense.",
+          "success_criteria": [
+            "correct use of the past simple tense",
+            "clear and natural-sounding dialogues",
+            "appropriate use of vocabulary and grammar"
+          ],
+          "activities": ["pair work", "group work", "role play"]
+        }
+      },
+      {
+        "_id": "123124124",
+        "topic": "Future Simple",
+        "date": "2024-02-09",
+        "presentation": {
+          "objective": "To introduce the future simple tense to students.",
+          "materials": ["whiteboard", "markers", "handouts"],
+          "connection": "I will ask students to think about their future plans and share them with the class."
+        },
+        "practice": {
+          "real_life_application": "Students will be able to use the future simple tense to talk about future events.",
+          "feedback_method": "I will provide feedback on students' use of the future simple tense during the practice activities.",
+          "activities": ["pair work", "group work", "role play"]
+        },
+        "production": {
+          "learner_interaction": "Students will work in pairs to create dialogues using the future simple tense.",
+          "success_criteria": [
+            "correct use of the future simple tense",
+            "clear and natural-sounding dialogues",
+            "appropriate use of vocabulary and grammar"
+          ],
+          "activities": ["pair work", "group work", "role play"]
+        }
+      }
+    ]
+  }
+]

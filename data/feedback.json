@@ -1,0 +1,26 @@
+[
+    {
+        "name": "invalid_password",
+        "info": {
+            "type": "error",
+            "title": "Invalid Password",
+            "message": "Password is invalid. It should be at least 8 characters long, and should contain at least 1 uppercase letter, lowercase letter, special character and number."
+        }
+    },
+    {
+        "name": "invalid_username",
+        "info": {
+            "type": "error",
+            "title": "Invalid Username",
+            "message": "Username is invalid. It should be between 4 and 19 characters long, and should only contain numbers, letters and underscores."
+        }
+    },
+    {
+        "name": "passwords_not_matching",
+        "info": {
+            "type": "error",
+            "title": "Non-Matching Passwords",
+            "message": "Passwords do not match. Verify that the two passwords you have typed in are the same."
+        }
+    }
+]

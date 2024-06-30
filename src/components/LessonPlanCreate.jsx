@@ -1,0 +1,496 @@
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Image from "react-bootstrap/Image";
+import Button from "react-bootstrap/Button";
+import Nav from "react-bootstrap/Nav";
+import Tab from "react-bootstrap/Tab";
+import Card from "react-bootstrap/Card";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
+import { Link, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import { useState, useEffect, useRef } from "react";
+import { useAuth } from "../hooks/useAuth";
+import LessonPlanAPI from "../api/LessonPlanAPI";
+
+const lessonPlanTemplate = {
+  topic: "",
+  date: "",
+  presentation: {
+    objective: "",
+    materials: [],
+    connection: "",
+  },
+  practice: {
+    real_life_application: "",
+    feedback_method: "",
+    activities: [],
+  },
+  production: {
+    learner_interaction: "",
+    success_criteria: [],
+    activities: [],
+  },
+};
+
+export const LessonPlanCreate = () => {
+  const { user } = useAuth();
+  const { userId } = useParams();
+  const navigate = useNavigate();
+  const lessonApiRef = useRef(null);
+
+  const [lessonPlan, setLessonPlan] = useState(lessonPlanTemplate);
+  const [authorised, setAuthorised] = useState(false);
+  
+  useEffect(() => {
+    if (user._id === userId) {
+      setAuthorised(true);
+    }
+
+    if (!lessonApiRef.current) {
+      lessonApiRef.current = new LessonPlanAPI(import.meta.env.VITE_API_ENDPOINT, userId);
+    }
+
+    console.log(lessonApiRef.current);
+  }, [user, userId, authorised]);
+
+  const handleSave = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await lessonApiRef.current.createLessonPlan(lessonPlan);
+
+      console.log(response);
+
+      setLessonPlan(lessonPlanTemplate);
+
+      navigate(`/${userId}`);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    const keys = name.split(".");
+
+    if (keys.length === 1) {
+      setLessonPlan((prevState) => ({
+        ...prevState,
+        [keys[0]]: value,
+      }));
+    } else {
+      setLessonPlan((prevState) => ({
+        ...prevState,
+        [keys[0]]: {
+          ...prevState[keys[0]],
+          [keys[1]]: value,
+        },
+      }));
+    }
+  };
+
+  const updateLessonPlan = (section, key, update) => {
+    setLessonPlan((prevState) => ({
+      ...prevState,
+      [section]: {
+        ...prevState[section],
+        [key]: update,
+      },
+    }));
+  };
+
+  const handleAddItem = (e, section, key, inputId) => {
+    e.preventDefault();
+    const newItem = document.getElementById(inputId).value;
+    if (newItem.trim() === "") return;
+
+    updateLessonPlan(section, key, [...lessonPlan[section][key], newItem]);
+    document.getElementById(inputId).value = "";
+  };
+
+  const handleRemoveItem = (e, section, key, index) => {
+    e.preventDefault();
+    const updatedItems = lessonPlan[section][key].filter((_, i) => i !== index);
+    updateLessonPlan(section, key, updatedItems);
+  };
+
+  return (
+    <>
+      <Row>
+        <Col xs={2}>
+          <Link to={`/${userId}`}>
+            <Button
+              variant="outline-secondary"
+              className="mx-5 my-2"
+              title="Go back to profile."
+              aria-label="back-button"
+            >
+              <Image src="/arrow-left.svg"></Image>
+            </Button>
+          </Link>
+        </Col>
+      </Row>
+
+      <Card className="mx-5">
+        <Card.Header>New Lesson Plan</Card.Header>
+        <Card.Body>
+          <Form>
+            <Card.Title>
+              <Row className="align-items-center">
+                <Col xs={9} sm={10} md={10}>
+                  <Form.Group>
+                    <FloatingLabel controlId="topic" label="Lesson Topic">
+                      <Form.Control
+                        type="text"
+                        placeholder="Lesson Topic"
+                        aria-label="topic-input"
+                        name="topic"
+                        onChange={handleChange}
+                      />
+                    </FloatingLabel>
+                  </Form.Group>
+                </Col>
+                <Col xs={1} sm={2} md={{ span: 1, offset: 1 }}>
+                  <Button
+                    variant="outline-success"
+                    aria-label="save-button"
+                    onClick={handleSave}
+                  >
+                    <Image src="/floppy.svg"></Image>
+                  </Button>
+                </Col>
+              </Row>
+            </Card.Title>
+            <Card.Subtitle className="mb-4 text-muted">
+              <Form.Control
+                type="date"
+                placeholder="Date"
+                name="date"
+                onChange={handleChange}
+              />
+            </Card.Subtitle>
+            <Tab.Container id="phase-tabs" defaultActiveKey="presentation">
+              <Tab.Content>
+                <Tab.Pane eventKey="presentation">
+                  <Form.Group className="mb-3" controlId="lessonObjective">
+                    <Form.Label className="h5">
+                      What is the main language point you want to teach?
+                    </Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      rows={3}
+                      name="presentation.objective"
+                      placeholder="Grammar, vocabulary, functions, etc."
+                      onChange={handleChange}
+                      aria-label="objective-textarea"
+                    />
+                  </Form.Group>
+                  <Form.Label className="h5">
+                    What materials will you need?
+                  </Form.Label>
+                  {lessonPlan.presentation.materials.length > 0 &&
+                    lessonPlan.presentation.materials.map((material, i) => {
+                      return (
+                        <InputGroup key={i} className="mb-3">
+                          <Form.Control
+                            type="text"
+                            placeholder={material}
+                            aria-label={`material-${i}`}
+                            disabled
+                            readOnly
+                          />
+                          <Button
+                            variant="outline-danger"
+                            id="removeMaterialButton"
+                            aria-label="remove-material-button"
+                            onClick={(e) =>
+                              handleRemoveItem(
+                                e,
+                                "presentation",
+                                "materials",
+                                i
+                              )
+                            }
+                          >
+                            <Image src="/dash-lg.svg" />
+                          </Button>
+                        </InputGroup>
+                      );
+                    })}
+                  <InputGroup className="mb-3">
+                    <Form.Control
+                      placeholder="Textbooks, audio, video, visual aids, etc."
+                      name="presentation.materials"
+                      id="materialInput"
+                      aria-label="material-input"
+                    />
+                    <Button
+                      variant="outline-success"
+                      id="addMaterialButton"
+                      aria-label="add-material-button"
+                      onClick={(e) =>
+                        handleAddItem(
+                          e,
+                          "presentation",
+                          "materials",
+                          "materialInput"
+                        )
+                      }
+                    >
+                      <Image src="/plus.svg" />
+                    </Button>
+                  </InputGroup>
+                  <Form.Group className="mb-3" controlId="connection">
+                    <Form.Label className="h5">
+                      How will you introduce the topic to make it relevant and
+                      engaging for students?
+                    </Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      rows={3}
+                      name="presentation.connection"
+                      onChange={handleChange}
+                      aria-label="connection-textarea"
+                      placeholder="I will..."
+                    />
+                  </Form.Group>
+                </Tab.Pane>
+                <Tab.Pane eventKey="practice">
+                  <Form.Group className="mb-3" controlId="realLifeApplication">
+                    <Form.Label className="h5">
+                      How is the target language applicable to the
+                      students&apos; everyday lives?
+                    </Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      rows={3}
+                      onChange={handleChange}
+                      name="practice.real_life_application"
+                      aria-label="real-life-application-textarea"
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="feedbackMethod">
+                    <Form.Label className="h5">
+                      What type of feedback will you provide to correct errors
+                      and reinforce learning?
+                    </Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      rows={3}
+                      onChange={handleChange}
+                      name="practice.feedback_method"
+                      aria-label="feedback-method-textarea"
+                    />
+                  </Form.Group>
+                  <Form.Label className="h5">
+                    What activities will you use to help students practice the
+                    target language?
+                  </Form.Label>
+                  {lessonPlan.practice.activities.length > 0 &&
+                    lessonPlan.practice.activities.map((activity, i) => {
+                      return (
+                        <InputGroup key={i} className="mb-3">
+                          <Form.Control
+                            type="text"
+                            placeholder={activity}
+                            aria-label={`practice-activity-${i}`}
+                            disabled
+                            readOnly
+                          />
+                          <Button
+                            variant="outline-danger"
+                            id="removePracticeActivityButton"
+                            aria-label="remove-practice-activity-button"
+                            onClick={(e) =>
+                              handleRemoveItem(e, "practice", "activities", i)
+                            }
+                          >
+                            <Image src="/dash-lg.svg" />
+                          </Button>
+                        </InputGroup>
+                      );
+                    })}
+                  <InputGroup className="mb-3">
+                    <Form.Control
+                      placeholder="Musical chairs, hot potato, word association, etc."
+                      name="practice.activities"
+                      id="practiceActivityInput"
+                      aria-label="practice-activity-input"
+                    />
+                    <Button
+                      variant="outline-success"
+                      id="addPracticeActivityButton"
+                      aria-label="add-practice-activity-button"
+                      onClick={(e) =>
+                        handleAddItem(
+                          e,
+                          "practice",
+                          "activities",
+                          "practiceActivityInput"
+                        )
+                      }
+                    >
+                      <Image src="/plus.svg" />
+                    </Button>
+                  </InputGroup>
+                </Tab.Pane>
+                <Tab.Pane eventKey="production">
+                  <Form.Group className="mb-3" controlId="learnerInteraction">
+                    <Form.Label className="h5">
+                      How will you facilitate student interaction and
+                      collaboration during the production phase?
+                    </Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      rows={3}
+                      onChange={handleChange}
+                      name="production.learner_interaction"
+                    />
+                  </Form.Group>
+                  <Form.Label className="h5">
+                    What criteria will you use to evaluate their performance?
+                  </Form.Label>
+                  {lessonPlan.production.success_criteria.length > 0 &&
+                    lessonPlan.production.success_criteria.map(
+                      (criterion, i) => {
+                        return (
+                          <InputGroup key={i} className="mb-3">
+                            <Form.Control
+                              type="text"
+                              placeholder={criterion}
+                              aria-label={`criterion-${i}`}
+                              disabled
+                              readOnly
+                            />
+                            <Button
+                              variant="outline-danger"
+                              id="removeSuccessCriterionButton"
+                              aria-label="remove-success-criterion-button"
+                              onClick={(e) =>
+                                handleRemoveItem(
+                                  e,
+                                  "production",
+                                  "success_criteria",
+                                  i
+                                )
+                              }
+                            >
+                              <Image src="/dash-lg.svg" />
+                            </Button>
+                          </InputGroup>
+                        );
+                      }
+                    )}
+                  <InputGroup className="mb-3">
+                    <Form.Control
+                      placeholder="Ability to use target language without help, etc."
+                      name="production.success_criteria"
+                      id="successCriteriaInput"
+                      aria-label="success-criteria-input"
+                    />
+                    <Button
+                      variant="outline-success"
+                      id="addSuccessCriterionButton"
+                      aria-label="add-success-criterion-button"
+                      onClick={(e) =>
+                        handleAddItem(
+                          e,
+                          "production",
+                          "success_criteria",
+                          "successCriteriaInput"
+                        )
+                      }
+                    >
+                      <Image src="/plus.svg" />
+                    </Button>
+                  </InputGroup>
+                  <Form.Label className="h5">
+                    What activities will allow students to use the new language
+                    more freely and creatively?
+                  </Form.Label>
+                  {lessonPlan.production.activities.length > 0 &&
+                    lessonPlan.production.activities.map((activity, i) => {
+                      return (
+                        <InputGroup key={i} className="mb-3">
+                          <Form.Control
+                            type="text"
+                            placeholder={activity}
+                            aria-label={`production-activity-${i}`}
+                            disabled
+                            readOnly
+                          />
+                          <Button
+                            variant="outline-danger"
+                            id="removeProductionActivityButton"
+                            aria-label="remove-production-activity-button"
+                            onClick={(e) =>
+                              handleRemoveItem(e, "production", "activities", i)
+                            }
+                          >
+                            <Image src="/dash-lg.svg" />
+                          </Button>
+                        </InputGroup>
+                      );
+                    })}
+                  <InputGroup className="mb-3">
+                    <Form.Control
+                      placeholder="Musical chairs, hot potato, word association, etc."
+                      name="production.activities"
+                      id="productionActivityInput"
+                      aria-label="production-activity-input"
+                    />
+                    <Button
+                      variant="outline-success"
+                      id="addProductionActivityButton"
+                      aria-label="add-production-activity-button"
+                      onClick={(e) =>
+                        handleAddItem(
+                          e,
+                          "production",
+                          "activities",
+                          "productionActivityInput"
+                        )
+                      }
+                    >
+                      <Image src="/plus.svg" />
+                    </Button>
+                  </InputGroup>
+                </Tab.Pane>
+              </Tab.Content>
+
+              <Nav variant="pills" className="flex-row mt-3">
+                <Nav.Item>
+                  <Nav.Link
+                    eventKey="presentation"
+                    title="See the presentation phase."
+                  >
+                    Presentation
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link
+                    eventKey="practice"
+                    title="See the practice phase."
+                    variant="outline-dark"
+                  >
+                    Practice
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link
+                    eventKey="production"
+                    title="See the production phase."
+                  >
+                    Production
+                  </Nav.Link>
+                </Nav.Item>
+              </Nav>
+            </Tab.Container>
+          </Form>
+        </Card.Body>
+      </Card>
+    </>
+  );
+};
