@@ -1,6 +1,6 @@
 import { useAuth } from "../hooks/useAuth";
 import { useUpdateLessonPlan } from "../hooks/useUpdateLessonPlan";
-import LessonPlanAPI from "../api/LessonPlanAPI";
+import LessonPlanService from "../service/LessonPlanService";
 import lessonPlanTemplate from "../../data/lessonPlanTemplate.json";
 
 import { useState, useEffect, useRef } from "react";
@@ -32,13 +32,12 @@ export const LessonPlanCreate = () => {
     user._id === userId ? setAuthorised(true) : setAuthorised(false);
 
     if (!lessonApiRef.current) {
-      lessonApiRef.current = new LessonPlanAPI(
+      lessonApiRef.current = new LessonPlanService(
         import.meta.env.VITE_API_ENDPOINT,
         userId
       );
     }
 
-    console.log(lessonPlan)
   }, [user, userId, authorised, lessonPlan]);
 
   const handleSave = async (e) => {

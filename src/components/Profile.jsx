@@ -2,8 +2,9 @@
 TODO Implement an Error component when a user whose _id does not match the userId from the route parameters tries to access the Profile page.
 */
 
-import LessonPlanAPI from "../api/LessonPlanAPI";
+import LessonPlanService from "../service/LessonPlanService";
 import { useAuth } from "../hooks/useAuth";
+import { fetchLessonPlans } from "../helper/fetchHelper";
 
 import { useEffect, useState, useRef } from "react";
 
@@ -28,25 +29,15 @@ export const Profile = () => {
       setAuthorised(true);
 
       if (!lessonApiRef.current) {
-        lessonApiRef.current = new LessonPlanAPI(
+        lessonApiRef.current = new LessonPlanService(
           import.meta.env.VITE_API_ENDPOINT,
           userId
         );
 
-        fetchLessonPlans();
+        fetchLessonPlans(lessonApiRef, setLessonPlans);
       }
     }
   }, [authorised, user, userId]);
-
-  const fetchLessonPlans = async () => {
-    try {
-      const response = await lessonApiRef.current.getLessonPlans();
-
-      setLessonPlans(response.data.lessonPlans);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
 
   return (
     <Container className="pt-5 mt-3 mt-lg-5 mx-lg-5 px-4 align-middle">

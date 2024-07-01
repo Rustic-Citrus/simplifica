@@ -1,4 +1,8 @@
-import data from "../../data/user.json";
+import lessonPlanTemplate from "../../data/lessonPlanTemplate.json";
+import LessonPlanService from "../service/LessonPlanService.js";
+import { fetchOneLessonPlan } from "../helper/fetchHelper.js";
+
+import { useEffect, useRef, useState } from "react";
 
 import { Link, useParams } from "react-router-dom";
 
@@ -12,8 +16,20 @@ import Tab from "react-bootstrap/Tab";
 import Card from "react-bootstrap/Card";
 
 export const LessonPlanView = () => {
-  const lessonPlan = data[0].lesson_plans[0];
+  const [lessonPlan, setLessonPlan] = useState(lessonPlanTemplate);
   const { userId, lessonId } = useParams();
+  const lessonApiRef = useRef(null);
+
+  useEffect(() => {
+    if (!lessonApiRef.current) {
+      lessonApiRef.current = new LessonPlanService(
+        import.meta.env.VITE_API_ENDPOINT,
+        userId
+      );
+    }
+
+    fetchOneLessonPlan(lessonApiRef, lessonId, setLessonPlan);
+  }, [userId, lessonApiRef, lessonId]);
 
   return (
     <>
@@ -55,7 +71,7 @@ export const LessonPlanView = () => {
             </Row>
           </Card.Title>
           <Card.Subtitle className="mb-4 text-muted">
-            {lessonPlan.date}
+            {new Date(lessonPlan.date).toLocaleDateString("en-GB")}
           </Card.Subtitle>
           <Tab.Container id="phase-tabs" defaultActiveKey="presentation">
             <Tab.Content>
@@ -166,10 +182,3 @@ export const LessonPlanView = () => {
     </>
   );
 };
-
-// LessonPlan.propTypes = {
-//   topic: PropTypes.string,
-//   date: PropTypes.date,
-//   lessonObjective: PropTypes.string,
-//   materials: PropTypes.array,
-// };

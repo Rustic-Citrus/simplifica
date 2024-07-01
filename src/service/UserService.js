@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default class UserAPI {
+export default class UserService {
   #instance;
 
   constructor(baseUrl) {
@@ -12,7 +12,6 @@ export default class UserAPI {
   async login(userData) {
     try {
       const response = await this.#instance.post("/login", userData);
-
       return response;
     } catch (error) {
       return error.message;
@@ -22,7 +21,6 @@ export default class UserAPI {
   async logout() {
     try {
       const response = await this.#instance.put("/logout");
-
       return response;
     } catch (error) {
       return error.message;
@@ -32,7 +30,6 @@ export default class UserAPI {
   async register(userData) {
     try {
       const response = await this.#instance.post("/register", userData);
-
       return response;
     } catch (error) {
       return error.message;

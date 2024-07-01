@@ -2,7 +2,7 @@ import { createContext, useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "./useLocalStorage";
 import PropTypes from "prop-types";
-import UserAPI from "../api/UserAPI.js";
+import UserService from "../service/UserService.js";
 
 const AuthContext = createContext();
 
@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const { VITE_API_ENDPOINT } = import.meta.env;
 
-  const api = new UserAPI(VITE_API_ENDPOINT);
+  const api = new UserService(VITE_API_ENDPOINT);
 
   const signIn = async (userData) => {
     try {

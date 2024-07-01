@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export default class LessonPlanAPI {
+export default class LessonPlanService {
   #instance;
-  #userId
+  #userId;
 
   constructor(baseUrl, userId) {
     this.#instance = axios.create({
@@ -13,8 +13,20 @@ export default class LessonPlanAPI {
 
   async getLessonPlans() {
     try {
-      const response = await this.#instance.get(`/${this.#userId}/lesson-plans`);
+      const response = await this.#instance.get(
+        `/${this.#userId}/lesson-plans`
+      );
+      return response;
+    } catch (error) {
+      return error.message;
+    }
+  }
 
+  async getOneLessonPlan(lessonId) {
+    try {
+      const response = await this.#instance.get(
+        `/${this.#userId}/lesson-plans/${lessonId}`
+      );
       return response;
     } catch (error) {
       return error.message;
@@ -23,10 +35,12 @@ export default class LessonPlanAPI {
 
   async createLessonPlan(lessonPlan) {
     try {
-      const response = await this.#instance.post(`/${this.#userId}/lesson-plans`, {
-        lessonPlan,
-      });
-
+      const response = await this.#instance.post(
+        `/${this.#userId}/lesson-plans`,
+        {
+          lessonPlan,
+        }
+      );
       return response;
     } catch (error) {
       return error.message;
@@ -51,7 +65,6 @@ export default class LessonPlanAPI {
       const response = await this.#instance.delete(
         `/${this.#userId}/lesson-plans/${lessonId}`
       );
-
       return response;
     } catch (error) {
       return error.message;
