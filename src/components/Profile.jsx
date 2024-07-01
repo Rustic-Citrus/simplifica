@@ -1,10 +1,7 @@
-/*
-TODO Implement an Error component when a user whose _id does not match the userId from the route parameters tries to access the Profile page.
-*/
-
 import LessonPlanService from "../service/LessonPlanService";
 import { useAuth } from "../hooks/useAuth";
 import { fetchLessonPlans } from "../helper/fetchHelper";
+import { Error } from "./Error";
 
 import { useEffect, useState, useRef } from "react";
 
@@ -23,65 +20,74 @@ export const Profile = () => {
   const lessonApiRef = useRef();
   const { user } = useAuth();
   const { userId } = useParams();
-  
+
   useEffect(() => {
-    if (user._id === userId) {
-      setAuthorised(true);
+    user._id === userId ? setAuthorised(true) : setAuthorised(false);
 
-      if (!lessonApiRef.current) {
-        lessonApiRef.current = new LessonPlanService(
-          import.meta.env.VITE_API_ENDPOINT,
-          userId
-        );
+    if (authorised && !lessonApiRef.current) {
+      lessonApiRef.current = new LessonPlanService(
+        import.meta.env.VITE_API_ENDPOINT,
+        userId
+      );
 
-        fetchLessonPlans(lessonApiRef, setLessonPlans);
-      }
+      fetchLessonPlans(lessonApiRef, setLessonPlans);
     }
   }, [authorised, user, userId]);
 
   return (
-    <Container className="pt-5 mt-3 mt-lg-5 mx-lg-5 px-4 align-middle">
-      <Row className="mb-3 mx-2 mt-3 mt-lg-5 mx-lg-5 pt-5 align-items-center">
-        <Col xs={8} md={10}>
-          <h1 className="display-3" aria-label="title">
-            My Lesson Plans
-          </h1>
-        </Col>
-        <Col xs={{ span: 2, offset: 1 }} md={1}>
-          <Link to={`/simplifica-frontend/${userId}/create`}>
-            <Button variant="outline-success">
-              <Image src="/simplifica-frontend/plus.svg"></Image>
-            </Button>
-          </Link>
-        </Col>
-      </Row>
-      <Table striped className="mx-1 mx-lg-5">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Topic</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {lessonPlans !== undefined &&
-            lessonPlans.map((plan, i) => {
-              return (
-                <tr key={i}>
-                  <td>
-                    <Link to={`/simplifica-frontend/${userId}/${plan._id}`}>{i + 1}</Link>
-                  </td>
-                  <td>
-                    <Link to={`/simplifica-frontend/${userId}/${plan._id}`}>{plan.topic}</Link>
-                  </td>
-                  <td>
-                    <Link to={`/simplifica-frontend/${userId}/${plan._id}`}>{new Date(plan.date).toLocaleDateString("en-GB")}</Link>
-                  </td>
-                </tr>
-              );
-            })}
-        </tbody>
-      </Table>
-    </Container>
-  );
+    <>
+      {
+        authorised ? (
+          <Container className="pt-5 mt-3 mt-lg-5 mx-lg-5 px-4 align-middle">
+            <Row className="mb-3 mx-2 mt-3 mt-lg-5 mx-lg-5 pt-5 align-items-center">
+              <Col xs={8} md={10}>
+                <h1 className="display-3" aria-label="title">
+              My Lesson Plans
+            </h1>
+          </Col>
+          <Col xs={{ span: 2, offset: 1 }} md={1}>
+            <Link to={`/simplifica-frontend/${userId}/create`}>
+              <Button variant="outline-success">
+                <Image src="/simplifica-frontend/plus.svg"></Image>
+              </Button>
+            </Link>
+          </Col>
+        </Row>
+        <Table striped className="mx-1 mx-lg-5">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Topic</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {lessonPlans !== undefined &&
+              lessonPlans.map((plan, i) => {
+                return (
+                  <tr key={i}>
+                    <td>
+                      <Link to={`/simplifica-frontend/${userId}/${plan._id}`}>
+                        {i + 1}
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={`/simplifica-frontend/${userId}/${plan._id}`}>
+                        {plan.topic}
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={`/simplifica-frontend/${userId}/${plan._id}`}>
+                        {new Date(plan.date).toLocaleDateString("en-GB")}
+                      </Link>
+                    </td>
+                  </tr>
+                );
+              })}
+          </tbody>
+        </Table>
+        </Container>) : <Error message={"You are trying to access someone else's profile. To access their profile, you must be signed in with their account."} />
+      }
+    </>
+  )
 };
