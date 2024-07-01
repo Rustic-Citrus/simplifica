@@ -1,3 +1,13 @@
+import { useAuth } from "../hooks/useAuth";
+import { useUpdateLessonPlan } from "../hooks/useUpdateLessonPlan";
+import LessonPlanAPI from "../api/LessonPlanAPI";
+import lessonPlanTemplate from "../../data/lessonPlanTemplate.json";
+
+import { useState, useEffect, useRef } from "react";
+
+import { Link, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -8,46 +18,18 @@ import Tab from "react-bootstrap/Tab";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
-import { Link, useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
-import { useState, useEffect, useRef } from "react";
-import { useAuth } from "../hooks/useAuth";
-import LessonPlanAPI from "../api/LessonPlanAPI";
-
-const lessonPlanTemplate = {
-  topic: "",
-  date: "",
-  presentation: {
-    objective: "",
-    materials: [],
-    connection: "",
-  },
-  practice: {
-    real_life_application: "",
-    feedback_method: "",
-    activities: [],
-  },
-  production: {
-    learner_interaction: "",
-    success_criteria: [],
-    activities: [],
-  },
-};
 
 export const LessonPlanCreate = () => {
   const { user } = useAuth();
   const { userId } = useParams();
   const navigate = useNavigate();
   const lessonApiRef = useRef(null);
-
-  const [lessonPlan, setLessonPlan] = useState(lessonPlanTemplate);
   const [authorised, setAuthorised] = useState(false);
+  const [lessonPlan, updateLessonPlan] =
+    useUpdateLessonPlan(lessonPlanTemplate);
 
   useEffect(() => {
-    if (user._id === userId) {
-      setAuthorised(true);
-    }
+    user._id === userId ? setAuthorised(true) : setAuthorised(false);
 
     if (!lessonApiRef.current) {
       lessonApiRef.current = new LessonPlanAPI(
@@ -55,15 +37,15 @@ export const LessonPlanCreate = () => {
         userId
       );
     }
-  }, [user, userId, authorised]);
+
+    console.log(lessonPlan)
+  }, [user, userId, authorised, lessonPlan]);
 
   const handleSave = async (e) => {
     e.preventDefault();
 
     try {
       await lessonApiRef.current.createLessonPlan(lessonPlan);
-
-      setLessonPlan(lessonPlanTemplate);
 
       navigate(`/simplifica-frontend/${userId}`);
     } catch (error) {
@@ -75,34 +57,14 @@ export const LessonPlanCreate = () => {
     const { name, value } = e.target;
     const keys = name.split(".");
 
-    if (keys.length === 1) {
-      setLessonPlan((prevState) => ({
-        ...prevState,
-        [keys[0]]: value,
-      }));
-    } else {
-      setLessonPlan((prevState) => ({
-        ...prevState,
-        [keys[0]]: {
-          ...prevState[keys[0]],
-          [keys[1]]: value,
-        },
-      }));
-    }
-  };
-
-  const updateLessonPlan = (section, key, update) => {
-    setLessonPlan((prevState) => ({
-      ...prevState,
-      [section]: {
-        ...prevState[section],
-        [key]: update,
-      },
-    }));
+    keys.length === 1
+      ? updateLessonPlan(keys[0], null, value)
+      : updateLessonPlan(keys[0], keys[1], value);
   };
 
   const handleAddItem = (e, section, key, inputId) => {
     e.preventDefault();
+
     const newItem = document.getElementById(inputId).value;
     if (newItem.trim() === "") return;
 
@@ -112,7 +74,9 @@ export const LessonPlanCreate = () => {
 
   const handleRemoveItem = (e, section, key, index) => {
     e.preventDefault();
+
     const updatedItems = lessonPlan[section][key].filter((_, i) => i !== index);
+
     updateLessonPlan(section, key, updatedItems);
   };
 
