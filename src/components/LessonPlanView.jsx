@@ -3,10 +3,11 @@ import LessonPlanService from "../service/LessonPlanService.js";
 import { fetchOneLessonPlan } from "../helper/fetchHelper.js";
 import { useAuth } from "../hooks/useAuth.jsx";
 import { Error } from "./Error.jsx";
+import { ConfirmDeleteModal } from "./ConfirmDeleteModal.jsx";
 
 import { useEffect, useRef, useState } from "react";
 
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
@@ -20,9 +21,11 @@ import Card from "react-bootstrap/Card";
 export const LessonPlanView = () => {
   const [lessonPlan, setLessonPlan] = useState(lessonPlanTemplate);
   const [authorised, setAuthorised] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const { userId, lessonId } = useParams();
   const lessonApiRef = useRef(null);
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     user && user._id === userId ? setAuthorised(true) : setAuthorised(false);
@@ -37,8 +40,31 @@ export const LessonPlanView = () => {
     }
   }, [user, userId, lessonApiRef, lessonId, authorised]);
 
+  const handleDeleteConfirmed = async () => {
+    try {
+      const response = await lessonApiRef.current.deleteLessonPlan(lessonId);
+
+      if (response.status < 300) {
+        navigate(`/simplifica-frontend/${userId}`);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const handleClickDelete = async (e) => {
+    e.preventDefault();
+
+    setShowDeleteModal(true);
+  };
+
   return (
     <>
+      <ConfirmDeleteModal
+        show={showDeleteModal}
+        toggleShow={() => setShowDeleteModal(false)}
+        handleDeleteConfirmed={handleDeleteConfirmed}
+      />
       {authorised ? (
         <>
           <Container>
@@ -71,7 +97,10 @@ export const LessonPlanView = () => {
                     </Button>
                   </Col>
                   <Col xs={2} sm={2} md={1}>
-                    <Button variant="outline-danger">
+                    <Button
+                      variant="outline-danger"
+                      onClick={handleClickDelete}
+                    >
                       <Image src="/simplifica-frontend/trash.svg"></Image>
                     </Button>
                   </Col>
