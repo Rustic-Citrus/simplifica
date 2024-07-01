@@ -1,5 +1,3 @@
-import { Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./hooks/useAuth";
 import { Page } from "./components/Page";
 import { Register } from "./components/Register";
 import { SignIn } from "./components/SignIn";
@@ -10,6 +8,10 @@ import { LessonPlanView } from "./components/LessonPlanView";
 import { LessonPlanCreate } from "./components/LessonPlanCreate";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { PublicRoute } from "./components/PublicRoute";
+import { LessonPlanEdit } from "./components/LessonPlanEdit";
+import { AuthProvider } from "./hooks/useAuth";
+
+import { Routes, Route } from "react-router-dom";
 
 export const App = () => {
   return (
@@ -49,19 +51,29 @@ export const App = () => {
           }
         />
         <Route
-          path="/simplifica-frontend/:userId/:lessonId"
+          path="/simplifica-frontend/:userId/view/:lessonId"
           element={
             <ProtectedRoute>
               <Page MainComponent={LessonPlanView} />
             </ProtectedRoute>
           }
+        />
+        <Route
+          path="/simplifica-frontend/:userId/edit/:lessonId"
+          element={
+            <ProtectedRoute>
+              <Page MainComponent={LessonPlanEdit} />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/simplifica-frontend/:userId/create"
+          element={
+            <ProtectedRoute>
+              <Page MainComponent={LessonPlanCreate} />
+            </ProtectedRoute>
+          }
         ></Route>
-        <Route path="/simplifica-frontend/:userId/create" element={
-          <ProtectedRoute><Page MainComponent={LessonPlanCreate}/></ProtectedRoute>
-        }
-        >
-
-        </Route>
       </Routes>
     </AuthProvider>
   );

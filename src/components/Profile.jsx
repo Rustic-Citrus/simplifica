@@ -78,21 +78,21 @@ export const Profile = () => {
                       <tr key={i}>
                         <td>
                           <Link
-                            to={`/simplifica-frontend/${userId}/${plan._id}`}
+                            to={`/simplifica-frontend/${userId}/view/${plan._id}`}
                           >
                             {i + 1}
                           </Link>
                         </td>
                         <td>
                           <Link
-                            to={`/simplifica-frontend/${userId}/${plan._id}`}
+                            to={`/simplifica-frontend/${userId}/view/${plan._id}`}
                           >
                             {plan.topic}
                           </Link>
                         </td>
                         <td>
                           <Link
-                            to={`/simplifica-frontend/${userId}/${plan._id}`}
+                            to={`/simplifica-frontend/${userId}/view/${plan._id}`}
                           >
                             {new Date(plan.date).toLocaleDateString("en-GB")}
                           </Link>

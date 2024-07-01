@@ -3,6 +3,7 @@ import { useUpdateLessonPlan } from "../hooks/useUpdateLessonPlan";
 import LessonPlanService from "../service/LessonPlanService";
 import lessonPlanTemplate from "../../data/lessonPlanTemplate.json";
 import { Error } from "./Error";
+import { fetchOneLessonPlan } from "../helper/fetchHelper";
 
 import { useState, useEffect, useRef } from "react";
 
@@ -23,9 +24,9 @@ import Spinner from "react-bootstrap/Spinner";
 
 import { motion } from "framer-motion";
 
-export const LessonPlanCreate = () => {
+export const LessonPlanEdit = () => {
   const { user } = useAuth();
-  const { userId } = useParams();
+  const { userId, lessonId } = useParams();
   const navigate = useNavigate();
   const lessonApiRef = useRef(null);
   const [authorised, setAuthorised] = useState(false);
@@ -41,19 +42,23 @@ export const LessonPlanCreate = () => {
         import.meta.env.VITE_API_ENDPOINT,
         userId
       );
+
+      fetchOneLessonPlan(lessonApiRef, lessonId, updateLessonPlan);
     }
-  }, [user, userId, authorised, lessonPlan]);
+
+    console.log(lessonPlan)
+  }, [user, userId, authorised, lessonPlan, lessonId, updateLessonPlan]);
 
   const handleClickSave = async (e) => {
     e.preventDefault();
     try {
       setIsSaving(true);
-      await lessonApiRef.current.createLessonPlan(lessonPlan);
+      await lessonApiRef.current.updateLessonPlan(lessonId, lessonPlan);
 
       setTimeout(() => {
         navigate(`/simplifica-frontend/${userId}`);
         setIsSaving(false);
-      }, 2000)
+      }, 2000);
     } catch (error) {
       console.log(error.message);
     }
@@ -74,7 +79,7 @@ export const LessonPlanCreate = () => {
     const newItem = document.getElementById(inputId).value;
     if (newItem.trim() === "") return;
 
-    updateLessonPlan([...lessonPlan[section][key], newItem], section, key);
+    updateLessonPlan(newItem, section, key, [...lessonPlan[section][key]]);
     document.getElementById(inputId).value = "";
   };
 
@@ -125,6 +130,7 @@ export const LessonPlanCreate = () => {
                             placeholder="Lesson Topic"
                             aria-label="topic-input"
                             name="topic"
+                            value={lessonPlan.topic}
                             onChange={handleChange}
                           />
                         </Form.Group>
@@ -151,6 +157,7 @@ export const LessonPlanCreate = () => {
                       type="date"
                       placeholder="Date"
                       name="date"
+                      value={lessonPlan.date !== "" ? new Date(lessonPlan.date).toISOString().split('T')[0] : ""}
                       onChange={handleChange}
                     />
                   </Card.Subtitle>
@@ -172,6 +179,7 @@ export const LessonPlanCreate = () => {
                             rows={3}
                             name="presentation.objective"
                             placeholder="Grammar, vocabulary, functions, etc."
+                            defaultValue={lessonPlan.presentation.objective}
                             onChange={handleChange}
                             aria-label="objective-textarea"
                           />
@@ -188,6 +196,7 @@ export const LessonPlanCreate = () => {
                                     type="text"
                                     placeholder={material}
                                     aria-label={`material-${i}`}
+                                    defaultValue={lessonPlan.presentation.materials[i]}
                                     disabled
                                     readOnly
                                   />
@@ -242,6 +251,7 @@ export const LessonPlanCreate = () => {
                             as="textarea"
                             rows={3}
                             name="presentation.connection"
+                            defaultValue={lessonPlan.presentation.connection}
                             onChange={handleChange}
                             aria-label="connection-textarea"
                             placeholder="I will..."
@@ -261,6 +271,7 @@ export const LessonPlanCreate = () => {
                             as="textarea"
                             rows={3}
                             onChange={handleChange}
+                            defaultValue={lessonPlan.practice.real_life_application}
                             name="practice.real_life_application"
                             aria-label="real-life-application-textarea"
                           />
@@ -274,6 +285,7 @@ export const LessonPlanCreate = () => {
                             as="textarea"
                             rows={3}
                             onChange={handleChange}
+                            defaultValue={lessonPlan.practice.feedback_method}
                             name="practice.feedback_method"
                             aria-label="feedback-method-textarea"
                           />
@@ -290,6 +302,7 @@ export const LessonPlanCreate = () => {
                                   type="text"
                                   placeholder={activity}
                                   aria-label={`practice-activity-${i}`}
+                                  defaultValue={lessonPlan.practice.activities[i]}
                                   disabled
                                   readOnly
                                 />
@@ -348,6 +361,7 @@ export const LessonPlanCreate = () => {
                             as="textarea"
                             rows={3}
                             onChange={handleChange}
+                            defaultValue={lessonPlan.production.learner_interaction}
                             name="production.learner_interaction"
                           />
                         </Form.Group>
@@ -364,6 +378,7 @@ export const LessonPlanCreate = () => {
                                     type="text"
                                     placeholder={criterion}
                                     aria-label={`criterion-${i}`}
+                                    defaultValue={lessonPlan.production.success_criteria[i]}
                                     disabled
                                     readOnly
                                   />
@@ -422,6 +437,7 @@ export const LessonPlanCreate = () => {
                                     type="text"
                                     placeholder={activity}
                                     aria-label={`production-activity-${i}`}
+                                    defaultValue={lessonPlan.production.activities[i]}
                                     disabled
                                     readOnly
                                   />
@@ -515,7 +531,7 @@ export const LessonPlanCreate = () => {
         >
           <Error
             message={
-              "You are trying to create a lesson for an account which you are not signed in to. To create a lesson for that account, you must sign in with their details."
+              "You are trying to edit a lesson for an account which you are not signed in to. To edit a lesson for that account, you must sign in with their details."
             }
           />
         </motion.div>

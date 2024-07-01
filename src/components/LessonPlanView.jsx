@@ -49,6 +49,10 @@ export const LessonPlanView = () => {
     }
   }, [user, userId, lessonApiRef, lessonId, authorised]);
 
+  const handleEditClick = async () => {
+    navigate(`/simplifica-frontend/${userId}/edit/${lessonId}`);
+  }
+
   const handleDeleteConfirmed = async () => {
     try {
       setIsDeleting(true);
@@ -111,7 +115,7 @@ export const LessonPlanView = () => {
                       <h1 className="display-6">{lessonPlan.topic}</h1>
                     </Col>
                     <Col xs={2} sm={2} md={1}>
-                      <Button variant="outline-secondary">
+                      <Button variant="outline-secondary" onClick={handleEditClick}>
                         <Image src="/simplifica-frontend/pencil.svg"></Image>
                       </Button>
                     </Col>
