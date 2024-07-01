@@ -1,3 +1,10 @@
+import { handleChangeHelper } from "../helper/handleHelper";
+import { useAuth } from "../hooks/useAuth.jsx";
+
+import { useState } from "react";
+
+import PropTypes from "prop-types";
+
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
@@ -5,10 +12,8 @@ import Stack from "react-bootstrap/Stack";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
-import { handleChangeHelper } from "../helper/handleHelper";
-import { useState } from "react";
-import { useAuth } from "../hooks/useAuth.jsx";
-import PropTypes from "prop-types";
+
+import { motion } from "framer-motion";
 
 export const SignIn = ({ triggerFeedback }) => {
   const [username, setUsername] = useState("");
@@ -54,57 +59,71 @@ export const SignIn = ({ triggerFeedback }) => {
 
   return (
     <Container className="pt-5 mt-5 px-4 align-middle col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
-      <Stack gap={1} className="mb-3">
-        <h1 className="display-3 mt-5 pt-5" aria-label="title">
-          Welcome back
-        </h1>
-      </Stack>
-      <Form noValidate onSubmit={handleSubmit}>
-        <Form.Group controlId="form">
-          <FloatingLabel controlId="username-label" label="Your username">
-            <Form.Control
-              type="text"
-              placeholder="Your username"
-              className="mb-2"
-              title="Type your username here."
-              aria-label="username-input"
-              onChange={handleUsernameChange}
-            />
-          </FloatingLabel>
-          <InputGroup className="mb-2">
-            <FloatingLabel controlId="password-label" label="Your password">
+      <motion.div
+        initial={{ opacity: 0, x: -100, scale: 0.95 }}
+        animate={{ opacity: 1, x: 0, scale: 1 }}
+        transition={{
+          duration: 0.8,
+          delay: 0.5,
+          ease: [0, 0.71, 0.2, 1.01],
+        }}
+      >
+        <Stack gap={1} className="mb-3">
+          <h1 className="display-3 mt-5 pt-5" aria-label="title">
+            Welcome back
+          </h1>
+        </Stack>
+        <Form noValidate onSubmit={handleSubmit}>
+          <Form.Group controlId="form">
+            <FloatingLabel controlId="username-label" label="Your username">
               <Form.Control
-                type={hidePassword ? "password" : "text"}
-                placeholder="Your password"
-                title="Type your password here."
-                aria-label="password-input"
-                onChange={handlePasswordChange}
+                type="text"
+                placeholder="Your username"
+                className="mb-2"
+                title="Type your username here."
+                aria-label="username-input"
+                onChange={handleUsernameChange}
               />
             </FloatingLabel>
-            <Button
-              variant="outline-secondary"
-              onClick={() => setHidePassword(!hidePassword)}
-              title="Click here to reveal your password."
-              aria-label="hide-password-button"
-            >
-              <Image
-                src={hidePassword ? "/simplifica-frontend/eye.svg" : "/simplifica-frontend/eye-slash.svg"}
-                alt="Icon of an eye."
-              />
-            </Button>
-          </InputGroup>
-        </Form.Group>
+            <InputGroup className="mb-2">
+              <FloatingLabel controlId="password-label" label="Your password">
+                <Form.Control
+                  type={hidePassword ? "password" : "text"}
+                  placeholder="Your password"
+                  title="Type your password here."
+                  aria-label="password-input"
+                  onChange={handlePasswordChange}
+                />
+              </FloatingLabel>
+              <Button
+                variant="outline-secondary"
+                onClick={() => setHidePassword(!hidePassword)}
+                title="Click here to reveal your password."
+                aria-label="hide-password-button"
+              >
+                <Image
+                  src={
+                    hidePassword
+                      ? "/simplifica-frontend/eye.svg"
+                      : "/simplifica-frontend/eye-slash.svg"
+                  }
+                  alt="Icon of an eye."
+                />
+              </Button>
+            </InputGroup>
+          </Form.Group>
 
-        <Button
-          type="submit"
-          variant="dark"
-          className="w-100"
-          aria-label="sign-in-button"
-          title="Click here to sign into your account."
-        >
-          Sign In
-        </Button>
-      </Form>
+          <Button
+            type="submit"
+            variant="dark"
+            className="w-100"
+            aria-label="sign-in-button"
+            title="Click here to sign into your account."
+          >
+            Sign In
+          </Button>
+        </Form>
+      </motion.div>
     </Container>
   );
 };

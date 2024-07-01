@@ -1,14 +1,26 @@
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Stack from "react-bootstrap/Stack";
+
 import { Link } from "react-router-dom";
+
+import { motion } from "framer-motion";
 
 export const Splash = () => {
   return (
     <Container className="pt-5 mt-5 px-4 align-middle">
       <Stack gap={1}>
         <h1 className="display-1 mt-5 pt-5" aria-label="title">
-          Simplifica.
+          Simplifica
+          <motion.span
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+              type: "spring",
+              stiffness: 260,
+              damping: 20
+            }}
+          >.</motion.span>
         </h1>
         <p aria-label="subtitle">
           Who said planning lessons couldn&apos;t be quick?

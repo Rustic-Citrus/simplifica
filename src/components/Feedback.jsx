@@ -1,5 +1,6 @@
-import Toast from "react-bootstrap/Toast";
 import PropTypes from "prop-types";
+
+import Toast from "react-bootstrap/Toast";
 
 export const Feedback = ({ title, message, type, toggleVisible }) => {
   const date = new Date();

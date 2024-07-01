@@ -1,13 +1,21 @@
-import Navbar from "react-bootstrap/Navbar";
-import { Link } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+
+import { useState } from "react";
+
+import { Link } from "react-router-dom";
+
+import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
+import Spinner from "react-bootstrap/Spinner";
 
 export const Header = () => {
   const { user, signOut } = useAuth();
+  const [isSigningOut, setIsSigningOut] = useState(false);
 
-  const handleClick = async (e) => {
+  const handleSignOutClick = async (e) => {
     e.preventDefault();
+
+    setIsSigningOut(true);
 
     try {
       await signOut();
@@ -33,10 +41,20 @@ export const Header = () => {
           </h1>
         </Link>
       </Navbar.Brand>
-      {user && (
-        <Button variant="dark" onClick={handleClick}>
+      {user && !isSigningOut && (
+        <Button variant="dark" onClick={handleSignOutClick}>
           Sign Out
         </Button>
+      )}
+      {isSigningOut && (
+        <Spinner
+          animation="border"
+          role="status"
+          size="sm"
+          className="d-flex justify-content center align-items-center"
+        >
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
       )}
     </Navbar>
   );

@@ -1,7 +1,10 @@
 import PropTypes from "prop-types";
+
 import { Header } from "./Header";
 import { Feedback } from "./Feedback";
+
 import { useState } from "react";
+
 import ToastContainer from "react-bootstrap/ToastContainer";
 
 export const Page = ({ MainComponent }) => {
@@ -16,7 +19,7 @@ export const Page = ({ MainComponent }) => {
   return (
     <>
       <Header />
-      {<MainComponent triggerFeedback={setupFeedback} />}
+      <MainComponent triggerFeedback={setupFeedback} />
       <ToastContainer position="top-end" className="m-4">
         {feedbackVisible &&
           feedback.map((feedbackItem, i) => {
