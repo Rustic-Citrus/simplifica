@@ -45,8 +45,6 @@ export const LessonPlanEdit = () => {
 
       fetchOneLessonPlan(lessonApiRef, lessonId, updateLessonPlan);
     }
-
-    console.log(lessonPlan)
   }, [user, userId, authorised, lessonPlan, lessonId, updateLessonPlan]);
 
   const handleClickSave = async (e) => {
@@ -79,7 +77,7 @@ export const LessonPlanEdit = () => {
     const newItem = document.getElementById(inputId).value;
     if (newItem.trim() === "") return;
 
-    updateLessonPlan(newItem, section, key, [...lessonPlan[section][key]]);
+    updateLessonPlan([...lessonPlan[section][key], newItem], section, key);
     document.getElementById(inputId).value = "";
   };
 
