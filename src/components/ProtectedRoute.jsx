@@ -8,7 +8,7 @@ export const ProtectedRoute = ({ children }) => {
 
   useEffect(() => {
     authenticate();
-  }, [authenticate]);
+  }, [authenticate, user]);
 
   if (!user) {
     return <Navigate to="/simplifica-frontend/login" />;
