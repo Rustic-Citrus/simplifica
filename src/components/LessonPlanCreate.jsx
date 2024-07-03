@@ -6,6 +6,8 @@ import { Error } from "./Error";
 
 import { useState, useEffect, useRef } from "react";
 
+import PropTypes from "prop-types";
+
 import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
@@ -23,7 +25,7 @@ import Spinner from "react-bootstrap/Spinner";
 
 import { motion } from "framer-motion";
 
-export const LessonPlanCreate = () => {
+export const LessonPlanCreate = ({ triggerFeedback }) => {
   const { user } = useAuth();
   const { userId } = useParams();
   const navigate = useNavigate();
@@ -32,6 +34,8 @@ export const LessonPlanCreate = () => {
   const [isSaving, setIsSaving] = useState(false);
   const [lessonPlan, updateLessonPlan] =
     useUpdateLessonPlan(lessonPlanTemplate);
+  const [hasDate, setHasDate] = useState(false);
+  const [hasTopic, setHasTopic] = useState(false);
 
   useEffect(() => {
     user._id === userId ? setAuthorised(true) : setAuthorised(false);
@@ -46,6 +50,17 @@ export const LessonPlanCreate = () => {
 
   const handleClickSave = async (e) => {
     e.preventDefault();
+
+    if (!hasTopic || !hasDate) {
+      return triggerFeedback([
+        {
+          type: "error",
+          title: "Error",
+          message: "Lesson needs at least a topic and a date.",
+        },
+      ]);
+    }
+
     try {
       setIsSaving(true);
       await lessonApiRef.current.createLessonPlan(lessonPlan);
@@ -53,15 +68,36 @@ export const LessonPlanCreate = () => {
       setTimeout(() => {
         navigate(`/simplifica-frontend/${userId}`);
         setIsSaving(false);
-      }, 2000)
+      }, 2000);
     } catch (error) {
       console.log(error.message);
+    }
+  };
+
+  const checkValueIsNotEmpty = (value) => {
+    return value.trim() !== "";
+  };
+
+  const updateEssentialFields = (field, notEmpty) => {
+    switch (field) {
+      case "date":
+        setHasDate(notEmpty);
+        break;
+      case "topic":
+        setHasTopic(notEmpty);
+        break;
     }
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     const keys = name.split(".");
+    const notEmpty = checkValueIsNotEmpty(value);
+
+    if (keys.length === 1) {
+      updateEssentialFields(keys[0], notEmpty)
+      updateLessonPlan(value, keys[0], null);
+    }
 
     keys.length === 1
       ? updateLessonPlan(value, keys[0], null)
@@ -522,4 +558,8 @@ export const LessonPlanCreate = () => {
       )}
     </>
   );
+};
+
+LessonPlanCreate.propTypes = {
+  triggerFeedback: PropTypes.func,
 };
