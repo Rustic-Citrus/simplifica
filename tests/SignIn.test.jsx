@@ -1,4 +1,5 @@
 import { SignIn } from "../src/components/SignIn";
+import { AuthProvider } from "../src/hooks/useAuth";
 import { describe, it, expect } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
@@ -8,7 +9,9 @@ describe("SignIn component tests", () => {
   it("renders correctly", async () => {
     render(
       <MemoryRouter>
-        <SignIn />
+        <AuthProvider>
+          <SignIn />
+        </AuthProvider>
       </MemoryRouter>
     );
 
@@ -27,7 +30,7 @@ describe("SignIn component tests", () => {
     expect(hidePasswordButton).toBeInTheDocument();
     expect(hidePasswordButton).toHaveAttribute("type", "button");
 
-    const signInButton = screen.getByLabelText("get-started-button");
+    const signInButton = screen.getByLabelText("sign-in-button");
     expect(signInButton).toBeInTheDocument();
     expect(signInButton).toHaveAttribute("type", "submit");
   });
@@ -35,7 +38,9 @@ describe("SignIn component tests", () => {
   it("handles username change correctly", async () => {
     render(
       <MemoryRouter>
-        <SignIn />
+        <AuthProvider>
+          <SignIn />
+        </AuthProvider>
       </MemoryRouter>
     );
 
@@ -48,7 +53,9 @@ describe("SignIn component tests", () => {
   it("handles password change correctly", async () => {
     render(
       <MemoryRouter>
-        <SignIn />
+        <AuthProvider>
+          <SignIn />
+        </AuthProvider>
       </MemoryRouter>
     );
 
@@ -61,11 +68,13 @@ describe("SignIn component tests", () => {
   it("handles form submission correctly", async () => {
     render(
       <MemoryRouter>
-        <SignIn />
+        <AuthProvider>
+          <SignIn />
+        </AuthProvider>
       </MemoryRouter>
     );
 
-    const signInButton = screen.getByLabelText("get-started-button");
+    const signInButton = screen.getByLabelText("sign-in-button");
     fireEvent.click(signInButton);
   });
 });
