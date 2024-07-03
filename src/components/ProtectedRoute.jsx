@@ -1,9 +1,15 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import PropTypes from "prop-types";
+import { useEffect } from "react";
 
 export const ProtectedRoute = ({ children }) => {
-  const { user } = useAuth();
+  const { user, authenticate } = useAuth();
+
+  useEffect(() => {
+    authenticate();
+  }, [authenticate]);
+
   if (!user) {
     return <Navigate to="/simplifica-frontend/login" />;
   }

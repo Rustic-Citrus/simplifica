@@ -11,7 +11,9 @@ export default class UserService {
 
   async login(userData) {
     try {
-      const response = await this.#instance.post("/login", userData);
+      const response = await this.#instance.post("/login", userData, {
+        withCredentials: true,
+      });
       return response;
     } catch (error) {
       return error.message;
@@ -20,16 +22,35 @@ export default class UserService {
 
   async logout() {
     try {
-      const response = await this.#instance.put("/logout");
+      const response = await this.#instance.put(
+        "/logout",
+        {},
+        {
+          withCredentials: true,
+        }
+      );
       return response;
     } catch (error) {
       return error.message;
     }
   }
-  
+
   async register(userData) {
     try {
       const response = await this.#instance.post("/register", userData);
+      return response;
+    } catch (error) {
+      return error.message;
+    }
+  }
+
+  async authenticate() {
+    try {
+      const response = await this.#instance.post(
+        "/",
+        {},
+        { withCredentials: true }
+      );
       return response;
     } catch (error) {
       return error.message;

@@ -13,17 +13,33 @@ export const AuthProvider = ({ children }) => {
 
   const api = new UserService(VITE_API_ENDPOINT);
 
+  const authenticate = async () => {
+    try {
+      const response = await api.authenticate();
+
+      if (response.status >= 300) {
+        setUser(null);
+      }
+
+      console.log(response);
+
+      return response;
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   const signIn = async (userData) => {
     try {
       const response = await api.login(userData);
 
       if (response.status === 200 && response.data.user._id) {
-        setUser(response.data.user);
-        navigate(`/simplifica-frontend/${response.data.user._id}`);
+        setTimeout(() => {
+          setUser(response.data.user);
+        }, 2000);
       }
 
       return response;
-
     } catch (error) {
       console.log(error.message);
     }
@@ -64,6 +80,7 @@ export const AuthProvider = ({ children }) => {
       signIn,
       signOut,
       register,
+      authenticate,
     }),
     [user]
   );
