@@ -13,10 +13,10 @@ export const Feedback = ({ title, message, type, toggleVisible }) => {
       autohide={true}
     >
       <Toast.Header>
-        <strong className="me-auto">{title}</strong>
-        <small>{date.toLocaleTimeString()}</small>
+        <strong className="me-auto" aria-label="feedback-title">{title}</strong>
+        <small aria-label="feedback-timestamp">{date.toLocaleTimeString()}</small>
       </Toast.Header>
-      <Toast.Body>{message}</Toast.Body>
+      <Toast.Body aria-label="feedback-message">{message}</Toast.Body>
     </Toast>
   );
 };
