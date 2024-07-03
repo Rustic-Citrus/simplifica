@@ -7,7 +7,10 @@ export default defineConfig({
   base: "/simplifica-frontend/",
   test: {
     environment: "jsdom",
-    globals: true
+    coverage: {
+      reporter: ["text", "json", "html"],
+    },
+    globals: true,
   },
-  setupFiles: "./tests/setup.js"
+  setupFiles: "./tests/setup.js",
 });
