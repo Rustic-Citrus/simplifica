@@ -82,4 +82,12 @@ describe("UserService class tests", () => {
 
     expect(postSpy).toHaveBeenCalledWith("/register", testUserData);
   });
+
+  it("calls axios.post when the authenticate method is called", async () => {
+    const postSpy = vi.spyOn(testInstance, "post");
+
+    await testUserService.authenticate();
+
+    expect(postSpy).toHaveBeenCalledWith("/", {}, { withCredentials: true });
+  });
 });
