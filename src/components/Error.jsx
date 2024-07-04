@@ -19,7 +19,12 @@ export const Error = ({ message = "" }) => {
             : "An unexpected error occurred. Click below to return to the homepage or see the console for more information."}
         </p>
         <Link to="/simplifica-frontend/">
-          <Button variant="dark" className="w-100" title="Return to home page.">
+          <Button
+            variant="dark"
+            className="w-100"
+            title="Return to home page."
+            aria-label="back-button"
+          >
             Back
           </Button>
         </Link>
