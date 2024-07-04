@@ -1,18 +1,18 @@
 import {
-  afterEach,
-  beforeEach,
-  beforeAll,
-  afterAll,
   expect,
   describe,
   it,
   vi,
 } from "vitest";
 import "@testing-library/jest-dom/vitest";
-import { cleanup, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 
 import * as useAuthModule from "../src/hooks/useAuth";
 import { Profile } from "../src/components/Profile";
+
+vi.mock("../src/helper/fetchHelper.js", () => ({
+  fetchLessonPlans: vi.fn(),
+}));
 
 vi.mock("../src/hooks/useAuth.jsx", () => {
   const actual = vi.importActual("../src/hooks/useAuth.jsx");
