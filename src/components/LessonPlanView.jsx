@@ -107,15 +107,15 @@ export const LessonPlanView = () => {
             }}
           >
             <Card className="mx-3 mx-lg-5">
-              <Card.Header>Lesson Plan</Card.Header>
+              <Card.Header aria-label="success-title">Lesson Plan</Card.Header>
               <Card.Body>
                 <Card.Title>
                   <Row className="align-items-center">
                     <Col xs={8} sm={8} md={10}>
-                      <h1 className="display-6">{lessonPlan.topic}</h1>
+                      <h1 className="display-6" aria-label="topic">{lessonPlan.topic}</h1>
                     </Col>
                     <Col xs={2} sm={2} md={1}>
-                      <Button variant="outline-secondary" onClick={handleEditClick}>
+                      <Button variant="outline-secondary" onClick={handleEditClick} aria-label="edit-button">
                         <Image src="/simplifica-frontend/pencil.svg"></Image>
                       </Button>
                     </Col>
@@ -133,6 +133,7 @@ export const LessonPlanView = () => {
                         <Button
                           variant="outline-danger"
                           onClick={handleClickDelete}
+                          aria-label="delete-button"
                         >
                           <Image src="/simplifica-frontend/trash.svg" />
                         </Button>
@@ -140,17 +141,17 @@ export const LessonPlanView = () => {
                     </Col>
                   </Row>
                 </Card.Title>
-                <Card.Subtitle className="mb-4 text-muted">
+                <Card.Subtitle className="mb-4 text-muted" aria-label="lesson-date">
                   {new Date(lessonPlan.date).toLocaleDateString("en-GB")}
                 </Card.Subtitle>
                 <Tab.Container id="phase-tabs" defaultActiveKey="presentation">
                   <Tab.Content>
                     <Tab.Pane eventKey="presentation">
-                      <Card.Text className="h6">
+                      <Card.Text className="h6" aria-label="lesson-objective-question">
                         What is the main language point (grammar, vocabulary,
                         function) you want to teach?
                       </Card.Text>
-                      <Card.Text>{lessonPlan.presentation.objective}</Card.Text>
+                      <Card.Text aria-label="lesson-objective-answer">{lessonPlan.presentation.objective}</Card.Text>
                       <Card.Text className="h6">
                         What materials (textbook, audio, video, visual aids)
                         will you need?
