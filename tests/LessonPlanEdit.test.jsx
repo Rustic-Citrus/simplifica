@@ -1,14 +1,14 @@
-import { describe, it, vi, expect } from "vitest";
+import { afterEach, beforeEach, beforeAll, afterAll, expect, describe, it, vi } from "vitest";
+import "@testing-library/jest-dom/vitest";
+import { cleanup, render, screen } from "@testing-library/react";
+
 import { LessonPlanEdit } from "../src/components/LessonPlanEdit";
 import { AuthProvider } from "../src/hooks/useAuth";
-import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import "@testing-library/jest-dom";
 
 describe("LessonPlanEdit component tests", () => {
   it("renders correctly", async () => {
     const mockTriggerFeedback = vi.fn();
-
     render(
       <MemoryRouter>
         <AuthProvider>
