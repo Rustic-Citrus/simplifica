@@ -11,6 +11,5 @@ export default defineConfig({
       reporter: ["text", "json", "html"],
     },
     globals: true,
-  },
-  setupFiles: "./tests/setup.js",
+  }
 });
