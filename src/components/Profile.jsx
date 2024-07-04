@@ -24,7 +24,9 @@ export const Profile = () => {
   const { userId } = useParams();
 
   useEffect(() => {
-    user._id === userId ? setAuthorised(true) : setAuthorised(false);
+    if (user) {
+      user._id === userId ? setAuthorised(true) : setAuthorised(false);
+    }
 
     if (authorised && !lessonApiRef.current) {
       lessonApiRef.current = new LessonPlanService(
