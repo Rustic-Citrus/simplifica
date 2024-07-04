@@ -66,8 +66,20 @@ describe("UserService class tests", () => {
 
     await testUserService.logout();
 
-    expect(putSpy).toHaveBeenCalledWith("/logout", {}, {
-      withCredentials: true,
-    });
+    expect(putSpy).toHaveBeenCalledWith(
+      "/logout",
+      {},
+      {
+        withCredentials: true,
+      }
+    );
+  });
+
+  it("calls axios.post when the register method is called", async () => {
+    const postSpy = vi.spyOn(testInstance, "post");
+
+    await testUserService.register(testUserData);
+
+    expect(postSpy).toHaveBeenCalledWith("/register", testUserData);
   });
 });
