@@ -9,7 +9,6 @@ describe("Feedback component tests", () => {
   const testType = "success";
   const mockToggleVisible = vi.fn();
 
-
   it("renders correctly", async () => {
     render(<Feedback title={testTitle} message={testMessage} type={testType} toggleVisible={mockToggleVisible} />);
 
