@@ -35,8 +35,10 @@ export const LessonPlanEdit = () => {
     useUpdateLessonPlan(lessonPlanTemplate);
 
   useEffect(() => {
-    user._id === userId ? setAuthorised(true) : setAuthorised(false);
-
+    if (user) {
+      user._id === userId ? setAuthorised(true) : setAuthorised(false);
+    } 
+  
     if (authorised && !lessonApiRef.current) {
       lessonApiRef.current = new LessonPlanService(
         import.meta.env.VITE_API_ENDPOINT,
