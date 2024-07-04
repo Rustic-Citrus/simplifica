@@ -9,6 +9,10 @@ export default class UserService {
     });
   }
 
+  getInstance() {
+    return this.#instance;
+  }
+
   async login(userData) {
     try {
       const response = await this.#instance.post("/login", userData, {
