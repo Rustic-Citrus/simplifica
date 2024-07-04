@@ -60,4 +60,14 @@ describe("UserService class tests", () => {
       withCredentials: true,
     });
   });
+
+  it("calls axios.put when the logout method is called", async () => {
+    const putSpy = vi.spyOn(testInstance, "put");
+
+    await testUserService.logout();
+
+    expect(putSpy).toHaveBeenCalledWith("/logout", {}, {
+      withCredentials: true,
+    });
+  });
 });
