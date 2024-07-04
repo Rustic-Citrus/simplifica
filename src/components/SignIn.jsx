@@ -12,6 +12,7 @@ import Stack from "react-bootstrap/Stack";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
+import Spinner from "react-bootstrap/Spinner";
 
 import { motion } from "framer-motion";
 
@@ -19,6 +20,7 @@ export const SignIn = ({ triggerFeedback }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
+  const [isSigningIn, setIsSigningIn] = useState(false);
   const { signIn } = useAuth();
 
   const handleUsernameChange = (e) => handleChangeHelper(e, setUsername);
@@ -26,6 +28,8 @@ export const SignIn = ({ triggerFeedback }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSigningIn(true);
+
     const feedback = [];
 
     const userData = { username, password };
@@ -45,6 +49,7 @@ export const SignIn = ({ triggerFeedback }) => {
           title: "Unsuccessful",
           message: response.data.msg,
         });
+        setIsSigningIn(false);
       }
     } catch (error) {
       feedback.push({
@@ -52,6 +57,7 @@ export const SignIn = ({ triggerFeedback }) => {
         title: "Error",
         message: error.message,
       });
+      setIsSigningIn(false);
     }
 
     triggerFeedback(feedback);
@@ -112,16 +118,35 @@ export const SignIn = ({ triggerFeedback }) => {
               </Button>
             </InputGroup>
           </Form.Group>
-
-          <Button
-            type="submit"
-            variant="dark"
-            className="w-100"
-            aria-label="sign-in-button"
-            title="Click here to sign into your account."
-          >
-            Sign In
-          </Button>
+          {isSigningIn ? (
+            <Button
+              variant="dark"
+              aria-label="sign-in-button"
+              title="Signing in..."
+              className="w-100"
+              disabled
+            >
+              Signing in...
+              <Spinner
+                as="span"
+                animation="border"
+                className="mx-3"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+              />
+            </Button>
+          ) : (
+            <Button
+              type="submit"
+              variant="dark"
+              className="w-100"
+              aria-label="sign-in-button"
+              title="Click here to sign into your account."
+            >
+              Sign In
+            </Button>
+          )}
         </Form>
       </motion.div>
     </Container>
