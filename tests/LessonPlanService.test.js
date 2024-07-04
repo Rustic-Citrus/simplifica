@@ -87,4 +87,12 @@ describe("LessonPlanService class tests", () => {
       newLessonPlan: lessonPlanTemplate,
     });
   });
+
+  it("calls axios.delete when deleteLessonPlan is called", async () => {
+    const deleteSpy = vi.spyOn(testInstance, "delete");
+
+    await testLessonPlanService.deleteLessonPlan(testLessonId);
+
+    expect(deleteSpy).toHaveBeenCalledWith(`/${testUserId}/lesson-plans/${testLessonId}`);
+  })
 });
