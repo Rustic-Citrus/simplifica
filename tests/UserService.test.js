@@ -28,6 +28,10 @@ describe("UserService class tests", () => {
   const axiosCreateSpy = vi.spyOn(axios, "create");
   let validBaseUrl = "https://www.valid.com/url";
   let testUserId = "81742460220";
+  let testUserData = {
+    username: "testUser",
+    password: "testPassword",
+  };
   let testUserService;
   let testInstance;
 
@@ -36,5 +40,24 @@ describe("UserService class tests", () => {
 
     expect(axiosCreateSpy).toHaveBeenCalledWith({ baseURL: validBaseUrl });
     expect(testUserService.getInstance()).toHaveProperty("get");
+  });
+
+  afterEach(() => {
+    testUserService = null;
+  });
+
+  beforeEach(() => {
+    testUserService = new UserService(validBaseUrl);
+    testInstance = testUserService.getInstance();
+  });
+
+  it("calls axios.post when the login method is called", async () => {
+    const postSpy = vi.spyOn(testInstance, "post");
+
+    await testUserService.login(testUserData);
+
+    expect(postSpy).toHaveBeenCalledWith("/login", testUserData, {
+      withCredentials: true,
+    });
   });
 });
