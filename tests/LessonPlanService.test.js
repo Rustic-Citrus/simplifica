@@ -81,11 +81,17 @@ describe("LessonPlanService class tests", () => {
   it("calls axios.put when updateLessonPlan is called", async () => {
     const putSpy = vi.spyOn(testInstance, "put");
 
-    await testLessonPlanService.updateLessonPlan(testLessonId, lessonPlanTemplate);
+    await testLessonPlanService.updateLessonPlan(
+      testLessonId,
+      lessonPlanTemplate
+    );
 
-    expect(putSpy).toHaveBeenCalledWith(`/${testUserId}/lesson-plans/${testLessonId}`, {
-      newLessonPlan: lessonPlanTemplate,
-    });
+    expect(putSpy).toHaveBeenCalledWith(
+      `/${testUserId}/lesson-plans/${testLessonId}`,
+      {
+        newLessonPlan: lessonPlanTemplate,
+      }
+    );
   });
 
   it("calls axios.delete when deleteLessonPlan is called", async () => {
@@ -93,6 +99,8 @@ describe("LessonPlanService class tests", () => {
 
     await testLessonPlanService.deleteLessonPlan(testLessonId);
 
-    expect(deleteSpy).toHaveBeenCalledWith(`/${testUserId}/lesson-plans/${testLessonId}`);
-  })
+    expect(deleteSpy).toHaveBeenCalledWith(
+      `/${testUserId}/lesson-plans/${testLessonId}`
+    );
+  });
 });
