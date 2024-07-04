@@ -14,6 +14,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
 import InputGroup from "react-bootstrap/InputGroup";
+import Spinner from "react-bootstrap/Spinner";
 
 import { motion } from "framer-motion";
 
@@ -23,6 +24,7 @@ export const Register = ({ triggerFeedback }) => {
   const [validated, setValidated] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isRegistering, setIsRegistering] = useState(false);
   const [confirmedPassword, setConfirmedPassword] = useState("");
   const { register } = useAuth();
 
@@ -40,6 +42,8 @@ export const Register = ({ triggerFeedback }) => {
     handleChangeHelper(e, setConfirmedPassword);
 
   const handleSubmit = async (e) => {
+    setIsRegistering(true);
+
     const reportedFeedback = [];
 
     e.preventDefault();
@@ -75,9 +79,11 @@ export const Register = ({ triggerFeedback }) => {
             message: response.data.msg,
             type: "error",
           });
+          setIsRegistering(false);
         }
       } catch (error) {
         console.log(error.message);
+        setIsRegistering(false);
       }
     }
 
@@ -170,15 +176,35 @@ export const Register = ({ triggerFeedback }) => {
             </InputGroup>
           </Form.Group>
 
-          <Button
-            type="submit"
-            variant="dark"
-            className="w-100"
-            aria-label="get-started-button"
-            title="Click here to register your account."
-          >
-            Get Started
-          </Button>
+          {isRegistering ? (
+            <Button
+              variant="dark"
+              aria-label="get-started-button"
+              title="Signing you up..."
+              className="w-100"
+              disabled
+            >
+              Creating your account...
+              <Spinner
+                as="span"
+                animation="border"
+                className="mx-3"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+              />
+            </Button>
+          ) : (
+            <Button
+              type="submit"
+              variant="dark"
+              className="w-100"
+              aria-label="get-started-button"
+              title="Click here to register your account."
+            >
+              Get Started
+            </Button>
+          )}
         </Form>
       </motion.div>
     </Container>
