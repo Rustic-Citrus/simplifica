@@ -156,3 +156,7 @@ jsconfig.json
 # SASS maps
 
 *.css.map
+
+# Test recipe file
+
+tests/recipe.js
