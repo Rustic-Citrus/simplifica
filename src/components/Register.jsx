@@ -1,5 +1,5 @@
 import { handleChangeHelper } from "../helper/handleHelper";
-import { validatePassword, validateUsername } from "../../validation/validate";
+import { validatePassword, validateUsername } from "../validation/validate";
 import feedback from "../../data/feedback.json";
 import { useAuth } from "../hooks/useAuth";
 

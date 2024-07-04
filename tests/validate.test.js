@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { validateUsername, validatePassword } from "../validation/validate.js";
+import { validateUsername, validatePassword } from "../src/validation/validate.js";
 
 describe("validateUsername tests", () => {
   it("should return true for a valid username", () => {
