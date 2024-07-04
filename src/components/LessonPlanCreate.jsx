@@ -38,7 +38,9 @@ export const LessonPlanCreate = ({ triggerFeedback }) => {
   const [hasTopic, setHasTopic] = useState(false);
 
   useEffect(() => {
-    user._id === userId ? setAuthorised(true) : setAuthorised(false);
+    if (user) {
+      user._id === userId ? setAuthorised(true) : setAuthorised(false);
+    }
 
     if (authorised && !lessonApiRef.current) {
       lessonApiRef.current = new LessonPlanService(
@@ -95,7 +97,7 @@ export const LessonPlanCreate = ({ triggerFeedback }) => {
     const notEmpty = checkValueIsNotEmpty(value);
 
     if (keys.length === 1) {
-      updateEssentialFields(keys[0], notEmpty)
+      updateEssentialFields(keys[0], notEmpty);
       updateLessonPlan(value, keys[0], null);
     }
 
