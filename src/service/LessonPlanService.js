@@ -11,6 +11,14 @@ export default class LessonPlanService {
     this.#userId = userId;
   }
 
+  getInstance() {
+    return this.#instance;
+  }
+
+  getUserId() {
+    return this.#userId;
+  }
+
   async getLessonPlans() {
     try {
       const response = await this.#instance.get(
