@@ -1,16 +1,18 @@
 import { SignIn } from "../src/components/SignIn";
 import { AuthProvider } from "../src/hooks/useAuth";
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { MemoryRouter } from "react-router-dom";
 
 describe("SignIn component tests", () => {
+  const mockTriggerFeedback = vi.fn();
+
   it("renders correctly", async () => {
     render(
       <MemoryRouter>
         <AuthProvider>
-          <SignIn />
+          <SignIn triggerFeedback={mockTriggerFeedback} />
         </AuthProvider>
       </MemoryRouter>
     );
@@ -39,7 +41,7 @@ describe("SignIn component tests", () => {
     render(
       <MemoryRouter>
         <AuthProvider>
-          <SignIn />
+          <SignIn triggerFeedback={mockTriggerFeedback} />
         </AuthProvider>
       </MemoryRouter>
     );
@@ -54,7 +56,7 @@ describe("SignIn component tests", () => {
     render(
       <MemoryRouter>
         <AuthProvider>
-          <SignIn />
+          <SignIn triggerFeedback={mockTriggerFeedback} />
         </AuthProvider>
       </MemoryRouter>
     );
@@ -69,7 +71,7 @@ describe("SignIn component tests", () => {
     render(
       <MemoryRouter>
         <AuthProvider>
-          <SignIn />
+          <SignIn triggerFeedback={mockTriggerFeedback} />
         </AuthProvider>
       </MemoryRouter>
     );
