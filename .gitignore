@@ -160,3 +160,7 @@ jsconfig.json
 # Test recipe file
 
 tests/recipe.js
+
+# Environment variables
+
+.env.prod
