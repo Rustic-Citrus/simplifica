@@ -18,7 +18,7 @@ export const Error = ({ message = "" }) => {
             ? message
             : "An unexpected error occurred. Click below to return to the homepage or see the console for more information."}
         </p>
-        <Link to="/simplifica-frontend/">
+        <Link to="/">
           <Button
             variant="dark"
             className="w-100"

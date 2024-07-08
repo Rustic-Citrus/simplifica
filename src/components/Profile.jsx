@@ -58,9 +58,9 @@ export const Profile = () => {
                 </h1>
               </Col>
               <Col xs={{ span: 2, offset: 1 }} md={1}>
-                <Link to={`/simplifica-frontend/${userId}/create`}>
+                <Link to={`/${userId}/create`}>
                   <Button variant="outline-success">
-                    <Image src="/simplifica-frontend/plus.svg"></Image>
+                    <Image src="/simplifica/plus.svg"></Image>
                   </Button>
                 </Link>
               </Col>
@@ -80,21 +80,21 @@ export const Profile = () => {
                       <tr key={i}>
                         <td>
                           <Link
-                            to={`/simplifica-frontend/${userId}/view/${plan._id}`}
+                            to={`/${userId}/view/${plan._id}`}
                           >
                             {i + 1}
                           </Link>
                         </td>
                         <td>
                           <Link
-                            to={`/simplifica-frontend/${userId}/view/${plan._id}`}
+                            to={`/${userId}/view/${plan._id}`}
                           >
                             {plan.topic}
                           </Link>
                         </td>
                         <td>
                           <Link
-                            to={`/simplifica-frontend/${userId}/view/${plan._id}`}
+                            to={`/${userId}/view/${plan._id}`}
                           >
                             {new Date(plan.date).toLocaleDateString("en-GB")}
                           </Link>

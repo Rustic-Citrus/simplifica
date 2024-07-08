@@ -68,7 +68,7 @@ export const LessonPlanCreate = ({ triggerFeedback }) => {
       await lessonApiRef.current.createLessonPlan(lessonPlan);
 
       setTimeout(() => {
-        navigate(`/simplifica-frontend/${userId}`);
+        navigate(`/${userId}`);
         setIsSaving(false);
       }, 2000);
     } catch (error) {
@@ -129,14 +129,14 @@ export const LessonPlanCreate = ({ triggerFeedback }) => {
       {authorised ? (
         <>
           <Container fluid>
-            <Link to={`/simplifica-frontend/${userId}`}>
+            <Link to={`/${userId}`}>
               <Button
                 variant="outline-secondary"
                 className="my-2"
                 title="Go back to profile."
                 aria-label="back-button"
               >
-                <Image src="/simplifica-frontend/arrow-left.svg"></Image>
+                <Image src="/simplifica/arrow-left.svg"></Image>
               </Button>
             </Link>
           </Container>
@@ -178,7 +178,7 @@ export const LessonPlanCreate = ({ triggerFeedback }) => {
                             aria-label="save-button"
                             onClick={handleClickSave}
                           >
-                            <Image src="/simplifica-frontend/floppy.svg"></Image>
+                            <Image src="/simplifica/floppy.svg"></Image>
                           </Button>
                         )}
                       </Col>
@@ -242,7 +242,7 @@ export const LessonPlanCreate = ({ triggerFeedback }) => {
                                       )
                                     }
                                   >
-                                    <Image src="/simplifica-frontend/dash-lg.svg" />
+                                    <Image src="/simplifica/dash-lg.svg" />
                                   </Button>
                                 </InputGroup>
                               );
@@ -268,7 +268,7 @@ export const LessonPlanCreate = ({ triggerFeedback }) => {
                               )
                             }
                           >
-                            <Image src="/simplifica-frontend/plus.svg" />
+                            <Image src="/simplifica/plus.svg" />
                           </Button>
                         </InputGroup>
                         <Form.Group className="mb-3" controlId="connection">
@@ -344,7 +344,7 @@ export const LessonPlanCreate = ({ triggerFeedback }) => {
                                     )
                                   }
                                 >
-                                  <Image src="/simplifica-frontend/dash-lg.svg" />
+                                  <Image src="/simplifica/dash-lg.svg" />
                                 </Button>
                               </InputGroup>
                             );
@@ -369,7 +369,7 @@ export const LessonPlanCreate = ({ triggerFeedback }) => {
                               )
                             }
                           >
-                            <Image src="/simplifica-frontend/plus.svg" />
+                            <Image src="/simplifica/plus.svg" />
                           </Button>
                         </InputGroup>
                       </Tab.Pane>
@@ -418,7 +418,7 @@ export const LessonPlanCreate = ({ triggerFeedback }) => {
                                       )
                                     }
                                   >
-                                    <Image src="/simplifica-frontend/dash-lg.svg" />
+                                    <Image src="/simplifica/dash-lg.svg" />
                                   </Button>
                                 </InputGroup>
                               );
@@ -444,7 +444,7 @@ export const LessonPlanCreate = ({ triggerFeedback }) => {
                               )
                             }
                           >
-                            <Image src="/simplifica-frontend/plus.svg" />
+                            <Image src="/simplifica/plus.svg" />
                           </Button>
                         </InputGroup>
                         <Form.Label className="h5">
@@ -476,7 +476,7 @@ export const LessonPlanCreate = ({ triggerFeedback }) => {
                                       )
                                     }
                                   >
-                                    <Image src="/simplifica-frontend/dash-lg.svg" />
+                                    <Image src="/simplifica/dash-lg.svg" />
                                   </Button>
                                 </InputGroup>
                               );
@@ -502,7 +502,7 @@ export const LessonPlanCreate = ({ triggerFeedback }) => {
                               )
                             }
                           >
-                            <Image src="/simplifica-frontend/plus.svg" />
+                            <Image src="/simplifica/plus.svg" />
                           </Button>
                         </InputGroup>
                       </Tab.Pane>

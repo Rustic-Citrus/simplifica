@@ -18,7 +18,7 @@ export const App = () => {
     <AuthProvider>
       <Routes>
         <Route
-          path="/simplifica-frontend/"
+          path="/"
           element={
             <PublicRoute>
               <Page MainComponent={Splash} />
@@ -27,53 +27,59 @@ export const App = () => {
           errorElement={<Page MainComponent={Error} />}
         />
         <Route
-          path="/simplifica-frontend/register"
+          path="/register"
           element={
             <PublicRoute>
               <Page MainComponent={Register} />
             </PublicRoute>
           }
+          errorElement={<Page MainComponent={Error} />}
         />
         <Route
-          path="/simplifica-frontend/login"
+          path="/login"
           element={
             <PublicRoute>
               <Page MainComponent={SignIn} />
             </PublicRoute>
           }
+          errorElement={<Page MainComponent={Error} />}
         />
         <Route
-          path="/simplifica-frontend/:userId"
+          path="/:userId"
           element={
             <ProtectedRoute>
               <Page MainComponent={Profile} />
             </ProtectedRoute>
           }
+          errorElement={<Page MainComponent={Error} />}
         />
         <Route
-          path="/simplifica-frontend/:userId/view/:lessonId"
+          path="/:userId/view/:lessonId"
           element={
             <ProtectedRoute>
               <Page MainComponent={LessonPlanView} />
             </ProtectedRoute>
           }
+          errorElement={<Page MainComponent={Error} />}
         />
         <Route
-          path="/simplifica-frontend/:userId/edit/:lessonId"
+          path="/:userId/edit/:lessonId"
           element={
             <ProtectedRoute>
               <Page MainComponent={LessonPlanEdit} />
             </ProtectedRoute>
           }
+          errorElement={<Page MainComponent={Error} />}
         />
         <Route
-          path="/simplifica-frontend/:userId/create"
+          path="/:userId/create"
           element={
             <ProtectedRoute>
               <Page MainComponent={LessonPlanCreate} />
             </ProtectedRoute>
           }
-        ></Route>
+          errorElement={<Page MainComponent={Error} />}
+        />
       </Routes>
     </AuthProvider>
   );

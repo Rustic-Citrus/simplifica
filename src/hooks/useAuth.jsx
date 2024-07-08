@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }) => {
       const response = await api.logout();
 
       setUser(null);
-      navigate("/simplifica-frontend/");
+      navigate("/");
 
       return response;
     } catch (error) {
@@ -62,7 +62,7 @@ export const AuthProvider = ({ children }) => {
 
       if (response.status === 201) {
         setTimeout(() => {
-          navigate("/simplifica-frontend/login");
+          navigate("/login");
         }, 3000);
       }
 

@@ -31,7 +31,7 @@ export const Header = () => {
       sticky="top"
     >
       <Navbar.Brand>
-        <Link className="align-items-center text-decoration-none" to="/simplifica-frontend/">
+        <Link className="align-items-center text-decoration-none" to="/">
           <h1
             className="display-6 mb-0"
             aria-label="brand"

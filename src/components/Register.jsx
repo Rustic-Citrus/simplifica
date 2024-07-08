@@ -138,8 +138,8 @@ export const Register = ({ triggerFeedback }) => {
                 <Image
                   src={
                     hidePassword
-                      ? "/simplifica-frontend/eye.svg"
-                      : "/simplifica-frontend/eye-slash.svg"
+                      ? "/simplifica/eye.svg"
+                      : "/simplifica/eye-slash.svg"
                   }
                   alt="Icon of an eye."
                 />
@@ -167,8 +167,8 @@ export const Register = ({ triggerFeedback }) => {
                 <Image
                   src={
                     hideConfirmPassword
-                      ? "/simplifica-frontend/eye.svg"
-                      : "/simplifica-frontend/eye-slash.svg"
+                      ? "/simplifica/eye.svg"
+                      : "/simplifica/eye-slash.svg"
                   }
                   alt="Icon of an eye."
                 />

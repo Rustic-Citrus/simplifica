@@ -6,7 +6,7 @@ import "./css/main.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/simplifica">
       <App />
     </BrowserRouter>
   </React.StrictMode>

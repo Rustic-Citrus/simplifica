@@ -50,7 +50,7 @@ export const LessonPlanView = () => {
   }, [user, userId, lessonApiRef, lessonId, authorised]);
 
   const handleEditClick = async () => {
-    navigate(`/simplifica-frontend/${userId}/edit/${lessonId}`);
+    navigate(`/${userId}/edit/${lessonId}`);
   }
 
   const handleDeleteConfirmed = async () => {
@@ -61,7 +61,7 @@ export const LessonPlanView = () => {
 
       if (response.status < 300) {
         setTimeout(() => {
-          navigate(`/simplifica-frontend/${userId}`);
+          navigate(`/${userId}`);
           setIsDeleting(false);
         }, 2000);
       }
@@ -86,14 +86,14 @@ export const LessonPlanView = () => {
       {authorised && !isLoading && (
         <>
           <Container fluid>
-            <Link to={`/simplifica-frontend/${userId}`}>
+            <Link to={`/${userId}`}>
               <Button
                 variant="outline-secondary"
                 className="my-2"
                 title="Go back to profile."
                 aria-label="back-button"
               >
-                <Image src="/simplifica-frontend/arrow-left.svg"></Image>
+                <Image src="/simplifica/arrow-left.svg" />
               </Button>
             </Link>
           </Container>
@@ -116,7 +116,7 @@ export const LessonPlanView = () => {
                     </Col>
                     <Col xs={2} sm={2} md={1}>
                       <Button variant="outline-secondary" onClick={handleEditClick} aria-label="edit-button">
-                        <Image src="/simplifica-frontend/pencil.svg"></Image>
+                        <Image src="/simplifica/pencil.svg" />
                       </Button>
                     </Col>
                     <Col
@@ -135,7 +135,7 @@ export const LessonPlanView = () => {
                           onClick={handleClickDelete}
                           aria-label="delete-button"
                         >
-                          <Image src="/simplifica-frontend/trash.svg" />
+                          <Image src="/simplifica/trash.svg" />
                         </Button>
                       )}
                     </Col>

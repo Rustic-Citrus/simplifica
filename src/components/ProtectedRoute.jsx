@@ -11,7 +11,7 @@ export const ProtectedRoute = ({ children }) => {
   }, [authenticate, user]);
 
   if (!user) {
-    return <Navigate to="/simplifica-frontend/login" />;
+    return <Navigate to="/login" />;
   }
   return children;
 };

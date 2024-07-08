@@ -27,7 +27,7 @@ export const Splash = () => {
         </p>
       </Stack>
       <Stack gap={2} className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
-        <Link to="/simplifica-frontend/register">
+        <Link to="/register">
           <Button
             variant="dark"
             aria-label="sign-up-button"
@@ -37,7 +37,7 @@ export const Splash = () => {
             Sign Up (it&apos;s free!)
           </Button>
         </Link>
-        <Link to="/simplifica-frontend/login">
+        <Link to="/login">
           <Button
             variant="outline-secondary"
             aria-label="sign-in-button"
