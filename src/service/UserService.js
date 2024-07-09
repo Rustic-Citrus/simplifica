@@ -13,14 +13,24 @@ export default class UserService {
     return this.#instance;
   }
 
+  generateErrorResponse(error) {
+    return {
+      data: {
+        msg: error.message,
+      },
+    };
+  }
+
   async login(userData) {
     try {
       const response = await this.#instance.post("/login", userData, {
         withCredentials: true,
+        validateStatus: (status) => status < 500,
       });
+
       return response;
     } catch (error) {
-      return error.message;
+      return this.generateErrorResponse(error);
     }
   }
 
@@ -31,20 +41,23 @@ export default class UserService {
         {},
         {
           withCredentials: true,
+          validateStatus: (status) => status < 500,
         }
       );
       return response;
     } catch (error) {
-      return error.message;
+      return this.generateErrorResponse(error);
     }
   }
 
   async register(userData) {
     try {
-      const response = await this.#instance.post("/register", userData);
+      const response = await this.#instance.post("/register", userData, {
+        validateStatus: (status) => status < 500,
+      });
       return response;
     } catch (error) {
-      return error.message;
+      return this.generateErrorResponse(error);
     }
   }
 
@@ -53,11 +66,11 @@ export default class UserService {
       const response = await this.#instance.post(
         "/",
         {},
-        { withCredentials: true }
+        { withCredentials: true, validateStatus: (status) => status < 500 }
       );
       return response;
     } catch (error) {
-      return error.message;
+      return this.generateErrorResponse(error);
     }
   }
 }

@@ -40,13 +40,13 @@ export const SignIn = () => {
       if (response.status === 200) {
         feedback.push({
           type: "success",
-          title: "Successfully Signed In",
+          title: "Success",
           message: response.data.msg,
         });
       } else {
         feedback.push({
           type: "error",
-          title: "Unsuccessful",
+          title: "Error",
           message: response.data.msg,
         });
         setIsSigningIn(false);
