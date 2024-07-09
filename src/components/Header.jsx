@@ -21,6 +21,10 @@ export const Header = () => {
       await signOut();
     } catch (error) {
       console.log(error.message);
+    } finally {
+      setTimeout(() => {
+        setIsSigningOut(false);
+      }, 2000);
     }
   };
 
