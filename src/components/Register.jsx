@@ -2,10 +2,9 @@ import { handleChangeHelper } from "../helper/handleHelper";
 import { validatePassword, validateUsername } from "../validation/validate";
 import feedback from "../../data/feedback.json";
 import { useAuth } from "../hooks/useAuth";
+import { useFeedback } from "../hooks/useFeedback";
 
 import { useState, useEffect } from "react";
-
-import PropTypes from "prop-types";
 
 import Container from "react-bootstrap/Container";
 import Stack from "react-bootstrap/Stack";
@@ -18,7 +17,8 @@ import Spinner from "react-bootstrap/Spinner";
 
 import { motion } from "framer-motion";
 
-export const Register = ({ triggerFeedback }) => {
+export const Register = () => {
+  const { triggerFeedback } = useFeedback();
   const [hidePassword, setHidePassword] = useState(true);
   const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
   const [validated, setValidated] = useState(false);
@@ -209,8 +209,4 @@ export const Register = ({ triggerFeedback }) => {
       </motion.div>
     </Container>
   );
-};
-
-Register.propTypes = {
-  triggerFeedback: PropTypes.func.isRequired,
 };

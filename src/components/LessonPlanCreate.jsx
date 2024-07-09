@@ -1,4 +1,5 @@
 import { useAuth } from "../hooks/useAuth";
+import { useFeedback } from "../hooks/useFeedback";
 import { useUpdateLessonPlan } from "../hooks/useUpdateLessonPlan";
 import LessonPlanService from "../service/LessonPlanService";
 import lessonPlanTemplate from "../../data/lessonPlanTemplate.json";
@@ -25,7 +26,8 @@ import Spinner from "react-bootstrap/Spinner";
 
 import { motion } from "framer-motion";
 
-export const LessonPlanCreate = ({ triggerFeedback }) => {
+export const LessonPlanCreate = () => {
+  const { triggerFeedback } = useFeedback();
   const { user } = useAuth();
   const { userId } = useParams();
   const navigate = useNavigate();

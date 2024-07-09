@@ -1,27 +1,20 @@
-import PropTypes from "prop-types";
-
 import { Header } from "./Header";
 import { Feedback } from "./Feedback";
+import { useFeedback } from "../hooks/useFeedback";
 
-import { useState } from "react";
+import { Outlet } from "react-router-dom";
 
 import ToastContainer from "react-bootstrap/ToastContainer";
 
-export const Page = ({ MainComponent }) => {
-  const [feedbackVisible, setFeedbackVisible] = useState(false);
-  const [feedback, setFeedback] = useState([]);
-
-  const setupFeedback = (reportedFeedback) => {
-    setFeedback(reportedFeedback);
-    setFeedbackVisible(true);
-  };
+export const Page = () => {
+  const { feedback, showFeedback, toggleFeedback } = useFeedback();
 
   return (
     <>
       <Header />
-      <MainComponent triggerFeedback={setupFeedback} />
+      <Outlet />
       <ToastContainer position="top-end" className="m-4">
-        {feedbackVisible &&
+        {showFeedback &&
           feedback.map((feedbackItem, i) => {
             return (
               <Feedback
@@ -29,15 +22,11 @@ export const Page = ({ MainComponent }) => {
                 title={feedbackItem.title}
                 message={feedbackItem.message}
                 type={feedbackItem.type}
-                toggleVisible={() => setFeedbackVisible(!feedbackVisible)}
+                toggleVisible={toggleFeedback}
               />
             );
           })}
       </ToastContainer>
     </>
   );
-};
-
-Page.propTypes = {
-  MainComponent: PropTypes.elementType.isRequired,
 };

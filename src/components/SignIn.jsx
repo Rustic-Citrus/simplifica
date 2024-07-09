@@ -1,9 +1,8 @@
 import { handleChangeHelper } from "../helper/handleHelper";
 import { useAuth } from "../hooks/useAuth.jsx";
+import { useFeedback } from "../hooks/useFeedback.jsx";
 
 import { useState } from "react";
-
-import PropTypes from "prop-types";
 
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
@@ -16,7 +15,8 @@ import Spinner from "react-bootstrap/Spinner";
 
 import { motion } from "framer-motion";
 
-export const SignIn = ({ triggerFeedback }) => {
+export const SignIn = () => {
+  const { triggerFeedback } = useFeedback();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
@@ -151,8 +151,4 @@ export const SignIn = ({ triggerFeedback }) => {
       </motion.div>
     </Container>
   );
-};
-
-SignIn.propTypes = {
-  triggerFeedback: PropTypes.func,
 };

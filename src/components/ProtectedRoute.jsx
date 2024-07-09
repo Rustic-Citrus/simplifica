@@ -1,7 +1,10 @@
-import { Navigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import PropTypes from "prop-types";
+
 import { useEffect } from "react";
+
+import PropTypes from "prop-types";
+
+import { Navigate } from "react-router-dom";
 
 export const ProtectedRoute = ({ children }) => {
   const { user, authenticate } = useAuth();
@@ -13,6 +16,7 @@ export const ProtectedRoute = ({ children }) => {
   if (!user) {
     return <Navigate to="/login" />;
   }
+
   return children;
 };
 

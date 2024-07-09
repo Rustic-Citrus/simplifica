@@ -36,6 +36,8 @@ export const Profile = () => {
 
       fetchLessonPlans(lessonApiRef, setLessonPlans);
     }
+
+    console.log(`Authorised? ${authorised}`);
   }, [authorised, user, userId]);
 
   return (
@@ -79,23 +81,17 @@ export const Profile = () => {
                     return (
                       <tr key={i}>
                         <td>
-                          <Link
-                            to={`/${userId}/view/${plan._id}`}
-                          >
+                          <Link to={`/${userId}/view/${plan._id}`}>
                             {i + 1}
                           </Link>
                         </td>
                         <td>
-                          <Link
-                            to={`/${userId}/view/${plan._id}`}
-                          >
+                          <Link to={`/${userId}/view/${plan._id}`}>
                             {plan.topic}
                           </Link>
                         </td>
                         <td>
-                          <Link
-                            to={`/${userId}/view/${plan._id}`}
-                          >
+                          <Link to={`/${userId}/view/${plan._id}`}>
                             {new Date(plan.date).toLocaleDateString("en-GB")}
                           </Link>
                         </td>
