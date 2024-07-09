@@ -51,7 +51,7 @@ export const LessonPlanView = () => {
 
   const handleEditClick = async () => {
     navigate(`/${userId}/edit/${lessonId}`);
-  }
+  };
 
   const handleDeleteConfirmed = async () => {
     try {
@@ -77,7 +77,7 @@ export const LessonPlanView = () => {
   };
 
   return (
-    <>
+    <Container fluid>
       <ConfirmDeleteModal
         show={showDeleteModal}
         toggleShow={() => setShowDeleteModal(false)}
@@ -85,37 +85,42 @@ export const LessonPlanView = () => {
       />
       {authorised && !isLoading && (
         <>
-          <Container fluid>
-            <Link to={`/${userId}`}>
-              <Button
-                variant="outline-secondary"
-                className="my-2"
-                title="Go back to profile."
-                aria-label="back-button"
-              >
-                <Image src="/simplifica/arrow-left.svg" />
-              </Button>
-            </Link>
-          </Container>
+          <Link to={`/${userId}`} className="m-3">
+            <Button
+              variant="outline-secondary"
+              className="my-2"
+              title="Go back to profile."
+              aria-label="back-button"
+            >
+              <Image src="/simplifica/arrow-left.svg" />
+            </Button>
+          </Link>
           <motion.div
-            initial={{ opacity: 0, x: -100, scale: 0.95 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{
-              duration: 0.8,
-              delay: 0.5,
-              ease: [0, 0.71, 0.2, 1.01]
+              duration: 0.5,
+              delay: 0.2,
+              ease: [0, 0.71, 0.2, 1.01],
             }}
+            className="mx-3 my-2"
           >
-            <Card className="mx-3 mx-lg-5">
+            <Card className="mx-3 mx-lg-5 mb-2">
               <Card.Header aria-label="success-title">Lesson Plan</Card.Header>
               <Card.Body>
                 <Card.Title>
                   <Row className="align-items-center">
                     <Col xs={8} sm={8} md={10}>
-                      <h1 className="display-6" aria-label="topic">{lessonPlan.topic}</h1>
+                      <h1 className="display-6" aria-label="topic">
+                        {lessonPlan.topic}
+                      </h1>
                     </Col>
                     <Col xs={2} sm={2} md={1}>
-                      <Button variant="outline-secondary" onClick={handleEditClick} aria-label="edit-button">
+                      <Button
+                        variant="outline-secondary"
+                        onClick={handleEditClick}
+                        aria-label="edit-button"
+                      >
                         <Image src="/simplifica/pencil.svg" />
                       </Button>
                     </Col>
@@ -141,17 +146,25 @@ export const LessonPlanView = () => {
                     </Col>
                   </Row>
                 </Card.Title>
-                <Card.Subtitle className="mb-4 text-muted" aria-label="lesson-date">
+                <Card.Subtitle
+                  className="mb-4 text-muted"
+                  aria-label="lesson-date"
+                >
                   {new Date(lessonPlan.date).toLocaleDateString("en-GB")}
                 </Card.Subtitle>
                 <Tab.Container id="phase-tabs" defaultActiveKey="presentation">
                   <Tab.Content>
                     <Tab.Pane eventKey="presentation">
-                      <Card.Text className="h6" aria-label="lesson-objective-question">
+                      <Card.Text
+                        className="h6"
+                        aria-label="lesson-objective-question"
+                      >
                         What is the main language point (grammar, vocabulary,
                         function) you want to teach?
                       </Card.Text>
-                      <Card.Text aria-label="lesson-objective-answer">{lessonPlan.presentation.objective}</Card.Text>
+                      <Card.Text aria-label="lesson-objective-answer">
+                        {lessonPlan.presentation.objective}
+                      </Card.Text>
                       <Card.Text className="h6">
                         What materials (textbook, audio, video, visual aids)
                         will you need?
@@ -265,9 +278,9 @@ export const LessonPlanView = () => {
           initial={{ opacity: 0, x: -100 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{
-            duration: 0.8,
+            duration: 0.5,
             delay: 0.5,
-            ease: [0, 0.71, 0.2, 1.01]
+            ease: [0, 0.71, 0.2, 1.01],
           }}
         >
           <Error
@@ -277,7 +290,7 @@ export const LessonPlanView = () => {
           />
         </motion.div>
       )}
-    </>
+    </Container>
   );
 };
 

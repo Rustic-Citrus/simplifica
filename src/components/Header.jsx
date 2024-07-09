@@ -8,6 +8,8 @@ import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 
+import { motion } from "framer-motion";
+
 export const Header = () => {
   const { user, signOut } = useAuth();
   const [isSigningOut, setIsSigningOut] = useState(false);
@@ -18,7 +20,9 @@ export const Header = () => {
     setIsSigningOut(true);
 
     try {
-      await signOut();
+      setTimeout(async () => {
+        await signOut();
+      }, 1000);
     } catch (error) {
       console.log(error.message);
     } finally {
@@ -45,20 +49,44 @@ export const Header = () => {
           </h1>
         </Link>
       </Navbar.Brand>
-      {user && !isSigningOut && (
-        <Button variant="dark" onClick={handleSignOutClick}>
-          Sign Out
-        </Button>
-      )}
-      {isSigningOut && (
-        <Spinner
-          animation="border"
-          role="status"
-          size="sm"
-          className="d-flex justify-content center align-items-center"
+      {user && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{
+            opacity: 1,
+            transition: {
+              delay: 0.2,
+            },
+          }}
+          exit={{ opacity: 0 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.8 }}
         >
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
+          <Button
+            variant="dark"
+            onClick={handleSignOutClick}
+            disabled={isSigningOut}
+            className="w-100"
+          >
+            {isSigningOut ? (
+              <span>
+                Signing out...{" "}
+                <Spinner
+                  as="span"
+                  animation="border"
+                  className="mx-3"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                >
+                  <span className="visually-hidden">Loading...</span>
+                </Spinner>
+              </span>
+            ) : (
+              "Sign Out"
+            )}
+          </Button>
+        </motion.div>
       )}
     </Navbar>
   );

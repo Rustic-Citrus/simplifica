@@ -49,7 +49,6 @@ export const SignIn = () => {
           title: "Error",
           message: response.data.msg,
         });
-        setIsSigningIn(false);
       }
     } catch (error) {
       feedback.push({
@@ -57,20 +56,23 @@ export const SignIn = () => {
         title: "Error",
         message: error.message,
       });
-      setIsSigningIn(false);
+    } finally {
+      setTimeout(() => {
+        setIsSigningIn(false);
+      }, 1000);
     }
 
     triggerFeedback(feedback);
   };
 
   return (
-    <Container className="pt-5 mt-5 px-4 align-middle col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+    <Container className="col-12 col-md-6 pt-3 px-2 pt-md-5 px-md-4 ms-md-4 align-middle">
       <motion.div
-        initial={{ opacity: 0, x: -100, scale: 0.95 }}
-        animate={{ opacity: 1, x: 0, scale: 1 }}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
         transition={{
-          duration: 0.8,
-          delay: 0.5,
+          duration: 0.5,
+          delay: 0.2,
           ease: [0, 0.71, 0.2, 1.01],
         }}
       >
@@ -118,35 +120,32 @@ export const SignIn = () => {
               </Button>
             </InputGroup>
           </Form.Group>
-          {isSigningIn ? (
-            <Button
-              variant="dark"
-              aria-label="sign-in-button"
-              title="Signing in..."
-              className="w-100"
-              disabled
-            >
-              Signing in...
-              <Spinner
-                as="span"
-                animation="border"
-                className="mx-3"
-                size="sm"
-                role="status"
-                aria-hidden="true"
-              />
-            </Button>
-          ) : (
+          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.9 }}>
             <Button
               type="submit"
               variant="dark"
               className="w-100"
               aria-label="sign-in-button"
               title="Click here to sign into your account."
+              disabled={isSigningIn}
             >
-              Sign In
+              {isSigningIn ? (
+                <span>
+                  Signing in...{" "}
+                  <Spinner
+                    as="span"
+                    animation="border"
+                    className="mx-3"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                  />
+                </span>
+              ) : (
+                "Sign In"
+              )}
             </Button>
-          )}
+          </motion.div>
         </Form>
       </motion.div>
     </Container>

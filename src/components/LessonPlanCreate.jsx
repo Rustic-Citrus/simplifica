@@ -127,30 +127,29 @@ export const LessonPlanCreate = () => {
   };
 
   return (
-    <>
+    <Container fluid>
       {authorised ? (
         <>
-          <Container fluid>
-            <Link to={`/${userId}`}>
-              <Button
-                variant="outline-secondary"
-                className="my-2"
-                title="Go back to profile."
-                aria-label="back-button"
-              >
-                <Image src="/simplifica/arrow-left.svg"></Image>
-              </Button>
-            </Link>
-          </Container>
+          <Link to={`/${userId}`} className="m-3">
+            <Button
+              variant="outline-secondary"
+              className="my-2"
+              title="Go back to profile."
+              aria-label="back-button"
+            >
+              <Image src="/simplifica/arrow-left.svg"></Image>
+            </Button>
+          </Link>
 
           <motion.div
-            initial={{ opacity: 0, x: -100, scale: 0.95 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{
-              duration: 0.8,
-              delay: 0.5,
+              duration: 0.5,
+              delay: 0.2,
               ease: [0, 0.71, 0.2, 1.01],
             }}
+            className="mx-3 my-2"
           >
             <Card className="mx-3 mx-lg-5">
               <Card.Header>New Lesson Plan</Card.Header>
@@ -548,7 +547,7 @@ export const LessonPlanCreate = () => {
           initial={{ opacity: 0, x: -100, scale: 0.95 }}
           animate={{ opacity: 1, x: 0, scale: 1 }}
           transition={{
-            duration: 0.8,
+            duration: 0.5,
             delay: 0.5,
             ease: [0, 0.71, 0.2, 1.01],
           }}
@@ -560,7 +559,7 @@ export const LessonPlanCreate = () => {
           />
         </motion.div>
       )}
-    </>
+    </Container>
   );
 };
 

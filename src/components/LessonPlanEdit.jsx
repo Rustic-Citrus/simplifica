@@ -109,11 +109,11 @@ export const LessonPlanEdit = () => {
           </Container>
 
           <motion.div
-            initial={{ opacity: 0, x: -100, scale: 0.95 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{
-              duration: 0.8,
-              delay: 0.5,
+              duration: 0.5,
+              delay: 0.2,
               ease: [0, 0.71, 0.2, 1.01],
             }}
           >
@@ -524,7 +524,7 @@ export const LessonPlanEdit = () => {
           initial={{ opacity: 0, x: -100, scale: 0.95 }}
           animate={{ opacity: 1, x: 0, scale: 1 }}
           transition={{
-            duration: 0.8,
+            duration: 0.5,
             delay: 0.5,
             ease: [0, 0.71, 0.2, 1.01],
           }}

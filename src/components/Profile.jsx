@@ -41,73 +41,67 @@ export const Profile = () => {
   }, [authorised, user, userId]);
 
   return (
-    <>
+    <Container className="pt-3 px-2 pt-md-5 px-md-4 ms-md-4 align-middle">
       {authorised ? (
         <motion.div
-          initial={{ opacity: 0, x: -100, scale: 0.95 }}
-          animate={{ opacity: 1, x: 0, scale: 1 }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{
-            duration: 0.8,
-            delay: 0.5,
+            duration: 0.5,
+            delay: 0.2,
             ease: [0, 0.71, 0.2, 1.01],
           }}
         >
-          <Container className="pt-5 mt-3 mt-lg-5 mx-lg-5 px-4 align-middle">
-            <Row className="mb-3 mx-2 mt-3 mt-lg-5 mx-lg-5 pt-5 align-items-center">
-              <Col xs={8} md={10}>
-                <h1 className="display-3" aria-label="title">
-                  My Lesson Plans
-                </h1>
-              </Col>
-              <Col xs={{ span: 2, offset: 1 }} md={1}>
-                <Link to={`/${userId}/create`}>
-                  <Button variant="outline-success">
-                    <Image src="/simplifica/plus.svg"></Image>
-                  </Button>
-                </Link>
-              </Col>
-            </Row>
-            <Table striped className="mx-1 mx-lg-5">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Topic</th>
-                  <th>Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                {lessonPlans !== undefined &&
-                  lessonPlans.map((plan, i) => {
-                    return (
-                      <tr key={i}>
-                        <td>
-                          <Link to={`/${userId}/view/${plan._id}`}>
-                            {i + 1}
-                          </Link>
-                        </td>
-                        <td>
-                          <Link to={`/${userId}/view/${plan._id}`}>
-                            {plan.topic}
-                          </Link>
-                        </td>
-                        <td>
-                          <Link to={`/${userId}/view/${plan._id}`}>
-                            {new Date(plan.date).toLocaleDateString("en-GB")}
-                          </Link>
-                        </td>
-                      </tr>
-                    );
-                  })}
-              </tbody>
-            </Table>
-          </Container>
+          <Row className="mt-lg-3 mx-lg-5 align-items-center">
+            <Col xs={8} md={10}>
+              <h1 className="display-3" aria-label="title">
+                My Lesson Plans
+              </h1>
+            </Col>
+            <Col xs={{ span: 2, offset: 1 }} md={1}>
+              <Link to={`/${userId}/create`}>
+                <Button variant="outline-success">
+                  <Image src="/simplifica/plus.svg"></Image>
+                </Button>
+              </Link>
+            </Col>
+          </Row>
+          <Table striped className="mx-1 mx-lg-5">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Topic</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {lessonPlans !== undefined &&
+                lessonPlans.map((plan, i) => (
+                  <tr key={i}>
+                    <td>
+                      <Link to={`/${userId}/view/${plan._id}`}>{i + 1}</Link>
+                    </td>
+                    <td>
+                      <Link to={`/${userId}/view/${plan._id}`}>
+                        {plan.topic}
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={`/${userId}/view/${plan._id}`}>
+                        {new Date(plan.date).toLocaleDateString("en-GB")}
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </Table>
         </motion.div>
       ) : (
         <motion.div
-          initial={{ opacity: 0, x: -100, scale: 0.95 }}
-          animate={{ opacity: 1, x: 0, scale: 1 }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{
-            duration: 0.8,
+            duration: 0.5,
             delay: 0.5,
             ease: [0, 0.71, 0.2, 1.01],
           }}
@@ -119,6 +113,6 @@ export const Profile = () => {
           />
         </motion.div>
       )}
-    </>
+    </Container>
   );
 };
