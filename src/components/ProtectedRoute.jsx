@@ -13,11 +13,9 @@ export const ProtectedRoute = ({ children }) => {
     const waitThenCheckUser = async () => {
       await authenticate();
       
-      setTimeout(() => {
-        if (!user) {
-          return <Navigate to="/login" />;
-        }
-      }, 500);
+      if (!user) {
+        return <Navigate to="/login" />;
+      }
     };
 
     waitThenCheckUser();
