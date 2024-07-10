@@ -30,7 +30,7 @@ export const App = () => {
               errorElement={<Error />}
             />
             <Route
-              path="register"
+              path="/register"
               element={
                 <PublicRoute>
                   <Register />
@@ -39,7 +39,7 @@ export const App = () => {
               errorElement={<Error />}
             />
             <Route
-              path="login"
+              path="/login"
               element={
                 <PublicRoute>
                   <SignIn />
@@ -48,7 +48,7 @@ export const App = () => {
               errorElement={<Error />}
             />
             <Route
-              path=":userId"
+              path="/:userId"
               element={
                 <ProtectedRoute>
                   <Profile />
@@ -57,7 +57,7 @@ export const App = () => {
               errorElement={<Error />}
             />
             <Route
-              path=":userId/view/:lessonId"
+              path="/:userId/view/:lessonId"
               element={
                 <ProtectedRoute>
                   <LessonPlanView />
@@ -66,7 +66,7 @@ export const App = () => {
               errorElement={<Error />}
             />
             <Route
-              path=":userId/edit/:lessonId"
+              path="/:userId/edit/:lessonId"
               element={
                 <ProtectedRoute>
                   <LessonPlanEdit />
@@ -75,7 +75,7 @@ export const App = () => {
               errorElement={<Error />}
             />
             <Route
-              path=":userId/create"
+              path="/:userId/create"
               element={
                 <ProtectedRoute>
                   <LessonPlanCreate />
