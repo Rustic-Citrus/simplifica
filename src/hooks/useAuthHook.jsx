@@ -14,6 +14,8 @@ export const useAuthHook = () => {
     try {
       const response = await api.authenticate();
 
+      console.log(response);
+
       if (response.status >= 300) {
         setUser(null);
       }
