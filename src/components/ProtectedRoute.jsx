@@ -10,12 +10,18 @@ export const ProtectedRoute = ({ children }) => {
   const { user, authenticate } = useAuth();
 
   useEffect(() => {
-    authenticate();
-  }, [authenticate, user]);
+    const waitThenCheckUser = async () => {
+      setTimeout(() => {
+        if (!user) {
+          return <Navigate to="/login" />;
+        }
 
-  if (!user) {
-    return <Navigate to="/login" />;
-  }
+        authenticate();
+      }, 500);
+    };
+
+    waitThenCheckUser();
+  }, [user, authenticate]);
 
   return children;
 };

@@ -36,8 +36,6 @@ export const Profile = () => {
 
       fetchLessonPlans(lessonApiRef, setLessonPlans);
     }
-
-    console.log(`Authorised? ${authorised}`);
   }, [authorised, user, userId]);
 
   return (
