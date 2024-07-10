@@ -2,8 +2,8 @@ import lessonPlanTemplate from "../../data/lessonPlanTemplate.json";
 import LessonPlanService from "../service/LessonPlanService.js";
 import { fetchOneLessonPlan } from "../helper/fetchHelper.js";
 import { useAuth } from "../hooks/useAuth.jsx";
-import { Error } from "./Error.jsx";
 import { ConfirmDeleteModal } from "./ConfirmDeleteModal.jsx";
+// import { Error } from "./Error.jsx";
 
 import { useEffect, useRef, useState } from "react";
 
@@ -83,7 +83,7 @@ export const LessonPlanView = () => {
         toggleShow={() => setShowDeleteModal(false)}
         handleDeleteConfirmed={handleDeleteConfirmed}
       />
-      {authorised && !isLoading && (
+      {!isLoading && (
         <>
           <Link to={`/${userId}`} className="m-3">
             <Button
@@ -273,23 +273,21 @@ export const LessonPlanView = () => {
           </motion.div>
         </>
       )}
-      {!authorised && (
-        <motion.div
-          initial={{ opacity: 0, x: -100 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{
-            duration: 0.5,
-            delay: 0.5,
-            ease: [0, 0.71, 0.2, 1.01],
-          }}
-        >
-          <Error
-            message={
-              "You are trying to view someone else's lesson. In order to view their lessons, you must sign in to their account."
-            }
-          />
-        </motion.div>
-      )}
+      {/* <motion.div
+        initial={{ opacity: 0, x: -100 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{
+          duration: 0.5,
+          delay: 0.5,
+          ease: [0, 0.71, 0.2, 1.01],
+        }}
+      >
+        <Error
+          message={
+            "You are trying to view someone else's lesson. In order to view their lessons, you must sign in to their account."
+          }
+        />
+      </motion.div> */}
     </Container>
   );
 };
