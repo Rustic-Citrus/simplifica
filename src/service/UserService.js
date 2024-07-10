@@ -68,6 +68,9 @@ export default class UserService {
         {},
         { withCredentials: true, validateStatus: (status) => status < 500 }
       );
+
+      console.log(response)
+
       return response;
     } catch (error) {
       return this.generateErrorResponse(error);
