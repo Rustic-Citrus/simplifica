@@ -2,11 +2,9 @@ import PropTypes from "prop-types";
 
 import { Link } from "react-router-dom";
 
-import Container from "react-bootstrap/Container";
-import Stack from "react-bootstrap/Stack";
-import Button from "react-bootstrap/Button";
+import { Container, Stack, Button } from "react-bootstrap";
 
-export const Error = ({ message = "" }) => {
+export const ErrorComponent = ({ message = "" }) => {
   return (
     <Container className="pt-5 mt-5 px-4 h-100 align-middle">
       <Stack gap={1} className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
@@ -33,6 +31,6 @@ export const Error = ({ message = "" }) => {
   );
 };
 
-Error.propTypes = {
+ErrorComponent.propTypes = {
   message: PropTypes.string,
 };
