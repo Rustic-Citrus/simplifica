@@ -1,9 +1,9 @@
-import { Page } from "./components/Page";
+import { PageTemplate } from "./pages/PageTemplate"
 import { Register } from "./components/Register";
 import { SignIn } from "./components/SignIn";
 import { Profile } from "./components/Profile";
 import { Splash } from "./components/Splash";
-import { Error } from "./components/Error";
+import { ErrorComponent } from "./components/ErrorComponent";
 import { LessonPlanView } from "./components/LessonPlanView";
 import { LessonPlanCreate } from "./components/LessonPlanCreate";
 import { ProtectedRoute } from "./components/ProtectedRoute";
@@ -19,7 +19,7 @@ export const App = () => {
     <FeedbackProvider>
       <AuthProvider>
         <Routes>
-          <Route path="/" element={<Page />} errorElement={<Error />}>
+          <Route path="/" element={<PageTemplate />} errorElement={<ErrorComponent />}>
             <Route
               path="/"
               element={
@@ -27,7 +27,7 @@ export const App = () => {
                   <Splash />
                 </PublicRoute>
               }
-              errorElement={<Error />}
+              errorElement={<ErrorComponent />}
             />
             <Route
               path="/register"
@@ -36,7 +36,7 @@ export const App = () => {
                   <Register />
                 </PublicRoute>
               }
-              errorElement={<Error />}
+              errorElement={<ErrorComponent />}
             />
             <Route
               path="/login"
@@ -45,7 +45,7 @@ export const App = () => {
                   <SignIn />
                 </PublicRoute>
               }
-              errorElement={<Error />}
+              errorElement={<ErrorComponent />}
             />
             <Route
               path="/:userId"
@@ -54,7 +54,7 @@ export const App = () => {
                   <Profile />
                 </ProtectedRoute>
               }
-              errorElement={<Error />}
+              errorElement={<ErrorComponent />}
             />
             <Route
               path="/:userId/view/:lessonId"
@@ -63,7 +63,7 @@ export const App = () => {
                   <LessonPlanView />
                 </ProtectedRoute>
               }
-              errorElement={<Error />}
+              errorElement={<ErrorComponent />}
             />
             <Route
               path="/:userId/edit/:lessonId"
@@ -72,7 +72,7 @@ export const App = () => {
                   <LessonPlanEdit />
                 </ProtectedRoute>
               }
-              errorElement={<Error />}
+              errorElement={<ErrorComponent />}
             />
             <Route
               path="/:userId/create"
@@ -81,7 +81,7 @@ export const App = () => {
                   <LessonPlanCreate />
                 </ProtectedRoute>
               }
-              errorElement={<Error />}
+              errorElement={<ErrorComponent />}
             />
           </Route>
         </Routes>
