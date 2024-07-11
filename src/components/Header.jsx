@@ -1,14 +1,12 @@
 import { useAuth } from "../hooks/useAuth";
 import { LoadingWithSpinner } from "./LoadingWithSpinner";
+import { ButtonAnimationDecorator } from "./decorators/ButtonAnimationDecorator";
 
 import { useState } from "react";
 
 import { Link } from "react-router-dom";
 
-import Navbar from "react-bootstrap/Navbar";
-import Button from "react-bootstrap/Button";
-
-import { motion } from "framer-motion";
+import { Navbar, Button } from "react-bootstrap";
 
 export const Header = () => {
   const { user, signOut } = useAuth();
@@ -50,18 +48,7 @@ export const Header = () => {
         </Link>
       </Navbar.Brand>
       {user && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-            transition: {
-              delay: 0.2,
-            },
-          }}
-          exit={{ opacity: 0 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.8 }}
-        >
+        <ButtonAnimationDecorator>
           <Button
             variant="dark"
             onClick={handleSignOutClick}
@@ -74,7 +61,7 @@ export const Header = () => {
               "Sign Out"
             )}
           </Button>
-        </motion.div>
+        </ButtonAnimationDecorator>
       )}
     </Navbar>
   );

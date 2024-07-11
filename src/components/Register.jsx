@@ -3,19 +3,21 @@ import { validatePassword, validateUsername } from "../validation/validate";
 import feedback from "../../data/feedback.json";
 import { useAuth } from "../hooks/useAuth";
 import { useFeedback } from "../hooks/useFeedback";
+import { TransitionDecorator } from "./decorators/TransitionDecorator.jsx";
+import { ButtonAnimationDecorator } from "./decorators/ButtonAnimationDecorator.jsx";
 
 import { useState, useEffect } from "react";
 
-import Container from "react-bootstrap/Container";
-import Stack from "react-bootstrap/Stack";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Image from "react-bootstrap/Image";
-import InputGroup from "react-bootstrap/InputGroup";
-import Spinner from "react-bootstrap/Spinner";
-
-import { motion } from "framer-motion";
+import {
+  Container,
+  Stack,
+  FloatingLabel,
+  Form,
+  Button,
+  Image,
+  InputGroup,
+  Spinner,
+} from "react-bootstrap";
 
 export const Register = () => {
   const { triggerFeedback } = useFeedback();
@@ -94,15 +96,7 @@ export const Register = () => {
 
   return (
     <Container className="col-12 col-md-6 pt-3 px-2 pt-md-5 px-md-4 ms-md-4 pb-4 align-middle">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{
-          duration: 0.5,
-          delay: 0.2,
-          ease: [0, 0.71, 0.2, 1.01],
-        }}
-      >
+      <TransitionDecorator>
         <Stack gap={1}>
           <h1 className="display-3 mt-5 pt-5" aria-label="title">
             Create an account
@@ -177,7 +171,7 @@ export const Register = () => {
               </Button>
             </InputGroup>
           </Form.Group>
-          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.9 }}>
+          <ButtonAnimationDecorator>
             <Button
               type="submit"
               variant="dark"
@@ -202,9 +196,9 @@ export const Register = () => {
                 "Get Started"
               )}
             </Button>
-          </motion.div>
+          </ButtonAnimationDecorator>
         </Form>
-      </motion.div>
+      </TransitionDecorator>
     </Container>
   );
 };

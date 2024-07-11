@@ -2,18 +2,20 @@ import { handleChangeHelper } from "../helper/handleHelper";
 import { useAuth } from "../hooks/useAuth.jsx";
 import { useFeedback } from "../hooks/useFeedback.jsx";
 import { LoadingWithSpinner } from "./LoadingWithSpinner.jsx";
+import { TransitionDecorator } from "./decorators/TransitionDecorator.jsx";
+import { ButtonAnimationDecorator } from "./decorators/ButtonAnimationDecorator.jsx";
 
 import { useState } from "react";
 
-import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
-import Stack from "react-bootstrap/Stack";
-import InputGroup from "react-bootstrap/InputGroup";
-import Button from "react-bootstrap/Button";
-import Image from "react-bootstrap/Image";
-
-import { motion } from "framer-motion";
+import {
+  Form,
+  Container,
+  FloatingLabel,
+  Stack,
+  InputGroup,
+  Button,
+  Image,
+} from "react-bootstrap";
 
 export const SignIn = () => {
   const { triggerFeedback } = useFeedback();
@@ -67,15 +69,7 @@ export const SignIn = () => {
 
   return (
     <Container className="col-12 col-md-6 pt-3 px-2 pt-md-5 px-md-4 ms-md-4 align-middle">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{
-          duration: 0.5,
-          delay: 0.2,
-          ease: [0, 0.71, 0.2, 1.01],
-        }}
-      >
+      <TransitionDecorator>
         <Stack gap={1} className="mb-3">
           <h1 className="display-3 mt-5 pt-5" aria-label="title">
             Welcome back
@@ -120,7 +114,7 @@ export const SignIn = () => {
               </Button>
             </InputGroup>
           </Form.Group>
-          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.9 }}>
+          <ButtonAnimationDecorator>
             <Button
               type="submit"
               variant="dark"
@@ -135,9 +129,9 @@ export const SignIn = () => {
                 "Sign In"
               )}
             </Button>
-          </motion.div>
+          </ButtonAnimationDecorator>
         </Form>
-      </motion.div>
+      </TransitionDecorator>
     </Container>
   );
 };

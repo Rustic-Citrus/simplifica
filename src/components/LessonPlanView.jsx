@@ -3,7 +3,6 @@ import LessonPlanService from "../service/LessonPlanService.js";
 import { fetchOneLessonPlan } from "../helper/fetchHelper.js";
 import { useAuth } from "../hooks/useAuth.jsx";
 import { ConfirmDeleteModal } from "./ConfirmDeleteModal.jsx";
-// import { Error } from "./Error.jsx";
 
 import { useEffect, useRef, useState } from "react";
 
@@ -11,17 +10,19 @@ import PropTypes from "prop-types";
 
 import { Link, useParams, useNavigate } from "react-router-dom";
 
-import Container from "react-bootstrap/Container";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Image from "react-bootstrap/Image";
-import Button from "react-bootstrap/Button";
-import Nav from "react-bootstrap/Nav";
-import Tab from "react-bootstrap/Tab";
-import Card from "react-bootstrap/Card";
-import Spinner from "react-bootstrap/Spinner";
+import {
+  Container,
+  Col,
+  Row,
+  Image,
+  Button,
+  Nav,
+  Tab,
+  Card,
+  Spinner,
+} from "react-bootstrap";
 
-import { motion } from "framer-motion";
+import { TransitionDecorator } from "./decorators/TransitionDecorator.jsx";
 
 export const LessonPlanView = () => {
   const [lessonPlan, setLessonPlan] = useState(lessonPlanTemplate);
@@ -95,16 +96,7 @@ export const LessonPlanView = () => {
               <Image src="/simplifica/arrow-left.svg" />
             </Button>
           </Link>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{
-              duration: 0.5,
-              delay: 0.2,
-              ease: [0, 0.71, 0.2, 1.01],
-            }}
-            className="mx-3 my-2"
-          >
+          <TransitionDecorator>
             <Card className="mx-3 mx-lg-5 mb-2">
               <Card.Header aria-label="success-title">Lesson Plan</Card.Header>
               <Card.Body>
@@ -270,24 +262,9 @@ export const LessonPlanView = () => {
                 </Tab.Container>
               </Card.Body>
             </Card>
-          </motion.div>
+          </TransitionDecorator>
         </>
       )}
-      {/* <motion.div
-        initial={{ opacity: 0, x: -100 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{
-          duration: 0.5,
-          delay: 0.5,
-          ease: [0, 0.71, 0.2, 1.01],
-        }}
-      >
-        <Error
-          message={
-            "You are trying to view someone else's lesson. In order to view their lessons, you must sign in to their account."
-          }
-        />
-      </motion.div> */}
     </Container>
   );
 };

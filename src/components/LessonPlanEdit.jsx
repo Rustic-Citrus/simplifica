@@ -3,33 +3,32 @@ import { useUpdateLessonPlan } from "../hooks/useUpdateLessonPlan";
 import LessonPlanService from "../service/LessonPlanService";
 import lessonPlanTemplate from "../../data/lessonPlanTemplate.json";
 import { fetchOneLessonPlan } from "../helper/fetchHelper";
-// import { Error } from "./Error";
+import { TransitionDecorator } from "./decorators/TransitionDecorator";
 
 import { useState, useEffect, useRef } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
-import Container from "react-bootstrap/Container";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Image from "react-bootstrap/Image";
-import Button from "react-bootstrap/Button";
-import Nav from "react-bootstrap/Nav";
-import Tab from "react-bootstrap/Tab";
-import Card from "react-bootstrap/Card";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import Spinner from "react-bootstrap/Spinner";
-
-import { motion } from "framer-motion";
+import {
+  Container,
+  Col,
+  Row,
+  Image,
+  Button,
+  Nav,
+  Tab,
+  Card,
+  Form,
+  InputGroup,
+  Spinner,
+} from "react-bootstrap";
 
 export const LessonPlanEdit = () => {
   const { user } = useAuth();
   const { userId, lessonId } = useParams();
   const navigate = useNavigate();
   const lessonApiRef = useRef(null);
-  // const [authorised, setAuthorised] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [lessonPlan, updateLessonPlan] =
     useUpdateLessonPlan(lessonPlanTemplate);
@@ -102,15 +101,7 @@ export const LessonPlanEdit = () => {
         </Link>
       </Container>
 
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{
-          duration: 0.5,
-          delay: 0.2,
-          ease: [0, 0.71, 0.2, 1.01],
-        }}
-      >
+      <TransitionDecorator>
         <Card className="mx-3 mx-lg-5">
           <Card.Header>New Lesson Plan</Card.Header>
           <Card.Body>
@@ -500,23 +491,7 @@ export const LessonPlanEdit = () => {
             </Form>
           </Card.Body>
         </Card>
-      </motion.div>
-
-      {/* <motion.div
-        initial={{ opacity: 0, x: -100, scale: 0.95 }}
-        animate={{ opacity: 1, x: 0, scale: 1 }}
-        transition={{
-          duration: 0.5,
-          delay: 0.5,
-          ease: [0, 0.71, 0.2, 1.01],
-        }}
-      >
-        <Error
-          message={
-            "You are trying to edit a lesson for an account which you are not signed in to. To edit a lesson for that account, you must sign in with their details."
-          }
-        />
-      </motion.div> */}
+      </TransitionDecorator>
     </>
   );
 };

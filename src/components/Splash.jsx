@@ -1,21 +1,13 @@
-import Button from "react-bootstrap/Button";
-import Stack from "react-bootstrap/Stack";
+import { TransitionDecorator } from "./decorators/TransitionDecorator";
+import { ButtonAnimationDecorator } from "./decorators/ButtonAnimationDecorator";
+
+import { Button, Stack } from "react-bootstrap";
 
 import { Link } from "react-router-dom";
 
-import { motion } from "framer-motion";
-
 export const Splash = () => {
   return (
-    <motion.div
-      className="pt-3 px-2 pt-md-5 px-md-4 ms-md-4 align-middle"
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{
-        duration: 0.5,
-        ease: [0, 0.71, 0.2, 1.01],
-      }}
-    >
+    <TransitionDecorator>
       <Stack gap={1}>
         <h1 className="display-1 mt-5 pt-5" aria-label="title">
           Simplifica.
@@ -26,7 +18,7 @@ export const Splash = () => {
       </Stack>
       <Stack gap={2} className="col-auto col-sm-8 col-lg-6 col-xl-5">
         <Link to="/register">
-          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.9 }}>
+          <ButtonAnimationDecorator>
             <Button
               variant="dark"
               aria-label="sign-up-button"
@@ -35,10 +27,10 @@ export const Splash = () => {
             >
               Sign Up (it&apos;s free!)
             </Button>
-          </motion.div>
+          </ButtonAnimationDecorator>
         </Link>
         <Link to="/login">
-          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.9 }}>
+          <ButtonAnimationDecorator>
             <Button
               variant="outline-secondary"
               aria-label="sign-in-button"
@@ -48,9 +40,9 @@ export const Splash = () => {
             >
               Sign In
             </Button>
-          </motion.div>
+          </ButtonAnimationDecorator>
         </Link>
       </Stack>
-    </motion.div>
+    </TransitionDecorator>
   );
 };

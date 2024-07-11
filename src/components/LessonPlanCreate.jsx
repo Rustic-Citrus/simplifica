@@ -515,21 +515,6 @@ export const LessonPlanCreate = () => {
           </Card.Body>
         </Card>
       </motion.div>
-      {/* <motion.div
-          initial={{ opacity: 0, x: -100, scale: 0.95 }}
-          animate={{ opacity: 1, x: 0, scale: 1 }}
-          transition={{
-            duration: 0.5,
-            delay: 0.5,
-            ease: [0, 0.71, 0.2, 1.01],
-          }}
-        >
-          <Error
-            message={
-              "You are trying to create a lesson for an account which you are not signed in to. To create a lesson for that account, you must sign in with their details."
-            }
-          />
-        </motion.div> */}
     </Container>
   );
 };

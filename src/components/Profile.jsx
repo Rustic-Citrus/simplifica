@@ -1,20 +1,13 @@
 import LessonPlanService from "../service/LessonPlanService";
 import { useAuth } from "../hooks/useAuth";
 import { fetchLessonPlans } from "../helper/fetchHelper";
-// import { Error } from "./Error";
+import { TransitionDecorator } from "./decorators/TransitionDecorator";
 
 import { useEffect, useState, useRef } from "react";
 
 import { Link, useParams } from "react-router-dom";
 
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Table from "react-bootstrap/Table";
-import Button from "react-bootstrap/Button";
-import Image from "react-bootstrap/Image";
-
-import { motion } from "framer-motion";
+import { Container, Row, Col, Table, Button, Image } from "react-bootstrap";
 
 export const Profile = () => {
   const [lessonPlans, setLessonPlans] = useState([]);
@@ -35,15 +28,7 @@ export const Profile = () => {
 
   return (
     <Container className="pt-3 px-2 pt-md-5 px-md-4 ms-md-4 align-middle">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{
-          duration: 0.5,
-          delay: 0.2,
-          ease: [0, 0.71, 0.2, 1.01],
-        }}
-      >
+      <TransitionDecorator>
         <Row className="mt-lg-3 mx-lg-5 align-items-center">
           <Col xs={8} md={10}>
             <h1 className="display-3" aria-label="title">
@@ -85,22 +70,7 @@ export const Profile = () => {
               ))}
           </tbody>
         </Table>
-      </motion.div>
-      {/* <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{
-            duration: 0.5,
-            delay: 0.5,
-            ease: [0, 0.71, 0.2, 1.01],
-          }}
-        >
-          <Error
-            message={
-              "You are trying to access someone else's profile. To access their profile, you must be signed in with their account."
-            }
-          />
-        </motion.div> */}
+      </TransitionDecorator>
     </Container>
   );
 };
