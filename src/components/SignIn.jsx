@@ -1,6 +1,7 @@
 import { handleChangeHelper } from "../helper/handleHelper";
 import { useAuth } from "../hooks/useAuth.jsx";
 import { useFeedback } from "../hooks/useFeedback.jsx";
+import { LoadingWithSpinner } from "./LoadingWithSpinner.jsx";
 
 import { useState } from "react";
 
@@ -11,7 +12,6 @@ import Stack from "react-bootstrap/Stack";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
-import Spinner from "react-bootstrap/Spinner";
 
 import { motion } from "framer-motion";
 
@@ -130,17 +130,7 @@ export const SignIn = () => {
               disabled={isSigningIn}
             >
               {isSigningIn ? (
-                <span>
-                  Signing in...{" "}
-                  <Spinner
-                    as="span"
-                    animation="border"
-                    className="mx-3"
-                    size="sm"
-                    role="status"
-                    aria-hidden="true"
-                  />
-                </span>
+                <LoadingWithSpinner loadingText="Signing in" />
               ) : (
                 "Sign In"
               )}

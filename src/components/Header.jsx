@@ -1,4 +1,5 @@
 import { useAuth } from "../hooks/useAuth";
+import { LoadingWithSpinner } from "./LoadingWithSpinner";
 
 import { useState } from "react";
 
@@ -6,7 +7,6 @@ import { Link } from "react-router-dom";
 
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
-import Spinner from "react-bootstrap/Spinner";
 
 import { motion } from "framer-motion";
 
@@ -69,19 +69,7 @@ export const Header = () => {
             className="w-100"
           >
             {isSigningOut ? (
-              <span>
-                Signing out...{" "}
-                <Spinner
-                  as="span"
-                  animation="border"
-                  className="mx-3"
-                  size="sm"
-                  role="status"
-                  aria-hidden="true"
-                >
-                  <span className="visually-hidden">Loading...</span>
-                </Spinner>
-              </span>
+              <LoadingWithSpinner loadingText="Signing out" />
             ) : (
               "Sign Out"
             )}
