@@ -20,7 +20,7 @@ export const Splash = () => {
         <Link to="/register">
           <ButtonAnimationDecorator>
             <Button
-              variant="dark"
+              variant="primary"
               aria-label="sign-up-button"
               className="w-100"
               title="Register for an account."
@@ -32,11 +32,11 @@ export const Splash = () => {
         <Link to="/login">
           <ButtonAnimationDecorator>
             <Button
-              variant="outline-secondary"
+              variant="secondary"
               aria-label="sign-in-button"
               className="w-100"
               title="Sign in to an account."
-              style={{ borderColor: "darkgrey", color: "black" }}
+              style={{ color: "white" }}
             >
               Sign In
             </Button>

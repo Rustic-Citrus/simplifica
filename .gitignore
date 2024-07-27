@@ -1,5 +1,7 @@
 # Logs
 
+.sass-cache
+
 logs
 *.log
 npm-debug.log*

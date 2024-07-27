@@ -33,7 +33,7 @@ export const Header = () => {
   return (
     <Navbar
       expand="lg"
-      className="bg-body-tertiary justify-content-between text-center align-items-center px-5"
+      className="justify-content-between text-center align-items-center px-5"
       sticky="top"
     >
       <Navbar.Brand>
