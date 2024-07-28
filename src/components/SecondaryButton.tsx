@@ -1,6 +1,6 @@
 import { Button } from "react-bootstrap";
 
-interface PrimaryButtonProps {
+interface SecondaryButtonProps {
   content: string | React.JSX.Element;
   title: string;
   ariaLabel: string;
@@ -8,16 +8,16 @@ interface PrimaryButtonProps {
   onClick?: () => void;
 }
 
-export const PrimaryButton = ({
+export const SecondaryButton = ({
   content,
   title,
   ariaLabel,
   onClick,
   disabled
-}: PrimaryButtonProps) => {
+}: SecondaryButtonProps) => {
   return (
     <Button
-      variant="primary"
+      variant="secondary"
       aria-label={ariaLabel}
       className="w-100"
       title={title}
