@@ -4,9 +4,7 @@ import { useFeedback } from "../hooks/useFeedback.jsx";
 import { LoadingWithSpinner } from "./LoadingWithSpinner.jsx";
 import { TransitionDecorator } from "./decorators/TransitionDecorator.jsx";
 import { ButtonAnimationDecorator } from "./decorators/ButtonAnimationDecorator.jsx";
-
 import { useState } from "react";
-
 import {
   Form,
   Container,
@@ -16,6 +14,7 @@ import {
   Button,
   Image,
 } from "react-bootstrap";
+import { PrimaryButton } from "./PrimaryButton.tsx";
 
 export const SignIn = () => {
   const { triggerFeedback } = useFeedback();
@@ -115,20 +114,19 @@ export const SignIn = () => {
             </InputGroup>
           </Form.Group>
           <ButtonAnimationDecorator>
-            <Button
-              type="submit"
-              variant="dark"
-              className="w-100"
-              aria-label="sign-in-button"
+            <PrimaryButton
+              ariaLabel="sign-in-button"
               title="Click here to sign into your account."
               disabled={isSigningIn}
-            >
-              {isSigningIn ? (
-                <LoadingWithSpinner loadingText="Signing in" />
-              ) : (
-                "Sign In"
-              )}
-            </Button>
+              content={
+                isSigningIn ? (
+                  <LoadingWithSpinner loadingText="Signing in" />
+                ) : (
+                  "Sign In"
+                )
+              }
+              onClick={handleSubmit}
+            />
           </ButtonAnimationDecorator>
         </Form>
       </TransitionDecorator>
