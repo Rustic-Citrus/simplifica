@@ -44,4 +44,12 @@ describe("PrimaryButton component tests", () => {
 
     expect(testFunc).toHaveBeenCalled();
   });
+
+  it("has the correct disabled property when it is disabled", async () => {
+    render(<PrimaryButton disabled={true} />);
+
+    await waitFor(() => {
+      expect(screen.getByRole("button").disabled).toEqual(true);
+    })
+  })
 });
