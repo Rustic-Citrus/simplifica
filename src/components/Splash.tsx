@@ -1,8 +1,8 @@
 import { PrimaryButton } from "./PrimaryButton";
+import { SecondaryButton } from "./SecondaryButton";
 import { TransitionDecorator } from "./decorators/TransitionDecorator";
 import { ButtonAnimationDecorator } from "./decorators/ButtonAnimationDecorator";
-
-import { Button, Stack } from "react-bootstrap";
+import { Stack } from "react-bootstrap";
 
 import { Link } from "react-router-dom";
 
@@ -29,15 +29,11 @@ export const Splash = () => {
         </Link>
         <Link to="/login">
           <ButtonAnimationDecorator>
-            <Button
-              variant="secondary"
-              aria-label="sign-in-button"
-              className="w-100"
+            <SecondaryButton
+              ariaLabel="sign-in-button"
               title="Sign in to an account."
-              style={{ color: "white" }}
-            >
-              Sign In
-            </Button>
+              content="Sign In"
+            />
           </ButtonAnimationDecorator>
         </Link>
       </Stack>
