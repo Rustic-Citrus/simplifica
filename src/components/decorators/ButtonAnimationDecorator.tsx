@@ -1,19 +1,18 @@
-import PropTypes from "prop-types";
-
 import { motion } from "framer-motion";
+import { ReactNode } from "react";
 
-export const ButtonAnimationDecorator = ({ children }) => {
+export const ButtonAnimationDecorator = ({
+  children,
+}: {
+  children: ReactNode;
+}) => {
   return (
     <motion.div
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.95 }}
       aria-hidden="true"
     >
-      { children }
+      {children}
     </motion.div>
   );
 };
-
-ButtonAnimationDecorator.propTypes = {
-  children: PropTypes.node
-}

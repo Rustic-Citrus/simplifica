@@ -1,8 +1,7 @@
-import PropTypes from "prop-types";
-
 import { motion } from "framer-motion";
+import { ReactNode } from "react";
 
-export const TransitionDecorator = ({ children }) => {
+export const TransitionDecorator = ({ children }: { children: ReactNode }) => {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
@@ -17,8 +16,4 @@ export const TransitionDecorator = ({ children }) => {
       {children}
     </motion.div>
   );
-};
-
-TransitionDecorator.propTypes = {
-  children: PropTypes.node,
 };
