@@ -1,3 +1,4 @@
+import { PrimaryButton } from "./PrimaryButton";
 import { TransitionDecorator } from "./decorators/TransitionDecorator";
 import { ButtonAnimationDecorator } from "./decorators/ButtonAnimationDecorator";
 
@@ -19,14 +20,11 @@ export const Splash = () => {
       <Stack gap={2} className="col-auto col-sm-8 col-lg-6 col-xl-5">
         <Link to="/register">
           <ButtonAnimationDecorator>
-            <Button
-              variant="primary"
-              aria-label="sign-up-button"
-              className="w-100"
+            <PrimaryButton
+              content="Sign Up (it's free!)"
               title="Register for an account."
-            >
-              Sign Up (it&apos;s free!)
-            </Button>
+              ariaLabel="sign-up-button"
+            />
           </ButtonAnimationDecorator>
         </Link>
         <Link to="/login">
