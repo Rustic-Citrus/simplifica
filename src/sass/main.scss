@@ -1,4 +1,7 @@
 $paynes-gray: #405d72;
+$poppy: #da2c38;
+$cordovan: #8C4843;
+$keppel: #44BBA4;
 $slate-gray: #758694;
 $french-gray: #aaaeb2;
 $timberwolf: #dfd5cf;
@@ -60,10 +63,8 @@ $display-font-sizes: (
   6: 2rem,
 ) !default;
 
-$primary: $paynes-gray;
-$secondary: $french-gray;
-
-$heading-color: $primary;
+$primary: $poppy;
+$secondary: $paynes-gray;
 
 $body-bg: #fff8f388;
 

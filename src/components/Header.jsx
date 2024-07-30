@@ -39,7 +39,7 @@ export const Header = () => {
       <Navbar.Brand>
         <Link className="align-items-center text-decoration-none" to="/">
           <h1
-            className="display-6 mb-0"
+            className="display-6 mb-0 text-black"
             aria-label="brand"
             title="Return to home page."
           >
