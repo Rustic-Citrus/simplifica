@@ -1,9 +1,9 @@
 import { handleChangeHelper } from "../helper/handleHelper";
-import { useAuth } from "../hooks/useAuth.jsx";
-import { useFeedback } from "../hooks/useFeedback.jsx";
-import { LoadingWithSpinner } from "./LoadingWithSpinner.jsx";
-import { TransitionDecorator } from "./decorators/TransitionDecorator.jsx";
-import { ButtonAnimationDecorator } from "./decorators/ButtonAnimationDecorator.jsx";
+import { useAuth } from "../hooks/useAuth";
+import { useFeedback } from "../hooks/useFeedback";
+import { LoadingWithSpinner } from "./LoadingWithSpinner";
+import { TransitionDecorator } from "./decorators/TransitionDecorator";
+import { ButtonAnimationDecorator } from "./decorators/ButtonAnimationDecorator";
 import { useState } from "react";
 import {
   Form,
@@ -14,7 +14,7 @@ import {
   Button,
   Image,
 } from "react-bootstrap";
-import { PrimaryButton } from "./PrimaryButton.tsx";
+import { PrimaryButton } from "./PrimaryButton";
 
 export const SignIn = () => {
   const { triggerFeedback } = useFeedback();

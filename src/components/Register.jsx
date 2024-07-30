@@ -3,8 +3,8 @@ import { validatePassword, validateUsername } from "../validation/validate";
 import feedback from "../../data/feedback.json";
 import { useAuth } from "../hooks/useAuth";
 import { useFeedback } from "../hooks/useFeedback";
-import { TransitionDecorator } from "./decorators/TransitionDecorator.jsx";
-import { ButtonAnimationDecorator } from "./decorators/ButtonAnimationDecorator.jsx";
+import { TransitionDecorator } from "./decorators/TransitionDecorator";
+import { ButtonAnimationDecorator } from "./decorators/ButtonAnimationDecorator";
 
 import { useState, useEffect } from "react";
 

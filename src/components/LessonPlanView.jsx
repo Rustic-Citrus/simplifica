@@ -22,7 +22,7 @@ import {
   Spinner,
 } from "react-bootstrap";
 
-import { TransitionDecorator } from "./decorators/TransitionDecorator.jsx";
+import { TransitionDecorator } from "./decorators/TransitionDecorator";
 
 export const LessonPlanView = () => {
   const [lessonPlan, setLessonPlan] = useState(lessonPlanTemplate);
