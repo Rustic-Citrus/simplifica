@@ -1,7 +1,8 @@
-import { PrimaryButton } from "../components/PrimaryButton";
-import { SecondaryButton } from "../components/SecondaryButton";
-import { TransitionDecorator } from "../components/decorators/TransitionDecorator";
-import { ButtonAnimationDecorator } from "../components/decorators/ButtonAnimationDecorator";
+import { PrimaryButton, SecondaryButton } from "../components";
+import {
+  TransitionDecorator,
+  ButtonAnimationDecorator,
+} from "../components/decorators";
 import { Stack } from "react-bootstrap";
 import { Link } from "react-router-dom";
 

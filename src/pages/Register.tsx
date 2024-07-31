@@ -1,10 +1,11 @@
 import { validatePassword, validateUsername } from "../validation/validate";
 import feedback from "../../data/feedback.json";
-import { useAuth } from "../hooks/useAuth";
-import { useFeedback } from "../hooks/useFeedback";
-import { TransitionDecorator } from "../components/decorators/TransitionDecorator";
-import { ButtonAnimationDecorator } from "../components/decorators/ButtonAnimationDecorator";
-import { PrimaryButton } from "../components/PrimaryButton";
+import { useAuth, useFeedback } from "../hooks";
+import {
+  TransitionDecorator,
+  ButtonAnimationDecorator,
+} from "../components/decorators";
+import { PrimaryButton } from "../components";
 import React, { useState, useEffect } from "react";
 import {
   Container,
@@ -16,19 +17,7 @@ import {
   InputGroup,
   Spinner,
 } from "react-bootstrap";
-
-interface FeedbackItem {
-  type: string,
-  title: string,
-  message: string
-}
-
-interface RegisterResponse {
-  status: number;
-  data: {
-    msg: string;
-  };
-}
+import { FeedbackItem, RegisterResponse } from "../interfaces";
 
 export const Register = () => {
   const { triggerFeedback } = useFeedback();
