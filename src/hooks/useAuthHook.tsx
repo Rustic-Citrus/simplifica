@@ -1,10 +1,9 @@
 import { useLocalStorage } from "./useLocalStorage";
 import UserService from "../service/UserService";
-
 import { useNavigate } from "react-router-dom";
 
 export const useAuthHook = () => {
-  const [user, setUser] = useLocalStorage("user", null);
+  const [user, setUser] = useLocalStorage("user", "");
   const navigate = useNavigate();
   const { VITE_API_ENDPOINT } = import.meta.env;
 
@@ -15,11 +14,11 @@ export const useAuthHook = () => {
       const response = await api.authenticate();
 
       if (response.status >= 300) {
-        setUser(null);
+        setUser("");
       }
 
       return response;
-    } catch (error) {
+    } catch (error: any) {
       console.log(error.message);
     }
   };

@@ -1,17 +1,16 @@
 import { PageTemplate } from "./pages/PageTemplate"
-import { Register } from "./components/Register";
-import { SignIn } from "./components/SignIn";
-import { Profile } from "./components/Profile";
-import { Splash } from "./components/Splash";
+import { Register } from "./pages/Register";
+import { SignIn } from "./pages/SignIn";
+import { Profile } from "./pages/Profile";
+import { Splash } from "./pages/Splash";
 import { ErrorComponent } from "./components/ErrorComponent";
-import { LessonPlanView } from "./components/LessonPlanView";
-import { LessonPlanCreate } from "./components/LessonPlanCreate";
+import { LessonPlanView } from "./pages/LessonPlanView";
+import { LessonPlanCreate } from "./pages/LessonPlanCreate";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { PublicRoute } from "./components/PublicRoute";
-import { LessonPlanEdit } from "./components/LessonPlanEdit";
+import { LessonPlanEdit } from "./pages/LessonPlanEdit";
 import { AuthProvider } from "./hooks/useAuth";
 import { FeedbackProvider } from "./hooks/useFeedback";
-
 import { Routes, Route } from "react-router-dom";
 
 export const App = () => {

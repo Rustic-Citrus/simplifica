@@ -1,8 +1,8 @@
 import LessonPlanService from "../service/LessonPlanService";
 import { useAuth } from "../hooks/useAuth";
 import { fetchLessonPlans } from "../helper/fetchHelper";
-import { PrimaryButton } from "./PrimaryButton";
-import { TransitionDecorator } from "./decorators/TransitionDecorator";
+import { PrimaryButton } from "../components/PrimaryButton";
+import { TransitionDecorator } from "../components/decorators/TransitionDecorator";
 
 import { useEffect, useState, useRef } from "react";
 

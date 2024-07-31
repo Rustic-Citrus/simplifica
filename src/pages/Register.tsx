@@ -2,9 +2,9 @@ import { validatePassword, validateUsername } from "../validation/validate";
 import feedback from "../../data/feedback.json";
 import { useAuth } from "../hooks/useAuth";
 import { useFeedback } from "../hooks/useFeedback";
-import { TransitionDecorator } from "./decorators/TransitionDecorator";
-import { ButtonAnimationDecorator } from "./decorators/ButtonAnimationDecorator";
-import { PrimaryButton } from "./PrimaryButton";
+import { TransitionDecorator } from "../components/decorators/TransitionDecorator";
+import { ButtonAnimationDecorator } from "../components/decorators/ButtonAnimationDecorator";
+import { PrimaryButton } from "../components/PrimaryButton";
 import React, { useState, useEffect } from "react";
 import {
   Container,

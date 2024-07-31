@@ -3,13 +3,10 @@ import { useUpdateLessonPlan } from "../hooks/useUpdateLessonPlan";
 import LessonPlanService from "../service/LessonPlanService";
 import lessonPlanTemplate from "../../data/lessonPlanTemplate.json";
 import { fetchOneLessonPlan } from "../helper/fetchHelper";
-import { TransitionDecorator } from "./decorators/TransitionDecorator";
-
+import { TransitionDecorator } from "../components/decorators/TransitionDecorator";
 import { useState, useEffect, useRef } from "react";
-
 import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-
 import {
   Container,
   Col,
