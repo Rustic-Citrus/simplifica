@@ -1,13 +1,9 @@
 import LessonPlanService from "../service/LessonPlanService";
 import { useAuth } from "../hooks/useAuth";
 import { fetchLessonPlans } from "../helper/fetchHelper";
-import { PrimaryButton } from "../components/PrimaryButton";
 import { TransitionDecorator } from "../components/decorators/TransitionDecorator";
-
 import { useEffect, useState, useRef } from "react";
-
 import { Link, useParams } from "react-router-dom";
-
 import { Container, Row, Col, Table, Button, Image } from "react-bootstrap";
 
 export const Profile = () => {

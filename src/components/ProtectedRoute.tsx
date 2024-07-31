@@ -1,9 +1,6 @@
 import { useAuth } from "../hooks/useAuth";
-
 import { useEffect } from "react";
-
 import PropTypes from "prop-types";
-
 import { Navigate } from "react-router-dom";
 
 export const ProtectedRoute = ({ children }) => {

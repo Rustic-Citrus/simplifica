@@ -1,16 +1,15 @@
-import { PageTemplate } from "./pages/PageTemplate"
-import { Register } from "./pages/Register";
-import { SignIn } from "./pages/SignIn";
-import { Profile } from "./pages/Profile";
-import { Splash } from "./pages/Splash";
-import { ErrorComponent } from "./components/ErrorComponent";
-import { LessonPlanView } from "./pages/LessonPlanView";
-import { LessonPlanCreate } from "./pages/LessonPlanCreate";
-import { ProtectedRoute } from "./components/ProtectedRoute";
-import { PublicRoute } from "./components/PublicRoute";
-import { LessonPlanEdit } from "./pages/LessonPlanEdit";
-import { AuthProvider } from "./hooks/useAuth";
-import { FeedbackProvider } from "./hooks/useFeedback";
+import {
+  PageTemplate,
+  Register,
+  SignIn,
+  Profile,
+  Splash,
+  LessonPlanView,
+  LessonPlanCreate,
+  LessonPlanEdit,
+} from "./pages";
+import { ErrorComponent, ProtectedRoute, PublicRoute } from "./components";
+import { AuthProvider, FeedbackProvider } from "./hooks";
 import { Routes, Route } from "react-router-dom";
 
 export const App = () => {
@@ -18,7 +17,11 @@ export const App = () => {
     <FeedbackProvider>
       <AuthProvider>
         <Routes>
-          <Route path="/" element={<PageTemplate />} errorElement={<ErrorComponent />}>
+          <Route
+            path="/"
+            element={<PageTemplate />}
+            errorElement={<ErrorComponent />}
+          >
             <Route
               path="/"
               element={
