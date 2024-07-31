@@ -1,9 +1,14 @@
 import axios from "axios";
 
+interface UserData {
+  username: string;
+  password: string;
+}
+
 export default class UserService {
   #instance;
 
-  constructor(baseUrl) {
+  constructor(baseUrl: string) {
     this.#instance = axios.create({
       baseURL: baseUrl,
     });
@@ -13,7 +18,7 @@ export default class UserService {
     return this.#instance;
   }
 
-  generateErrorResponse(error) {
+  generateErrorResponse(error: any) {
     return {
       data: {
         msg: error.message,
@@ -21,7 +26,7 @@ export default class UserService {
     };
   }
 
-  async login(userData) {
+  async login(userData: UserData) {
     try {
       const response = await this.#instance.post("/login", userData, {
         withCredentials: true,
@@ -50,7 +55,7 @@ export default class UserService {
     }
   }
 
-  async register(userData) {
+  async register(userData: UserData) {
     try {
       const response = await this.#instance.post("/register", userData, {
         validateStatus: (status) => status < 500,

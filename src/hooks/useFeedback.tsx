@@ -1,12 +1,13 @@
 import { useFeedbackHook } from "./useFeedbackHook";
-
 import { createContext, useMemo, useContext } from "react";
-
-import PropTypes from "prop-types";
 
 const FeedbackContext = createContext();
 
-export const FeedbackProvider = ({ children }) => {
+export const FeedbackProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [feedback, showFeedback, triggerFeedback, toggleFeedback] =
     useFeedbackHook();
 
@@ -29,8 +30,4 @@ export const FeedbackProvider = ({ children }) => {
 
 export const useFeedback = () => {
   return useContext(FeedbackContext);
-};
-
-FeedbackProvider.propTypes = {
-  children: PropTypes.node,
 };

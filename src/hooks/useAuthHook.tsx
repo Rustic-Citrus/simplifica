@@ -1,5 +1,5 @@
 import { useLocalStorage } from "./useLocalStorage";
-import UserService from "../service/UserService.js";
+import UserService from "../service/UserService";
 
 import { useNavigate } from "react-router-dom";
 

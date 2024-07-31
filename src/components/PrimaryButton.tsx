@@ -5,7 +5,7 @@ interface PrimaryButtonProps {
   title: string;
   ariaLabel: string;
   disabled?: boolean;
-  onClick?: () => void;
+  onClick?: (() => void) | ((e: any) => Promise<void>) | ((e: any) => void);
 }
 
 export const PrimaryButton = ({

@@ -1,13 +1,11 @@
-import { handleChangeHelper } from "../helper/handleHelper";
 import { validatePassword, validateUsername } from "../validation/validate";
 import feedback from "../../data/feedback.json";
 import { useAuth } from "../hooks/useAuth";
 import { useFeedback } from "../hooks/useFeedback";
 import { TransitionDecorator } from "./decorators/TransitionDecorator";
 import { ButtonAnimationDecorator } from "./decorators/ButtonAnimationDecorator";
-
-import { useState, useEffect } from "react";
-
+import { PrimaryButton } from "./PrimaryButton";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Stack,
@@ -19,70 +17,86 @@ import {
   Spinner,
 } from "react-bootstrap";
 
+interface FeedbackItem {
+  type: string,
+  title: string,
+  message: string
+}
+
+interface RegisterResponse {
+  status: number;
+  data: {
+    msg: string;
+  };
+}
+
 export const Register = () => {
   const { triggerFeedback } = useFeedback();
   const [hidePassword, setHidePassword] = useState(true);
   const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
   const [validated, setValidated] = useState(false);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [formState, setFormState] = useState({
+    username: "",
+    password: "",
+    confirmedPassword: "",
+  });
   const [isRegistering, setIsRegistering] = useState(false);
-  const [confirmedPassword, setConfirmedPassword] = useState("");
   const { register } = useAuth();
 
   useEffect(() => {
-    validatePassword(password) &&
-    validateUsername(username) &&
-    password === confirmedPassword
-      ? setValidated(true)
-      : setValidated(false);
-  }, [username, password, confirmedPassword]);
+    const { username, password, confirmedPassword } = formState;
+    setValidated(
+      validatePassword(password) &&
+        validateUsername(username) &&
+        password === confirmedPassword
+    );
+  }, [formState]);
 
-  const handleUsernameChange = (e) => handleChangeHelper(e, setUsername);
-  const handlePasswordChange = (e) => handleChangeHelper(e, setPassword);
-  const handleConfirmedPasswordChange = (e) =>
-    handleChangeHelper(e, setConfirmedPassword);
+  const getValidationErrors = ({
+    username,
+    password,
+    confirmedPassword,
+  }: typeof formState) => {
+    const errors = [];
+    if (password !== confirmedPassword) errors.push("passwords_not_matching");
+    if (!validatePassword(password)) errors.push("invalid_password");
+    if (!validateUsername(username)) errors.push("invalid_username");
+    return errors;
+  };
 
-  const handleSubmit = async (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormState((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setIsRegistering(true);
 
-    const reportedFeedback = [];
-
-    e.preventDefault();
+    const reportedFeedback: FeedbackItem[] = [];
 
     if (!validated) {
       e.stopPropagation();
-
-      const errors = [];
-
-      if (password !== confirmedPassword) errors.push("passwords_not_matching");
-      if (!validatePassword(password)) errors.push("invalid_password");
-      if (!validateUsername(username)) errors.push("invalid_username");
+      const errors = getValidationErrors(formState);
 
       for (const error of errors) {
-        for (const feedbackItem of feedback) {
-          if (feedbackItem.name === error)
-            reportedFeedback.push(feedbackItem.info);
+        const feedbackItem = feedback.find((item) => item.name === error);
+        if (feedbackItem) {
+          reportedFeedback.push(feedbackItem.info);
         }
       }
     } else {
       try {
-        const response = await register({ username, password });
+        const response: RegisterResponse = await register(formState);
 
-        if (response.status === 201) {
-          reportedFeedback.push({
-            title: "Registration Successful",
-            message: response.data.msg,
-            type: "success",
-          });
-        } else {
-          reportedFeedback.push({
-            title: "Registration Failed",
-            message: response.data.msg,
-            type: "error",
-          });
-        }
-      } catch (error) {
+        reportedFeedback.push({
+          title:
+            response.status === 201
+              ? "Registration Successful"
+              : "Registration Failed",
+          message: response.data.msg,
+          type: response.status === 201 ? "success" : "error",
+        });
+      } catch (error: any) {
         console.log(error.message);
       }
     }
@@ -109,10 +123,11 @@ export const Register = () => {
               <Form.Control
                 type="text"
                 placeholder="Your username"
+                name="username"
                 className="mb-2"
                 title="Type your username here."
                 aria-label="username-input"
-                onChange={handleUsernameChange}
+                onChange={handleChange}
               />
             </FloatingLabel>
             <InputGroup hasValidation className="mb-2">
@@ -120,9 +135,10 @@ export const Register = () => {
                 <Form.Control
                   type={hidePassword ? "password" : "text"}
                   placeholder="Your password"
+                  name="password"
                   title="Type your password here."
                   aria-label="password-input"
-                  onChange={handlePasswordChange}
+                  onChange={handleChange}
                 />
               </FloatingLabel>
               <Button
@@ -149,9 +165,10 @@ export const Register = () => {
                 <Form.Control
                   type={hideConfirmPassword ? "password" : "text"}
                   placeholder="Confirm your password"
+                  name="confirmedPassword"
                   aria-label="confirm-password-input"
                   title="Type your password again here."
-                  onChange={handleConfirmedPasswordChange}
+                  onChange={handleChange}
                 />
               </FloatingLabel>
               <Button
@@ -172,30 +189,28 @@ export const Register = () => {
             </InputGroup>
           </Form.Group>
           <ButtonAnimationDecorator>
-            <Button
-              type="submit"
-              variant="dark"
-              className="w-100"
-              aria-label="get-started-button"
+            <PrimaryButton
+              ariaLabel="get-started-button"
               title="Click here to register your account."
               disabled={isRegistering}
-            >
-              {isRegistering ? (
-                <span>
-                  Creating your account...{" "}
-                  <Spinner
-                    as="span"
-                    animation="border"
-                    className="mx-3"
-                    size="sm"
-                    role="status"
-                    aria-hidden="true"
-                  />
-                </span>
-              ) : (
-                "Get Started"
-              )}
-            </Button>
+              content={
+                isRegistering ? (
+                  <span>
+                    Creating your account...{" "}
+                    <Spinner
+                      as="span"
+                      animation="border"
+                      className="mx-3"
+                      size="sm"
+                      role="status"
+                      aria-hidden="true"
+                    />
+                  </span>
+                ) : (
+                  "Get Started"
+                )
+              }
+            />
           </ButtonAnimationDecorator>
         </Form>
       </TransitionDecorator>

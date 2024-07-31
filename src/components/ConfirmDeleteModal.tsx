@@ -1,9 +1,14 @@
-import PropTypes from "prop-types";
+import { Button, Modal } from "react-bootstrap";
 
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-
-export const ConfirmDeleteModal = ({ show, toggleShow, handleDeleteConfirmed }) => {
+export const ConfirmDeleteModal = ({
+  show,
+  toggleShow,
+  handleDeleteConfirmed,
+}: {
+  show: boolean;
+  toggleShow: () => void;
+  handleDeleteConfirmed: () => void;
+}) => {
   const handleConfirm = () => {
     toggleShow();
     handleDeleteConfirmed();
@@ -29,9 +34,3 @@ export const ConfirmDeleteModal = ({ show, toggleShow, handleDeleteConfirmed }) 
     </Modal>
   );
 };
-
-ConfirmDeleteModal.propTypes = {
-  show: PropTypes.bool,
-  toggleShow: PropTypes.func,
-  handleDeleteConfirmed: PropTypes.func
-}

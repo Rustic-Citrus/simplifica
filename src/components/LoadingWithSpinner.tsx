@@ -1,8 +1,10 @@
-import PropTypes from "prop-types";
-
 import Spinner from "react-bootstrap/Spinner";
 
-export const LoadingWithSpinner = ({ loadingText }) => {
+export const LoadingWithSpinner = ({
+  loadingText,
+}: {
+  loadingText: string;
+}) => {
   return (
     <span aria-label="loading-text">
       {`${loadingText}...`}
@@ -16,8 +18,4 @@ export const LoadingWithSpinner = ({ loadingText }) => {
       />
     </span>
   );
-};
-
-LoadingWithSpinner.propTypes = {
-  loadingText: PropTypes.string.isRequired,
 };

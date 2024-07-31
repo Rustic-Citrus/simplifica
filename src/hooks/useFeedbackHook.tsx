@@ -4,7 +4,7 @@ export const useFeedbackHook = () => {
   const [showFeedback, setShowFeedback] = useState(false);
   const [feedback, setFeedback] = useState([]);
 
-  const triggerFeedback = (reportedFeedback) => {
+  const triggerFeedback = (reportedFeedback: any) => {
     setFeedback(reportedFeedback);
     setShowFeedback(true);
   };

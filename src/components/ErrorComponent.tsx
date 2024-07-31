@@ -1,10 +1,7 @@
-import PropTypes from "prop-types";
-
 import { Link } from "react-router-dom";
-
 import { Container, Stack, Button } from "react-bootstrap";
 
-export const ErrorComponent = ({ message = "" }) => {
+export const ErrorComponent = ({ message = "" }: { message: string }) => {
   return (
     <Container className="pt-5 mt-5 px-4 h-100 align-middle">
       <Stack gap={1} className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
@@ -29,8 +26,4 @@ export const ErrorComponent = ({ message = "" }) => {
       </Stack>
     </Container>
   );
-};
-
-ErrorComponent.propTypes = {
-  message: PropTypes.string,
 };
