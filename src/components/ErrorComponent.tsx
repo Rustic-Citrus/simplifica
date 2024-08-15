@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
 import { Container, Stack, Button } from "react-bootstrap";
 
-export const ErrorComponent = ({ message = "" }: { message: string }) => {
+/**
+ * A reusable error component that displays a generic error message and a link to return to the homepage.
+ *
+ * @param {string} message - An optional error message to display. If not provided, a default message will be shown.
+ * @return {JSX.Element} The error component JSX element.
+*/
+export const ErrorComponent = ({ message = "" }: { message?: string }) => {
   return (
     <Container className="pt-5 mt-5 px-4 h-100 align-middle">
       <Stack gap={1} className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
