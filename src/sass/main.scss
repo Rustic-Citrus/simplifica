@@ -7,6 +7,7 @@ $french-gray: #aaaeb2;
 $timberwolf: #dfd5cf;
 $champagne-pink: #f7e7dc;
 $seashell: #fff8f3;
+$forest-green: #168423;
 
 html,
 body,
@@ -16,9 +17,9 @@ body,
 }
 
 body {
-  background: linear-gradient(45deg, $champagne-pink, $seashell, $timberwolf);
+  background: linear-gradient(45deg, $champagne-pink, $seashell, $timberwolf, $french-gray);
   background-size: 400% 400%;
-  animation: gradient 8s ease infinite;
+  animation: gradient 12s ease infinite;
 }
 
 @keyframes gradient {
@@ -63,7 +64,7 @@ $display-font-sizes: (
   6: 2rem,
 ) !default;
 
-$primary: $poppy;
+$primary: $forest-green;
 $secondary: $paynes-gray;
 
 $body-bg: #fff8f388;
