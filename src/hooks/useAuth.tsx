@@ -1,12 +1,15 @@
 import { useAuthHook } from "./useAuthHook";
-
 import { createContext, useContext, useMemo } from "react";
 
-import PropTypes from "prop-types";
+const AuthContext = createContext({
+  user: null,
+  signIn: () => {},
+  signOut: () => {},
+  register: () => {},
+  authenticate: () => {},
+});
 
-const AuthContext = createContext();
-
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, authenticate, signIn, signOut, register] = useAuthHook();
 
   const value = useMemo(
@@ -25,8 +28,4 @@ export const AuthProvider = ({ children }) => {
 
 export const useAuth = () => {
   return useContext(AuthContext);
-};
-
-AuthProvider.propTypes = {
-  children: PropTypes.element,
 };
