@@ -1,18 +1,17 @@
 import { useAuth } from "../hooks/useAuth";
 import { LoadingWithSpinner } from "./LoadingWithSpinner";
 import { ButtonAnimationDecorator } from "./decorators/ButtonAnimationDecorator";
-
 import { useState } from "react";
-
 import { Link } from "react-router-dom";
-
 import { Navbar, Button } from "react-bootstrap";
 
-export const Header = () => {
+export const Header = (): JSX.Element => {
   const { user, signOut } = useAuth();
   const [isSigningOut, setIsSigningOut] = useState(false);
 
-  const handleSignOutClick = async (e) => {
+  const handleSignOutClick = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ): Promise<void> => {
     e.preventDefault();
 
     setIsSigningOut(true);
@@ -21,7 +20,7 @@ export const Header = () => {
       setTimeout(async () => {
         await signOut();
       }, 1000);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error.message);
     } finally {
       setTimeout(() => {
