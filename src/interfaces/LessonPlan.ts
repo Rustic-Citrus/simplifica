@@ -1,4 +1,5 @@
 export interface LessonPlan {
+  _id: string,
   topic: string;
   date: string;
   presentation: {

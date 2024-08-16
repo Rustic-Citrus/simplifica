@@ -1,7 +1,7 @@
 import { FeedbackComponent, Header } from "../components";
-import { useFeedback } from "../hooks/useFeedback";
+import { useFeedback } from "../hooks";
 import { Outlet } from "react-router-dom";
-import ToastContainer from "react-bootstrap/ToastContainer";
+import { ToastContainer } from "react-bootstrap";
 import { AnimatePresence } from "framer-motion";
 
 export const PageTemplate = () => {

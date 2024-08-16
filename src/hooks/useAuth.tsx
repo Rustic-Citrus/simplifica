@@ -1,13 +1,17 @@
 import { useAuthHook } from "./useAuthHook";
 import { createContext, useContext, useMemo } from "react";
-import { UserData } from "../interfaces";
+import { UserRequest, UserResponse } from "../interfaces";
+import { DEFAULT_USER_RESPONSE, DEFAULT_USER } from "../templates";
 
 const AuthContext = createContext({
-  user: null,
-  register: async (userData: UserData): Promise<void> => {},
-  authenticate: async (userData: UserData): Promise<void> => {},
-  signIn: async (userData: UserData): Promise<void> => {},
-  signOut: async (): Promise<void> => {},
+  user: DEFAULT_USER,
+  register: async (userData: UserRequest): Promise<UserResponse> =>
+    DEFAULT_USER_RESPONSE,
+  authenticate: async (userData: UserRequest): Promise<UserResponse> =>
+    DEFAULT_USER_RESPONSE,
+  signIn: async (userData: UserRequest): Promise<UserResponse> =>
+    DEFAULT_USER_RESPONSE,
+  signOut: async (): Promise<UserResponse> => DEFAULT_USER_RESPONSE,
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {

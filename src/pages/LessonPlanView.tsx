@@ -5,7 +5,6 @@ import { useAuth } from "../hooks";
 import { ConfirmDeleteModal } from "../components";
 import { TransitionDecorator } from "../components/decorators";
 import { useEffect, useRef, useState } from "react";
-import PropTypes from "prop-types";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import {
   Container,
@@ -31,6 +30,9 @@ export const LessonPlanView = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (user?._id) {
+      user._id === userId ? setAuthorised(true) : setAuthorised(false);
+    }
     user && user._id === userId ? setAuthorised(true) : setAuthorised(false);
 
     if (authorised && !lessonApiRef.current) {
@@ -262,8 +264,4 @@ export const LessonPlanView = () => {
       )}
     </Container>
   );
-};
-
-LessonPlanView.propTypes = {
-  triggerFeedback: PropTypes.func,
 };

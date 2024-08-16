@@ -2,7 +2,6 @@ import { useUpdateLessonPlan, useFeedback, useAuth } from "../hooks";
 import { LessonPlanService } from "../services";
 import lessonPlanTemplate from "../../data/lessonPlanTemplate.json";
 import { useState, useEffect, useRef } from "react";
-import PropTypes from "prop-types";
 import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import {
@@ -511,8 +510,4 @@ export const LessonPlanCreate = () => {
       </motion.div>
     </Container>
   );
-};
-
-LessonPlanCreate.propTypes = {
-  triggerFeedback: PropTypes.func,
 };

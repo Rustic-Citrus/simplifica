@@ -1,16 +1,17 @@
 import { useState } from "react";
+import { LessonPlan } from "../interfaces";
 
-export const useUpdateLessonPlan = (initialLessonPlan) => {
+export const useUpdateLessonPlan = (initialLessonPlan: LessonPlan) => {
   const [lessonPlan, setLessonPlan] = useState(initialLessonPlan);
 
-  const updateLessonPlan = (update, section = null, key = null) => {
-    if (section === null && key === null) {
+  const updateLessonPlan = (update: LessonPlan | string, section = "", key = "") => {
+    if (typeof update !== "string" && section === "" && key === "") {
       setLessonPlan(update);
-    } else {
+    } else if (typeof update === "string") {
       setLessonPlan((prevState) => ({
         ...prevState,
         [section]:
-          key !== null
+          key !== ""
             ? {
                 ...prevState[section],
                 [key]: update,

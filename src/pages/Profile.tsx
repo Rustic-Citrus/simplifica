@@ -1,7 +1,8 @@
 import { LessonPlanService } from "../services";
 import { useAuth } from "../hooks";
 import { fetchLessonPlans } from "../helpers";
-import { TransitionDecorator } from "../components/decorators"
+import { TransitionDecorator } from "../components/decorators";
+import { LessonPlan } from "../interfaces";
 import { useEffect, useState, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Container, Row, Col, Table, Button, Image } from "react-bootstrap";
@@ -50,7 +51,7 @@ export const Profile = () => {
           </thead>
           <tbody>
             {lessonPlans !== undefined &&
-              lessonPlans.map((plan, i) => (
+              lessonPlans.map((plan: LessonPlan, i) => (
                 <tr key={i}>
                   <td>
                     <Link to={`/${userId}/view/${plan._id}`}>{i + 1}</Link>

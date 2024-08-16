@@ -1,10 +1,11 @@
 import { useLocalStorage } from "./useLocalStorage";
 import { UserService } from "../services";
-import { UserData, UserResponse } from "../interfaces";
+import { UserRequest, UserResponse } from "../interfaces";
 import { useNavigate } from "react-router-dom";
+import { DEFAULT_USER } from "../templates";
 
 export const useAuthHook = () => {
-  const [user, setUser] = useLocalStorage("user", "");
+  const [user, setUser] = useLocalStorage("user", JSON.stringify(DEFAULT_USER));
   const navigate = useNavigate();
   const { VITE_API_ENDPOINT } = import.meta.env;
 
@@ -15,7 +16,7 @@ export const useAuthHook = () => {
       status: 500,
       data: {
         msg: errorMessage,
-        user: null,
+        user: DEFAULT_USER,
       },
     };
   };
@@ -25,7 +26,7 @@ export const useAuthHook = () => {
       const response = await api.authenticate();
 
       if (response.status >= 300) {
-        setUser(null);
+        setUser(DEFAULT_USER);
       }
 
       return response;
@@ -34,7 +35,7 @@ export const useAuthHook = () => {
     }
   };
 
-  const signIn = async (userData: UserData): Promise<UserResponse> => {
+  const signIn = async (userData: UserRequest): Promise<UserResponse> => {
     try {
       const response = await api.login(userData);
 
@@ -54,7 +55,7 @@ export const useAuthHook = () => {
     try {
       const response = await api.logout();
 
-      setUser(null);
+      setUser(DEFAULT_USER);
       navigate("/");
 
       return response;
@@ -63,7 +64,7 @@ export const useAuthHook = () => {
     }
   };
 
-  const register = async (userData: UserData): Promise<UserResponse> => {
+  const register = async (userData: UserRequest): Promise<UserResponse> => {
     try {
       const response = await api.register(userData);
 
