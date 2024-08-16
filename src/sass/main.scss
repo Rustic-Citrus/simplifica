@@ -1,13 +1,18 @@
 $paynes-gray: #405d72;
 $poppy: #da2c38;
-$cordovan: #8C4843;
-$keppel: #44BBA4;
+$cordovan: #8c4843;
+$keppel: #44bba4;
 $slate-gray: #758694;
 $french-gray: #aaaeb2;
 $timberwolf: #dfd5cf;
 $champagne-pink: #f7e7dc;
 $seashell: #fff8f3;
 $forest-green: #168423;
+$azure-web: #F5FEFF;
+$majorelle-blue: #5542FF;
+$davys-gray: #595959;
+$hues: #fff2fc, #fff2fa, #fff2f8, #fff2f6, #fff2f3, #fff3f2, #fff5f2, #fff8f3,
+  #fffaf2, #fffcf2, #fffef2, #fefff2, #fcfff2, #f9fff2, #f7fff2;
 
 html,
 body,
@@ -17,9 +22,9 @@ body,
 }
 
 body {
-  background: linear-gradient(45deg, $champagne-pink, $seashell, $timberwolf, $french-gray);
+  background: radial-gradient($hues...);
   background-size: 400% 400%;
-  animation: gradient 12s ease infinite;
+  animation: gradient 8s ease infinite;
 }
 
 @keyframes gradient {
@@ -64,9 +69,8 @@ $display-font-sizes: (
   6: 2rem,
 ) !default;
 
-$primary: $forest-green;
-$secondary: $paynes-gray;
-
+$primary: $majorelle-blue;
+$secondary: $davys-gray;
 $body-bg: #fff8f388;
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
