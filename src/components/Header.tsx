@@ -1,6 +1,6 @@
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../hooks";
 import { LoadingWithSpinner } from "./LoadingWithSpinner";
-import { ButtonAnimationDecorator } from "./decorators/ButtonAnimationDecorator";
+import { ButtonAnimationDecorator } from "./decorators";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Button } from "react-bootstrap";
@@ -46,10 +46,10 @@ export const Header = (): JSX.Element => {
           </h1>
         </Link>
       </Navbar.Brand>
-      {user && (
+      {user._id !== "" && (
         <ButtonAnimationDecorator>
           <Button
-            variant="dark"
+            variant="secondary"
             onClick={handleSignOutClick}
             disabled={isSigningOut}
             className="w-100"

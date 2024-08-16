@@ -6,12 +6,12 @@ export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user, authenticate } = useAuth();
 
   useEffect(() => {
-    if (!user) {
+    if (user._id === "") {
       authenticate();
     }
   }, [user, authenticate]);
 
-  if (!user) {
+  if (user._id === "") {
     return <Navigate to="/login" />;;
   }
 

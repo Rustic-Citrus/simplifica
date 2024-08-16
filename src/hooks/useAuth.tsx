@@ -7,7 +7,7 @@ const AuthContext = createContext({
   user: DEFAULT_USER,
   register: async (userData: UserRequest): Promise<UserResponse> =>
     DEFAULT_USER_RESPONSE,
-  authenticate: async (userData: UserRequest): Promise<UserResponse> =>
+  authenticate: async (): Promise<UserResponse> =>
     DEFAULT_USER_RESPONSE,
   signIn: async (userData: UserRequest): Promise<UserResponse> =>
     DEFAULT_USER_RESPONSE,

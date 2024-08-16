@@ -1,17 +1,13 @@
+import { useAuth } from "../hooks";
 import { Navigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
-import PropTypes from "prop-types";
 
-export const PublicRoute = ({ children }) => {
+export const PublicRoute = ({ children }: { children: React.ReactNode }) => {
   const { user } = useAuth();
 
-  if (user) {
+  if (user._id !== "") {
     return <Navigate to={`/${user._id}`}/>;
   }
 
   return children;
 };
 
-PublicRoute.propTypes = {
-  children: PropTypes.element,
-};
