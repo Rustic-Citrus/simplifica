@@ -1,9 +1,5 @@
 import axios from "axios";
-
-interface UserData {
-  username: string;
-  password: string;
-}
+import { UserData } from "../interfaces";
 
 export default class UserService {
   #instance;
