@@ -1,9 +1,9 @@
-import axios from "axios";
+import axios, { AxiosResponse, AxiosInstance } from "axios";
 import { LessonPlan } from "../interfaces";
 
-export default class LessonPlanService {
-  #instance;
-  #userId;
+export class LessonPlanService {
+  #instance: AxiosInstance;
+  #userId: string;
 
   constructor(baseUrl: string, userId: string) {
     this.#instance = axios.create({
@@ -12,15 +12,15 @@ export default class LessonPlanService {
     this.#userId = userId;
   }
 
-  getInstance() {
+  getInstance(): AxiosInstance {
     return this.#instance;
   }
 
-  getUserId() {
+  getUserId(): string {
     return this.#userId;
   }
 
-  async getLessonPlans() {
+  async getLessonPlans(): Promise<AxiosResponse | string> {
     try {
       const response = await this.#instance.get(
         `/${this.#userId}/lesson-plans`
@@ -31,7 +31,7 @@ export default class LessonPlanService {
     }
   }
 
-  async getOneLessonPlan(lessonId: string) {
+  async getOneLessonPlan(lessonId: string): Promise<AxiosResponse | string> {
     try {
       const response = await this.#instance.get(
         `/${this.#userId}/lesson-plans/${lessonId}`
@@ -42,7 +42,9 @@ export default class LessonPlanService {
     }
   }
 
-  async createLessonPlan(lessonPlan: LessonPlan) {
+  async createLessonPlan(
+    lessonPlan: LessonPlan
+  ): Promise<AxiosResponse | string> {
     try {
       const response = await this.#instance.post(
         `/${this.#userId}/lesson-plans`,
@@ -56,7 +58,10 @@ export default class LessonPlanService {
     }
   }
 
-  async updateLessonPlan(lessonId: string, newLessonPlan: LessonPlan) {
+  async updateLessonPlan(
+    lessonId: string,
+    newLessonPlan: LessonPlan
+  ): Promise<AxiosResponse | string> {
     try {
       const response = await this.#instance.put(
         `/${this.#userId}/lesson-plans/${lessonId}`,
@@ -69,7 +74,7 @@ export default class LessonPlanService {
     }
   }
 
-  async deleteLessonPlan(lessonId: string) {
+  async deleteLessonPlan(lessonId: string): Promise<AxiosResponse | string> {
     try {
       const response = await this.#instance.delete(
         `/${this.#userId}/lesson-plans/${lessonId}`
