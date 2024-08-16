@@ -71,7 +71,7 @@ $display-font-sizes: (
 
 $primary: $majorelle-blue;
 $secondary: $davys-gray;
-$body-bg: #fff8f388;
+$body-bg: $azure-web;
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
