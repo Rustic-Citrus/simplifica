@@ -2,7 +2,6 @@ import { useLocalStorage } from "./useLocalStorage";
 import { UserService } from "../services";
 import { UserData, Response } from "../interfaces";
 import { useNavigate } from "react-router-dom";
-import { AxiosResponse } from "axios";
 
 export const useAuthHook = () => {
   const [user, setUser] = useLocalStorage("user", "");
@@ -11,7 +10,17 @@ export const useAuthHook = () => {
 
   const api = new UserService(VITE_API_ENDPOINT);
 
-  const authenticate = async (): Promise<AxiosResponse | Response | void> => {
+  const getErrorResponse = (errorMessage: string) => {
+    return {
+      status: 500,
+      data: {
+        msg: errorMessage,
+        user: null,
+      },
+    };
+  };
+
+  const authenticate = async (): Promise<Response> => {
     try {
       const response = await api.authenticate();
 
@@ -21,13 +30,11 @@ export const useAuthHook = () => {
 
       return response;
     } catch (error: any) {
-      console.log(error.message);
+      return getErrorResponse(error.message);
     }
   };
 
-  const signIn = async (
-    userData: UserData
-  ): Promise<AxiosResponse | Response | void> => {
+  const signIn = async (userData: UserData): Promise<Response> => {
     try {
       const response = await api.login(userData);
 
@@ -39,11 +46,11 @@ export const useAuthHook = () => {
 
       return response;
     } catch (error: any) {
-      console.log(error.message);
+      return getErrorResponse(error.message);
     }
   };
 
-  const signOut = async (): Promise<AxiosResponse | Response | void> => {
+  const signOut = async (): Promise<Response> => {
     try {
       const response = await api.logout();
 
@@ -52,13 +59,11 @@ export const useAuthHook = () => {
 
       return response;
     } catch (error: any) {
-      console.log(error.message);
+      return getErrorResponse(error.message);
     }
   };
 
-  const register = async (
-    userData: UserData
-  ): Promise<AxiosResponse | Response | void> => {
+  const register = async (userData: UserData): Promise<Response> => {
     try {
       const response = await api.register(userData);
 
@@ -70,7 +75,7 @@ export const useAuthHook = () => {
 
       return response;
     } catch (error: any) {
-      console.log(error.message);
+      return getErrorResponse(error.message);
     }
   };
 

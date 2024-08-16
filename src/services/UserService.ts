@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
 import { UserData, Response } from "../interfaces";
 
 export class UserService {
-  #instance;
+  #instance: AxiosInstance;
 
   constructor(baseUrl: string) {
     this.#instance = axios.create({
@@ -10,16 +10,16 @@ export class UserService {
     });
   }
 
-  getInstance() {
+  getInstance(): AxiosInstance {
     return this.#instance;
   }
 
-  generateErrorResponse(error: any): Response {
+  generateErrorResponse(errorMessage: string): Response {
     return {
       status: 500,
       data: {
-        msg: error.message,
-        user: null
+        msg: errorMessage,
+        user: null,
       },
     };
   }
@@ -30,10 +30,16 @@ export class UserService {
         withCredentials: true,
         validateStatus: (status) => status < 500,
       });
-      return response;
-      
-    } catch (error) {
-      return this.generateErrorResponse(error);
+
+      return {
+        status: response.status,
+        data: {
+          msg: response.data.msg,
+          user: response.data.user,
+        },
+      };
+    } catch (error: any) {
+      return this.generateErrorResponse(error.message);
     }
   }
 
@@ -47,9 +53,16 @@ export class UserService {
           validateStatus: (status) => status < 500,
         }
       );
-      return response;
-    } catch (error) {
-      return this.generateErrorResponse(error);
+
+      return {
+        status: response.status,
+        data: {
+          msg: response.data.msg,
+          user: null,
+        },
+      };
+    } catch (error: any) {
+      return this.generateErrorResponse(error.message);
     }
   }
 
@@ -58,9 +71,16 @@ export class UserService {
       const response = await this.#instance.post("/register", userData, {
         validateStatus: (status) => status < 500,
       });
-      return response;
-    } catch (error) {
-      return this.generateErrorResponse(error);
+
+      return {
+        status: response.status,
+        data: {
+          msg: response.data.msg,
+          user: response.data.user,
+        }
+      };
+    } catch (error: any) {
+      return this.generateErrorResponse(error.message);
     }
   }
 
@@ -71,9 +91,15 @@ export class UserService {
         {},
         { withCredentials: true, validateStatus: (status) => status < 500 }
       );
-      return response;
-    } catch (error) {
-      return this.generateErrorResponse(error);
+      return {
+        status: response.status,
+        data: {
+          msg: response.data.msg,
+          user: response.data.user,
+        }
+      };
+    } catch (error: any) {
+      return this.generateErrorResponse(error.message);
     }
   }
 }
