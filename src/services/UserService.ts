@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from "axios";
-import { UserData, Response } from "../interfaces";
+import { UserData, UserResponse } from "../interfaces";
 
 export class UserService {
   #instance: AxiosInstance;
@@ -14,7 +14,7 @@ export class UserService {
     return this.#instance;
   }
 
-  generateErrorResponse(errorMessage: string): Response {
+  generateErrorResponse(errorMessage: string): UserResponse {
     return {
       status: 500,
       data: {
@@ -24,7 +24,7 @@ export class UserService {
     };
   }
 
-  async login(userData: UserData): Promise<Response> {
+  async login(userData: UserData): Promise<UserResponse> {
     try {
       const response = await this.#instance.post("/login", userData, {
         withCredentials: true,
@@ -43,7 +43,7 @@ export class UserService {
     }
   }
 
-  async logout(): Promise<Response> {
+  async logout(): Promise<UserResponse> {
     try {
       const response = await this.#instance.put(
         "/logout",
@@ -66,7 +66,7 @@ export class UserService {
     }
   }
 
-  async register(userData: UserData): Promise<Response> {
+  async register(userData: UserData): Promise<UserResponse> {
     try {
       const response = await this.#instance.post("/register", userData, {
         validateStatus: (status) => status < 500,
@@ -84,7 +84,7 @@ export class UserService {
     }
   }
 
-  async authenticate(): Promise<Response> {
+  async authenticate(): Promise<UserResponse> {
     try {
       const response = await this.#instance.post(
         "/",

@@ -1,4 +1,4 @@
-export interface Response {
+export interface UserResponse {
   status: number;
   data: {
     msg: string;

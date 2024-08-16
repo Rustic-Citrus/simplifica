@@ -17,7 +17,7 @@ import {
   InputGroup,
   Spinner,
 } from "react-bootstrap";
-import { FeedbackItem, Response } from "../interfaces";
+import { FeedbackItem, UserResponse } from "../interfaces";
 
 export const Register = () => {
   const { triggerFeedback } = useFeedback();

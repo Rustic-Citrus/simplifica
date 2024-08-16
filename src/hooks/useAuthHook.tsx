@@ -1,6 +1,6 @@
 import { useLocalStorage } from "./useLocalStorage";
 import { UserService } from "../services";
-import { UserData, Response } from "../interfaces";
+import { UserData, UserResponse } from "../interfaces";
 import { useNavigate } from "react-router-dom";
 
 export const useAuthHook = () => {
@@ -20,7 +20,7 @@ export const useAuthHook = () => {
     };
   };
 
-  const authenticate = async (): Promise<Response> => {
+  const authenticate = async (): Promise<UserResponse> => {
     try {
       const response = await api.authenticate();
 
@@ -34,7 +34,7 @@ export const useAuthHook = () => {
     }
   };
 
-  const signIn = async (userData: UserData): Promise<Response> => {
+  const signIn = async (userData: UserData): Promise<UserResponse> => {
     try {
       const response = await api.login(userData);
 
@@ -50,7 +50,7 @@ export const useAuthHook = () => {
     }
   };
 
-  const signOut = async (): Promise<Response> => {
+  const signOut = async (): Promise<UserResponse> => {
     try {
       const response = await api.logout();
 
@@ -63,7 +63,7 @@ export const useAuthHook = () => {
     }
   };
 
-  const register = async (userData: UserData): Promise<Response> => {
+  const register = async (userData: UserData): Promise<UserResponse> => {
     try {
       const response = await api.register(userData);
 
