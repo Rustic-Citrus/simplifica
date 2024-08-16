@@ -17,7 +17,7 @@ import {
   InputGroup,
   Spinner,
 } from "react-bootstrap";
-import { FeedbackItem, RegisterResponse } from "../interfaces";
+import { FeedbackItem, Response } from "../interfaces";
 
 export const Register = () => {
   const { triggerFeedback } = useFeedback();
@@ -75,7 +75,7 @@ export const Register = () => {
       }
     } else {
       try {
-        const response: RegisterResponse = await register(formState);
+        const response = await register(formState);
 
         reportedFeedback.push({
           title:

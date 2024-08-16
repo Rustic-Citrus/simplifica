@@ -1,29 +1,23 @@
-import { useAuth } from "../hooks/useAuth";
-import { useFeedback } from "../hooks/useFeedback";
-import { useUpdateLessonPlan } from "../hooks/useUpdateLessonPlan";
-import LessonPlanService from "../service/LessonPlanService";
+import { useUpdateLessonPlan, useFeedback, useAuth } from "../hooks";
+import { LessonPlanService } from "../services";
 import lessonPlanTemplate from "../../data/lessonPlanTemplate.json";
-// import { Error } from "./Error";
-
 import { useState, useEffect, useRef } from "react";
-
 import PropTypes from "prop-types";
-
 import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-
-import Container from "react-bootstrap/Container";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Image from "react-bootstrap/Image";
-import Button from "react-bootstrap/Button";
-import Nav from "react-bootstrap/Nav";
-import Tab from "react-bootstrap/Tab";
-import Card from "react-bootstrap/Card";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import Spinner from "react-bootstrap/Spinner";
-
+import {
+  Container,
+  Col,
+  Row,
+  Image,
+  Button,
+  Nav,
+  Tab,
+  Card,
+  Form,
+  InputGroup,
+  Spinner,
+} from "react-bootstrap";
 import { motion } from "framer-motion";
 
 export const LessonPlanCreate = () => {

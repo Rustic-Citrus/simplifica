@@ -3,3 +3,4 @@ export * from "./useAuthHook";
 export * from "./useFeedback";
 export * from "./useFeedbackHook";
 export * from "./useLocalStorage";
+export * from "./useUpdateLessonPlan";

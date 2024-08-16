@@ -1,26 +1,19 @@
-import { useAuth } from "../hooks/useAuth";
-import { useEffect } from "react";
-import PropTypes from "prop-types";
+import { useAuth } from "../hooks";
+import React, { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 
-export const ProtectedRoute = ({ children }) => {
+export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user, authenticate } = useAuth();
 
   useEffect(() => {
-    const waitThenCheckUser = async () => {
-      await authenticate();
-      
-      if (!user) {
-        return <Navigate to="/login" />;
-      }
-    };
-
-    waitThenCheckUser();
+    if (!user) {
+      authenticate();
+    }
   }, [user, authenticate]);
 
-  return children;
-};
+  if (!user) {
+    return <Navigate to="/login" />;;
+  }
 
-ProtectedRoute.propTypes = {
-  children: PropTypes.element,
+  return children;
 };

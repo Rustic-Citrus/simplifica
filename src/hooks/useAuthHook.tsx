@@ -1,6 +1,8 @@
 import { useLocalStorage } from "./useLocalStorage";
-import UserService from "../service/UserService";
+import { UserService } from "../services";
+import { UserData, Response } from "../interfaces";
 import { useNavigate } from "react-router-dom";
+import { AxiosResponse } from "axios";
 
 export const useAuthHook = () => {
   const [user, setUser] = useLocalStorage("user", "");
@@ -9,12 +11,12 @@ export const useAuthHook = () => {
 
   const api = new UserService(VITE_API_ENDPOINT);
 
-  const authenticate = async () => {
+  const authenticate = async (): Promise<AxiosResponse | Response | void> => {
     try {
       const response = await api.authenticate();
 
       if (response.status >= 300) {
-        setUser("");
+        setUser(null);
       }
 
       return response;
@@ -23,23 +25,25 @@ export const useAuthHook = () => {
     }
   };
 
-  const signIn = async (userData) => {
+  const signIn = async (
+    userData: UserData
+  ): Promise<AxiosResponse | Response | void> => {
     try {
       const response = await api.login(userData);
 
-      if (response.status === 200 && response.data.user._id) {
+      if (response.status < 300) {
         setTimeout(() => {
           setUser(response.data.user);
         }, 2000);
       }
 
       return response;
-    } catch (error) {
+    } catch (error: any) {
       console.log(error.message);
     }
   };
 
-  const signOut = async () => {
+  const signOut = async (): Promise<AxiosResponse | Response | void> => {
     try {
       const response = await api.logout();
 
@@ -47,12 +51,14 @@ export const useAuthHook = () => {
       navigate("/");
 
       return response;
-    } catch (error) {
+    } catch (error: any) {
       console.log(error.message);
     }
   };
 
-  const register = async (userData) => {
+  const register = async (
+    userData: UserData
+  ): Promise<AxiosResponse | Response | void> => {
     try {
       const response = await api.register(userData);
 
@@ -63,7 +69,7 @@ export const useAuthHook = () => {
       }
 
       return response;
-    } catch (error) {
+    } catch (error: any) {
       console.log(error.message);
     }
   };

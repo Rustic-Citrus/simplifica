@@ -1,4 +1,4 @@
-import { handleChangeHelper } from "../helper/handleHelper";
+import { handleChangeHelper } from "../helpers";
 import { useAuth, useFeedback } from "../hooks";
 import { LoadingWithSpinner, PrimaryButton } from "../components";
 import {

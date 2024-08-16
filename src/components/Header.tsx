@@ -17,8 +17,8 @@ export const Header = (): JSX.Element => {
     setIsSigningOut(true);
 
     try {
-      setTimeout(async () => {
-        await signOut();
+      setTimeout(() => {
+        signOut();
       }, 1000);
     } catch (error: any) {
       console.log(error.message);

@@ -1,8 +1,9 @@
 import lessonPlanTemplate from "../../data/lessonPlanTemplate";
-import LessonPlanService from "../service/LessonPlanService";
-import { fetchOneLessonPlan } from "../helper/fetchHelper";
-import { useAuth } from "../hooks/useAuth";
-import { ConfirmDeleteModal } from "../components/ConfirmDeleteModal";
+import { LessonPlanService } from "../services";
+import { fetchOneLessonPlan } from "../helpers";
+import { useAuth } from "../hooks";
+import { ConfirmDeleteModal } from "../components";
+import { TransitionDecorator } from "../components/decorators";
 import { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { Link, useParams, useNavigate } from "react-router-dom";
@@ -17,7 +18,6 @@ import {
   Card,
   Spinner,
 } from "react-bootstrap";
-import { TransitionDecorator } from "../components/decorators/TransitionDecorator";
 
 export const LessonPlanView = () => {
   const [lessonPlan, setLessonPlan] = useState(lessonPlanTemplate);

@@ -1,7 +1,7 @@
-import LessonPlanService from "../service/LessonPlanService";
-import { useAuth } from "../hooks/useAuth";
-import { fetchLessonPlans } from "../helper/fetchHelper";
-import { TransitionDecorator } from "../components/decorators/TransitionDecorator";
+import { LessonPlanService } from "../services";
+import { useAuth } from "../hooks";
+import { fetchLessonPlans } from "../helpers";
+import { TransitionDecorator } from "../components/decorators"
 import { useEffect, useState, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Container, Row, Col, Table, Button, Image } from "react-bootstrap";

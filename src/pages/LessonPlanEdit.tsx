@@ -1,9 +1,8 @@
-import { useAuth } from "../hooks/useAuth";
-import { useUpdateLessonPlan } from "../hooks/useUpdateLessonPlan";
-import LessonPlanService from "../service/LessonPlanService";
+import { useAuth, useUpdateLessonPlan } from "../hooks";
+import { LessonPlanService } from "../services";
 import lessonPlanTemplate from "../../data/lessonPlanTemplate.json";
-import { fetchOneLessonPlan } from "../helper/fetchHelper";
-import { TransitionDecorator } from "../components/decorators/TransitionDecorator";
+import { fetchOneLessonPlan } from "../helpers";
+import { TransitionDecorator } from "../components/decorators";
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -31,7 +30,7 @@ export const LessonPlanEdit = () => {
     useUpdateLessonPlan(lessonPlanTemplate);
 
   useEffect(() => {
-    if (!lessonApiRef.current) {
+    if (!lessonApiRef.current && userId) {
       lessonApiRef.current = new LessonPlanService(
         import.meta.env.VITE_API_ENDPOINT,
         userId
