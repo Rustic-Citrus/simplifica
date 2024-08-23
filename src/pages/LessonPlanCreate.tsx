@@ -116,17 +116,6 @@ export const LessonPlanCreate = () => {
 
   return (
     <Container fluid>
-      <Link to={`/${userId}`} className="m-3">
-        <Button
-          variant="outline-secondary"
-          className="my-2"
-          title="Go back to profile."
-          aria-label="back-button"
-        >
-          <Image src="/simplifica/arrow-left.svg"></Image>
-        </Button>
-      </Link>
-
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}

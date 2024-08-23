@@ -4,6 +4,7 @@ import { ButtonAnimationDecorator } from "./decorators";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Button } from "react-bootstrap";
+import { Dropdown } from "./Dropdown";
 
 export const Header = (): JSX.Element => {
   const { user, signOut } = useAuth();
@@ -47,20 +48,23 @@ export const Header = (): JSX.Element => {
         </Link>
       </Navbar.Brand>
       {user._id !== "" && (
-        <ButtonAnimationDecorator>
-          <Button
-            variant="secondary"
-            onClick={handleSignOutClick}
-            disabled={isSigningOut}
-            className="w-100"
-          >
-            {isSigningOut ? (
-              <LoadingWithSpinner loadingText="Signing out" />
-            ) : (
-              "Sign Out"
-            )}
-          </Button>
-        </ButtonAnimationDecorator>
+        <div style={{ display: "flex", gap: "1rem" }}>
+          <Dropdown />
+          <ButtonAnimationDecorator>
+            <Button
+              variant="secondary"
+              onClick={handleSignOutClick}
+              disabled={isSigningOut}
+              className="w-100"
+            >
+              {isSigningOut ? (
+                <LoadingWithSpinner loadingText="" />
+              ) : (
+                "Sign Out"
+              )}
+            </Button>
+          </ButtonAnimationDecorator>
+        </div>
       )}
     </Navbar>
   );
