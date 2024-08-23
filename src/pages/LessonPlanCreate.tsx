@@ -126,7 +126,7 @@ export const LessonPlanCreate = () => {
         }}
         className="mx-3 my-2"
       >
-        <Card className="mx-3 mx-lg-5">
+        <Card className="mx-lg-5">
           <Card.Header>New Lesson Plan</Card.Header>
           <Card.Body>
             <Form>

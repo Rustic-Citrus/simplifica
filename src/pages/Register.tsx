@@ -98,111 +98,109 @@ export const Register = () => {
   };
 
   return (
-    <Container className="col-12 col-md-6 pt-3 px-2 pt-md-5 px-md-4 ms-md-4 pb-4 align-middle">
-      <TransitionDecorator>
-        <Stack gap={1}>
-          <h1 className="display-3 mt-5 pt-5" aria-label="title">
-            Create an account
-          </h1>
-          <p aria-label="subtitle">Enter a username and password</p>
-        </Stack>
-        <Form noValidate validated={validated} onSubmit={handleSubmit}>
-          <Form.Group controlId="form">
-            <FloatingLabel controlId="username-label" label="Your username">
+    <TransitionDecorator>
+      <Stack gap={1}>
+        <h1 className="display-3 mt-5 pt-5" aria-label="title">
+          Create an account
+        </h1>
+        <p aria-label="subtitle">Enter a username and password</p>
+      </Stack>
+      <Form noValidate validated={validated} onSubmit={handleSubmit} className="col-auto col-sm-8 col-lg-6 col-xl-5">
+        <Form.Group controlId="form">
+          <FloatingLabel controlId="username-label" label="Your username">
+            <Form.Control
+              type="text"
+              placeholder="Your username"
+              name="username"
+              className="mb-2"
+              title="Type your username here."
+              aria-label="username-input"
+              onChange={handleChange}
+            />
+          </FloatingLabel>
+          <InputGroup hasValidation className="mb-2">
+            <FloatingLabel controlId="password-label" label="Your password">
               <Form.Control
-                type="text"
-                placeholder="Your username"
-                name="username"
-                className="mb-2"
-                title="Type your username here."
-                aria-label="username-input"
+                type={hidePassword ? "password" : "text"}
+                placeholder="Your password"
+                name="password"
+                title="Type your password here."
+                aria-label="password-input"
                 onChange={handleChange}
               />
             </FloatingLabel>
-            <InputGroup hasValidation className="mb-2">
-              <FloatingLabel controlId="password-label" label="Your password">
-                <Form.Control
-                  type={hidePassword ? "password" : "text"}
-                  placeholder="Your password"
-                  name="password"
-                  title="Type your password here."
-                  aria-label="password-input"
-                  onChange={handleChange}
-                />
-              </FloatingLabel>
-              <Button
-                variant="outline-secondary"
-                onClick={() => setHidePassword(!hidePassword)}
-                title="Click here to reveal your password."
-                aria-label="hide-password-button"
-              >
-                <Image
-                  src={
-                    hidePassword
-                      ? "/simplifica/eye.svg"
-                      : "/simplifica/eye-slash.svg"
-                  }
-                  alt="Icon of an eye."
-                />
-              </Button>
-            </InputGroup>
-            <InputGroup hasValidation className="mb-2">
-              <FloatingLabel
-                controlId="confirm-password-label"
-                label="Confirm your password"
-              >
-                <Form.Control
-                  type={hideConfirmPassword ? "password" : "text"}
-                  placeholder="Confirm your password"
-                  name="confirmedPassword"
-                  aria-label="confirm-password-input"
-                  title="Type your password again here."
-                  onChange={handleChange}
-                />
-              </FloatingLabel>
-              <Button
-                variant="outline-secondary"
-                onClick={() => setHideConfirmPassword(!hideConfirmPassword)}
-                title="Click here to reveal your password."
-                aria-label="hide-confirm-password-button"
-              >
-                <Image
-                  src={
-                    hideConfirmPassword
-                      ? "/simplifica/eye.svg"
-                      : "/simplifica/eye-slash.svg"
-                  }
-                  alt="Icon of an eye."
-                />
-              </Button>
-            </InputGroup>
-          </Form.Group>
-          <ButtonAnimationDecorator>
-            <PrimaryButton
-              ariaLabel="get-started-button"
-              title="Click here to register your account."
-              disabled={isRegistering}
-              content={
-                isRegistering ? (
-                  <span>
-                    Creating your account...{" "}
-                    <Spinner
-                      as="span"
-                      animation="border"
-                      className="mx-3"
-                      size="sm"
-                      role="status"
-                      aria-hidden="true"
-                    />
-                  </span>
-                ) : (
-                  "Get Started"
-                )
-              }
-            />
-          </ButtonAnimationDecorator>
-        </Form>
-      </TransitionDecorator>
-    </Container>
+            <Button
+              variant="outline-secondary"
+              onClick={() => setHidePassword(!hidePassword)}
+              title="Click here to reveal your password."
+              aria-label="hide-password-button"
+            >
+              <Image
+                src={
+                  hidePassword
+                    ? "/simplifica/eye.svg"
+                    : "/simplifica/eye-slash.svg"
+                }
+                alt="Icon of an eye."
+              />
+            </Button>
+          </InputGroup>
+          <InputGroup hasValidation className="mb-2">
+            <FloatingLabel
+              controlId="confirm-password-label"
+              label="Confirm your password"
+            >
+              <Form.Control
+                type={hideConfirmPassword ? "password" : "text"}
+                placeholder="Confirm your password"
+                name="confirmedPassword"
+                aria-label="confirm-password-input"
+                title="Type your password again here."
+                onChange={handleChange}
+              />
+            </FloatingLabel>
+            <Button
+              variant="outline-secondary"
+              onClick={() => setHideConfirmPassword(!hideConfirmPassword)}
+              title="Click here to reveal your password."
+              aria-label="hide-confirm-password-button"
+            >
+              <Image
+                src={
+                  hideConfirmPassword
+                    ? "/simplifica/eye.svg"
+                    : "/simplifica/eye-slash.svg"
+                }
+                alt="Icon of an eye."
+              />
+            </Button>
+          </InputGroup>
+        </Form.Group>
+        <ButtonAnimationDecorator>
+          <PrimaryButton
+            ariaLabel="get-started-button"
+            title="Click here to register your account."
+            disabled={isRegistering}
+            content={
+              isRegistering ? (
+                <span>
+                  Creating your account...{" "}
+                  <Spinner
+                    as="span"
+                    animation="border"
+                    className="mx-3"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                  />
+                </span>
+              ) : (
+                "Get Started"
+              )
+            }
+          />
+        </ButtonAnimationDecorator>
+      </Form>
+    </TransitionDecorator>
   );
 };

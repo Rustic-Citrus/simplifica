@@ -67,69 +67,71 @@ export const SignIn = () => {
   };
 
   return (
-    <Container className="col-12 col-md-6 pt-3 px-2 pt-md-5 px-md-4 ms-md-4 align-middle">
-      <TransitionDecorator>
-        <Stack gap={1} className="mb-3">
-          <h1 className="display-3 mt-5 pt-5" aria-label="title">
-            Welcome back
-          </h1>
-        </Stack>
-        <Form noValidate onSubmit={handleSubmit}>
-          <Form.Group controlId="form">
-            <FloatingLabel controlId="username-label" label="Your username">
+    <TransitionDecorator>
+      <Stack gap={1}>
+        <h1 className="display-3 mt-5 pt-5" aria-label="title">
+          Welcome back
+        </h1>
+      </Stack>
+      <Form
+        noValidate
+        onSubmit={handleSubmit}
+        className="col-auto col-sm-8 col-lg-6 col-xl-5"
+      >
+        <Form.Group controlId="form">
+          <FloatingLabel controlId="username-label" label="Your username">
+            <Form.Control
+              type="text"
+              placeholder="Your username"
+              className="mb-2"
+              title="Type your username here."
+              aria-label="username-input"
+              onChange={handleUsernameChange}
+            />
+          </FloatingLabel>
+          <InputGroup className="mb-2">
+            <FloatingLabel controlId="password-label" label="Your password">
               <Form.Control
-                type="text"
-                placeholder="Your username"
-                className="mb-2"
-                title="Type your username here."
-                aria-label="username-input"
-                onChange={handleUsernameChange}
+                type={hidePassword ? "password" : "text"}
+                placeholder="Your password"
+                title="Type your password here."
+                aria-label="password-input"
+                onChange={handlePasswordChange}
               />
             </FloatingLabel>
-            <InputGroup className="mb-2">
-              <FloatingLabel controlId="password-label" label="Your password">
-                <Form.Control
-                  type={hidePassword ? "password" : "text"}
-                  placeholder="Your password"
-                  title="Type your password here."
-                  aria-label="password-input"
-                  onChange={handlePasswordChange}
-                />
-              </FloatingLabel>
-              <Button
-                variant="outline-secondary"
-                onClick={() => setHidePassword(!hidePassword)}
-                title="Click here to reveal your password."
-                aria-label="hide-password-button"
-              >
-                <Image
-                  src={
-                    hidePassword
-                      ? "/simplifica/eye.svg"
-                      : "/simplifica/eye-slash.svg"
-                  }
-                  alt="Icon of an eye."
-                />
-              </Button>
-            </InputGroup>
-          </Form.Group>
-          <ButtonAnimationDecorator>
-            <PrimaryButton
-              ariaLabel="sign-in-button"
-              title="Click here to sign into your account."
-              disabled={isSigningIn}
-              content={
-                isSigningIn ? (
-                  <LoadingWithSpinner loadingText="Signing in" />
-                ) : (
-                  "Sign In"
-                )
-              }
-              onClick={handleSubmit}
-            />
-          </ButtonAnimationDecorator>
-        </Form>
-      </TransitionDecorator>
-    </Container>
+            <Button
+              variant="outline-secondary"
+              onClick={() => setHidePassword(!hidePassword)}
+              title="Click here to reveal your password."
+              aria-label="hide-password-button"
+            >
+              <Image
+                src={
+                  hidePassword
+                    ? "/simplifica/eye.svg"
+                    : "/simplifica/eye-slash.svg"
+                }
+                alt="Icon of an eye."
+              />
+            </Button>
+          </InputGroup>
+        </Form.Group>
+        <ButtonAnimationDecorator>
+          <PrimaryButton
+            ariaLabel="sign-in-button"
+            title="Click here to sign into your account."
+            disabled={isSigningIn}
+            content={
+              isSigningIn ? (
+                <LoadingWithSpinner loadingText="Signing in" />
+              ) : (
+                "Sign In"
+              )
+            }
+            onClick={handleSubmit}
+          />
+        </ButtonAnimationDecorator>
+      </Form>
+    </TransitionDecorator>
   );
 };
