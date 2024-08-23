@@ -30,7 +30,7 @@ export const FeedbackComponent = ({ title, message, type, toggleVisible }) => {
     >
       <Toast
         onClose={toggleVisible}
-        delay={5000}
+        delay={2000}
         bg={type === "error" ? "warning" : type}
         autohide={true}
       >
