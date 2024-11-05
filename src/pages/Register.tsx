@@ -181,6 +181,7 @@ export const Register = () => {
             ariaLabel="get-started-button"
             title="Click here to register your account."
             disabled={isRegistering}
+            onClick={handleSubmit}
             content={
               isRegistering ? (
                 <span>
